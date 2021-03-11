@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyBookWorld</string>
+    <string name="app_name">My Book World</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -10,12 +10,23 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_sign_in">SignIn</string>
-
+    <!--Intro Screen-->
+    <string name="let_s_get_started_text">Lets Get Started</string>
+    <string name="intro_text_description">New to the Book World?</string>
+    <string name="sign_up_description_text">Enter your name, email id and password, to sign up.</string>
+    <!--Sign Up-->
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
     <!--START Sign IN-->
     <string name="sign_in_description_text">Enter your name, email id and password, to log into your account.</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="sign_in">Sign In</string>
+    <string name="SignIn">signIn</string>
+    <string name="image_contentDescription">Image Content Desc</string>
+
+
     <!--End-->
 
 </resources>
