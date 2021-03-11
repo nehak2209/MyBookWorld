@@ -25,6 +25,14 @@
     <string name="sign_in">Sign In</string>
     <string name="SignIn">signIn</string>
     <string name="image_contentDescription">Image Content Desc</string>
+    <!--START Sign IN-->
+
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_my_works">My Works</string>
+    <string name="nav_favourites">Favourites</string>
+    <string name="nav_help">Help</string>
+    <string name="nav_about">About</string>
+    <string name="nav_Log_out">Log Out</string>
 
 
     <!--End-->
