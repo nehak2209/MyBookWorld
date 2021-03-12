@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "346386213776",
+    "project_id": "mybookworld-94eb8",
+    "storage_bucket": "mybookworld-94eb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346386213776:android:45ca45ec9cb73187f0e115",
+        "android_client_info": {
+          "package_name": "com.example.mybookworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346386213776-o01cgdj7pfml90aqacvufoevgqupf3e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfjFae9i5gX80hQvNE0xgpSguiI6C5zHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346386213776-o01cgdj7pfml90aqacvufoevgqupf3e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
