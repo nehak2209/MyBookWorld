@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         setContentView(R.layout.activity_main)
         setupActionBar()
     }
+
     private fun setupActionBar(){
         setSupportActionBar(toolbar_main_activity)
         toolbar_main_activity.setNavigationIcon(R.drawable.ic_action_navigation_menu)
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
         }
     }
+
     private  fun toggleDrawer(){
 
         if(drawer_layout.isDrawerOpen(GravityCompat.START)){

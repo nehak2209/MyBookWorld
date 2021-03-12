@@ -8,6 +8,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
+@Suppress("DEPRECATION")
 class SplashActivity : AppCompatActivity() {
     /**
      * This function is auto created by Android when the Activity Class is created.

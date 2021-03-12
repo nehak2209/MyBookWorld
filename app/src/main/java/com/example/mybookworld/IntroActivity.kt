@@ -34,6 +34,11 @@ class IntroActivity : AppCompatActivity() {
             // Launch the sign in screen.
             startActivity(Intent(this , SigninActivity::class.java))
         }
+
+        btn_sign_up_intro.setOnClickListener {
+            // Launch the sign in screen.
+            startActivity(Intent(this , SignUpActivity::class.java))
+        }
         // END
     }
 }

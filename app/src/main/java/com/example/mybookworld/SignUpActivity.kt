@@ -2,14 +2,13 @@
 
 package com.example.mybookworld
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
-@Suppress("DEPRECATION")
-class SigninActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
@@ -17,7 +16,7 @@ class SigninActivity : AppCompatActivity() {
         //This call the parent constructor
         super.onCreate(savedInstanceState)
         // This is used to align the xml view to this class
-        setContentView(R.layout.activity_sign_in)
+        setContentView(R.layout.activity_sign_up)
 
         // This is used to hide the status bar and make the splash screen as a full screen activity.
         window.setFlags(
@@ -27,7 +26,6 @@ class SigninActivity : AppCompatActivity() {
 
         // TODO (Step 9: Call the setup actionBar function.)
         setupActionBar()
-        
     }
 
     // TODO (Step 8: A function for setting up the actionBar.)
@@ -36,7 +34,7 @@ class SigninActivity : AppCompatActivity() {
      */
     private fun setupActionBar() {
 
-        setSupportActionBar(toolbar_sign_in_activity)
+        setSupportActionBar(toolbar_sign_up_activity)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
