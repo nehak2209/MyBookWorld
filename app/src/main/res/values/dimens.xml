@@ -22,6 +22,8 @@
     <!--Sign Up-->
     <dimen name="sign_up_screen_btn_marginTop">30dp</dimen>
     <!--TODO (Step 5: Add all the dimen values here.)-->
+
+
     <!--START-->
     <dimen name="sign_in_screen_btn_marginTop">30dp</dimen>
     <dimen name="toolbar_title_text_size">40sp</dimen>
@@ -37,24 +39,25 @@
     <dimen name="authentication_screen_til_marginTop">20dp</dimen>
     <dimen name="authentication_screen_marginTop">60dp</dimen>
     <!--END-->
+
+
     <!--START-->
 
-
     <dimen name="height_of_nav_main">200dp</dimen>
-
     <dimen name="nav_image_size">80dp</dimen>
-
     <dimen name="nav_content_margin_StartEnd">16dp</dimen>
-
     <dimen name="nav_content_margin_top">5dp</dimen>
-
     <dimen name="nav_content_margin_bottom">10dp</dimen>
-
     <dimen name="nav_user_name_text_size">18sp</dimen>
-
     <dimen name="nav_image_circular_border_width">1dp</dimen>
-
     <dimen name="nav_divider_height">0.5dp</dimen>
 
     <!--END-->
+
+    <!--START DIALOG BOX-->
+    <dimen name="progress_dialog_content_padding">10dp</dimen>
+    <dimen name="progress_bar_size">50dp</dimen>
+    <dimen name="progress_text_marginStart">16dp</dimen>
+    <dimen name="progress_text_size">16sp</dimen>
+    <!--END DIALOG BOX-->
 </resources>

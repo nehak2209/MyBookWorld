@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.mybookworld
+package com.example.mybookworld.activities
 
 import android.content.Intent
 import android.graphics.Typeface
@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mybookworld.R
 import kotlinx.android.synthetic.main.activity_splash.*
 
 
@@ -41,7 +42,7 @@ class SplashActivity : AppCompatActivity() {
         tv_app_name.typeface = typeface
 
         Handler().postDelayed({
-            startActivity(Intent(this,IntroActivity::class.java))
+            startActivity(Intent(this, IntroActivity::class.java))
             finish()
         },3000)
         // END

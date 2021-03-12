@@ -32,8 +32,11 @@
     <string name="nav_help">Help</string>
     <string name="nav_about">About</string>
     <string name="nav_Log_out">Log Out</string>
-
-
     <!--End-->
+
+    <!--Dialog box-->
+    <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
+    <string name="please_wait">Please Wait…</string>
+    <!--dialog box-->
 
 </resources>
