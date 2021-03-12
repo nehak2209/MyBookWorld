@@ -2,14 +2,14 @@
 
 package com.example.mybookworld
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
-@Suppress("DEPRECATION")
-class SigninActivity : AppCompatActivity() {
+// TODO (Step 1: Add the Sign In activity.)
+// START
+class SignInActivity : AppCompatActivity() {
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
@@ -25,12 +25,11 @@ class SigninActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        // TODO (Step 9: Call the setup actionBar function.)
+        // TODO (Step 8: Call the setup actionBar function.)
         setupActionBar()
-        
     }
 
-    // TODO (Step 8: A function for setting up the actionBar.)
+    // TODO (Step 7: A function for setting up the actionBar.)
     /**
      * A function for actionBar Setup.
      */
@@ -47,3 +46,4 @@ class SigninActivity : AppCompatActivity() {
         toolbar_sign_in_activity.setNavigationOnClickListener { onBackPressed() }
     }
 }
+// END

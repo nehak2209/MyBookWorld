@@ -2,13 +2,15 @@
 
 package com.example.mybookworld
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
+// TODO (Step 1: Add the sign up activity.)
+// START
 class SignUpActivity : AppCompatActivity() {
+
     /**
      * This function is auto created by Android when the Activity Class is created.
      */
@@ -42,6 +44,6 @@ class SignUpActivity : AppCompatActivity() {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
         }
 
-        toolbar_sign_in_activity.setNavigationOnClickListener { onBackPressed() }
+        toolbar_sign_up_activity.setNavigationOnClickListener { onBackPressed() }
     }
 }

@@ -32,7 +32,7 @@ class IntroActivity : AppCompatActivity() {
 
         btn_sign_in_intro.setOnClickListener {
             // Launch the sign in screen.
-            startActivity(Intent(this , SigninActivity::class.java))
+            startActivity(Intent(this , SignInActivity::class.java))
         }
 
         btn_sign_up_intro.setOnClickListener {

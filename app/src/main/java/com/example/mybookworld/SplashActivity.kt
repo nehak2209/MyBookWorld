@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.mybookworld
 
 import android.content.Intent
@@ -8,7 +10,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
-@Suppress("DEPRECATION")
+
 class SplashActivity : AppCompatActivity() {
     /**
      * This function is auto created by Android when the Activity Class is created.
@@ -23,6 +25,7 @@ class SplashActivity : AppCompatActivity() {
         // This is used to hide the status bar and make the splash screen as a full screen activity.
         // START
         window.setFlags(
+
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
