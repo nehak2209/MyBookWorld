@@ -15,9 +15,9 @@ import com.google.firebase.auth.FirebaseAuth.getInstance
 import kotlinx.android.synthetic.main.dialog_progress.*
 import kotlinx.coroutines.delay
 
-class BaseActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
-    private var doubleBackToExitPressedOnce=false
+    private var doubleBackToExitPressedOnce = false
     private lateinit var mProgressDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class BaseActivity : AppCompatActivity() {
     }
 
     fun getCurrentUserID():String{
-        return getInstance().currentUser!!.uid
+        return FirebaseAuth.getInstance().currentUser!!.uid
     }
 
     fun doubleBackToExit(){
@@ -66,7 +66,8 @@ class BaseActivity : AppCompatActivity() {
     }
 
     fun showErrorSnackBar(message: String){
-        val snackBar=Snackbar.make(findViewById(android.R.id.content),message,Snackbar.LENGTH_LONG)
+        val snackBar=Snackbar.make(findViewById(android.R.id.content),
+                message,Snackbar.LENGTH_LONG)
         val snackBarView=snackBar.view
         snackBarView.setBackgroundColor(ContextCompat.getColor(this,
         R.color.snackbar_error_color))
