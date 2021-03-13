@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -43,14 +44,14 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
 
-            //var currentUserId= FirestoreClass().getCurrentUserId()
+            var currentUserId= FirestoreClass().getCurrentUserId()
 
-           // if(currentUserId.isNotEmpty()){
-               // startActivity(Intent(this, MainActivity::class.java))
-           // }
-           // else {
+            if(currentUserId.isNotEmpty()){
+                startActivity(Intent(this, MainActivity::class.java))
+           }
+            else {
                 startActivity(Intent(this, IntroActivity::class.java))
-           // }
+            }
                 finish()
         },3000)
             }
