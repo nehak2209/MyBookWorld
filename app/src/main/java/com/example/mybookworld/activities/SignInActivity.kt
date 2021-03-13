@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import com.example.mybookworld.R
+import com.example.mybookworld.models.User
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
@@ -43,6 +44,15 @@ class SignInActivity : BaseActivity() {
     /**
      * A function for actionBar Setup.
      */
+
+    fun signInSuccess(user: User){
+        hideProgressDialog()
+
+        startActivity(Intent(this, MainActivity::class.java))
+
+        finish()
+
+    }
     private fun setupActionBar() {
 
         setSupportActionBar(toolbar_sign_in_activity)

@@ -42,9 +42,17 @@ class SplashActivity : AppCompatActivity() {
         tv_app_name.typeface = typeface
 
         Handler().postDelayed({
-            startActivity(Intent(this, IntroActivity::class.java))
-            finish()
+
+            //var currentUserId= FirestoreClass().getCurrentUserId()
+
+           // if(currentUserId.isNotEmpty()){
+               // startActivity(Intent(this, MainActivity::class.java))
+           // }
+           // else {
+                startActivity(Intent(this, IntroActivity::class.java))
+           // }
+                finish()
         },3000)
+            }
         // END
     }
-}

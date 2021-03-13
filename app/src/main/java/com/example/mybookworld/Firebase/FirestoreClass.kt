@@ -19,7 +19,7 @@ class FirestoreClass {
         mFirestore.collection(Constants.USERS)
                 .document(getCurrentUserId()).
                 set(userInfo, SetOptions.merge()).
-                addOnFailureListener{
+                addOnSuccessListener{
                     activitiy.userRegisteredSuccess()
                 }.addOnFailureListener{
                     e->
@@ -29,10 +29,29 @@ class FirestoreClass {
     }
 
     fun signInUser(activity: SignInActivity){
+        mFirestore.collection(Constants.USERS)
+                .document(getCurrentUserId()).
+                get().
+                addOnSuccessListener{document ->
+
+                    val loggedInUser=document.toObject(User::class.java)!!
+                    if(loggedInUser != null)
+                        activity.signInSuccess(loggedInUser)
+
+                }.addOnFailureListener{
+                    e->
+                    Log.e("signInUser","Error")
+                }
 
     }
 
     fun getCurrentUserId():String{
-        return FirebaseAuth.getInstance().currentUser!!.uid
+        var currentUser = FirebaseAuth.getInstance().currentUser
+        var currentUserId=""
+        if(currentUserId != null){
+            currentUserId = currentUser.uid
+        }
+        return currentUserId
+
     }
 }
