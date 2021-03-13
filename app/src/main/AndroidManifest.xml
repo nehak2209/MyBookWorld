@@ -9,12 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.BaseActivity"></activity>
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            -
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,6 +21,7 @@
         </activity> <!-- TODO(Step 2: Modify the activity tag as per our requirement.) -->
         <!-- START -->
         <activity
+
             android:name=".activities.IntroActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- END -->
@@ -34,7 +33,12 @@
             android:name=".activities.SignInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- END -->
-        <activity android:name=".activities.MainActivity" />
+        <!--START-->
+        <activity
+            android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--END-->
     </application>
 
 </manifest>
