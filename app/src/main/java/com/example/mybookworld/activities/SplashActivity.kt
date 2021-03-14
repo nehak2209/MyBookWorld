@@ -44,7 +44,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
 
-            var currentUserId= FirestoreClass().getCurrentUserId()
+            var currentUserId= FirestoreClass().getCurrentUserID()
 
             if(currentUserId.isNotEmpty()){
                 startActivity(Intent(this, MainActivity::class.java))
