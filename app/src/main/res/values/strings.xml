@@ -37,6 +37,13 @@
     <!--Dialog box-->
     <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
     <string name="please_wait">Please Wait…</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="writeIcon">Write</string>
+    <string name="exploreIcon">Explore</string>
+    <string name="homeIcon">Home</string>
+    <string name="genre">Genre</string>
+    <string name="writer_section">Writer\'s Section</string>
     <!--dialog box-->
 
     <!--START PROFILE-->
