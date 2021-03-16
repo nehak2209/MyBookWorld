@@ -36,14 +36,10 @@ class SignInActivity : BaseActivity() {
         btn_sign_in.setOnClickListener(){
             signInRegisteredUser()
         }
-        // TODO (Step 8: Call the setup actionBar function.)
+
         setupActionBar()
     }
 
-    // TODO (Step 7: A function for setting up the actionBar.)
-    /**
-     * A function for actionBar Setup.
-     */
 
     fun signInSuccess(user: User){
         hideProgressDialog()

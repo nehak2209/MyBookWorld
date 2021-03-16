@@ -23,7 +23,7 @@ class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListe
         setContentView(R.layout.activity_main)
         setupActionBar()
        nav_view.setNavigationItemSelectedListener(this)
-        FirestoreClass().signInUser(this)
+        FirestoreClass().loadUserData(this)
     }
 
     private fun setupActionBar(){
@@ -50,7 +50,7 @@ class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListe
                .load(user.image)
                .centerCrop()
                .placeholder(R.drawable.ic_user_place_holder)
-               .into(nav_user_image);
+               .into(nav_user_image)
 
        tv_username.text=user.name
    }
@@ -61,7 +61,7 @@ class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListe
         when (menuItem.itemId) {
             R.id.nav_my_profile -> {
 
-                Toast.makeText(this@MainActivity, "My Profile", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this,MyProfileActivity::class.java))
             }
 
             R.id.nav_log_out -> {

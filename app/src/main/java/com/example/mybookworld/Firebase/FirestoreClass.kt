@@ -3,6 +3,7 @@ package com.example.mybookworld.Firebase
 import android.app.Activity
 import android.util.Log
 import com.example.mybookworld.activities.MainActivity
+import com.example.mybookworld.activities.MyProfileActivity
 import com.example.mybookworld.activities.SignInActivity
 import com.example.mybookworld.activities.SignUpActivity
 import com.example.mybookworld.models.User
@@ -38,7 +39,7 @@ class FirestoreClass {
     }
 
 
-    fun signInUser(activity: Activity) {
+    fun loadUserData(activity: Activity) {
 
 
         mFireStore.collection(Constants.USERS)
@@ -60,6 +61,11 @@ class FirestoreClass {
                         is MainActivity ->{
                             activity.updateNavigationUserDetails(loggedInUser)
                         }
+                        is MyProfileActivity->{
+                            activity.setUserDataInUI(loggedInUser)
+                        }
+
+
                     }
 
                 }
