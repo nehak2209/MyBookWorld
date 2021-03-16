@@ -7,10 +7,16 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
+import com.example.mybookworld.fragments.GenreFragment
+import com.example.mybookworld.fragments.HomeFragment
+import com.example.mybookworld.fragments.MyWorksFragment
+import com.example.mybookworld.fragments.WriterSectionFragment
 import com.example.mybookworld.models.User
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,7 +28,8 @@ class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupActionBar()
-       nav_view.setNavigationItemSelectedListener(this)
+        setupBottomBar()
+        nav_view.setNavigationItemSelectedListener(this)
         FirestoreClass().signInUser(this)
     }
 
@@ -92,6 +99,32 @@ class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListe
 
         return true
     }
+    private fun setupBottomBar()
+    {
+        val homeFragment = HomeFragment()
+        val categoryFragment = GenreFragment()
+        val myBooksFragment = MyWorksFragment()
+        val writerSectionFragment = WriterSectionFragment()
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        makeCurrentFragment(homeFragment)
+        bottomNav.setOnNavigationItemSelectedListener{
+            when (it.itemId) {
+                R.id.ic_home -> makeCurrentFragment(homeFragment)
+                R.id.ic_explore -> makeCurrentFragment(categoryFragment)
+                R.id.ic_list -> makeCurrentFragment(myBooksFragment)
+                R.id.ic_write -> makeCurrentFragment(writerSectionFragment)
+            }
+            true
+        }
+
+    }
+
+    private fun makeCurrentFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply{
+            replace (R.id.fl_wrapper,fragment)
+            commit()
+        }
 
 
 
