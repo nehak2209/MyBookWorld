@@ -84,7 +84,7 @@ class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListe
             }
             R.id.nav_my_works -> {
 
-                Toast.makeText(this@MainActivity, "My works", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "setting", Toast.LENGTH_SHORT).show()
             }
 
         }

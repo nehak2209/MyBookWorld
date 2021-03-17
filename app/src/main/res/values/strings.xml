@@ -27,7 +27,7 @@
     <string name="image_contentDescription">Image Content Desc</string>
 
     <string name="nav_my_profile">My Profile</string>
-    <string name="nav_settings">My Works</string>
+    <string name="nav_settings">Settings</string>
     <string name="nav_favourites">Favourites</string>
     <string name="nav_help">Help</string>
     <string name="nav_about">About</string>

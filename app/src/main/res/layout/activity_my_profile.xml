@@ -24,11 +24,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_background">
+        android:background="@drawable/ic_background3">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="460dp"
             android:layout_marginStart="@dimen/my_profile_screen_content_marginStartEnd"
             android:layout_marginTop="@dimen/my_profile_screen_content_marginTopBottom"
             android:layout_marginEnd="@dimen/my_profile_screen_content_marginStartEnd"
@@ -99,7 +99,7 @@
 
                 <Button
                     android:id="@+id/btn_update"
-                    android:layout_width="match_parent"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/my_profile_btn_update_marginTop"
