@@ -27,7 +27,7 @@
     <string name="image_contentDescription">Image Content Desc</string>
 
     <string name="nav_my_profile">My Profile</string>
-    <string name="nav_my_works">My Works</string>
+    <string name="nav_settings">My Works</string>
     <string name="nav_favourites">Favourites</string>
     <string name="nav_help">Help</string>
     <string name="nav_about">About</string>
@@ -50,6 +50,7 @@
     <string name="mobile">Mobile</string>
     <string name="update">UPDATE</string>
     <string name="my_profile_title">My Profile</string>
+    <string name="nav_my_works">My Works</string>
     <!--END PROFILE-->
 
 </resources>
