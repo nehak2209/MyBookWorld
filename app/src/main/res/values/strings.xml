@@ -46,6 +46,7 @@
     <string name="writer_section">Writer\'s Section</string>
 
     <string name="favourites">favourite</string>
+    <string name="Firebase">fire</string>
     <!--dialog box-->
 
 </resources>
