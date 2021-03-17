@@ -44,6 +44,8 @@
     <string name="homeIcon">Home</string>
     <string name="genre">Genre</string>
     <string name="writer_section">Writer\'s Section</string>
+
+    <string name="favourites">favourite</string>
     <!--dialog box-->
 
 </resources>
