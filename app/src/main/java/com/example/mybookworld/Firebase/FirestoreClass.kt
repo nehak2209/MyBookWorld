@@ -32,7 +32,7 @@ class FirestoreClass {
                 .addOnFailureListener { e ->
                     Log.e(
                             activity.javaClass.simpleName,
-                            "Error writing document",
+                            "Error in writing document",
                             e
                     )
                 }
