@@ -182,8 +182,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:padding="2dp"
-                            android:text="Welcome to Fiction Area"
+                            android:padding="4dp"
+                            android:text="   Welcome to Fiction Area"
                             android:textColor="@android:color/darker_gray" />
 
 
@@ -293,8 +293,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:padding="2dp"
-                            android:text="Get lost in another world."
+                            android:padding="4dp"
+                            android:text="     Get lost in another world."
                             android:textColor="@android:color/darker_gray" />
 
 
