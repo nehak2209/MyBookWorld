@@ -17,4 +17,9 @@
     <color name="primary_text_color">#363A43</color>
     <color name="secondary_text_color">#7A8089</color>
     <color name="snackbar_error_color">#F72400</color>
+    <color name="yellow">#FFB300</color>
+    <color name="peach">#FF6859</color>
+    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="colorAccent1">#ff4081</color>
 </resources>
