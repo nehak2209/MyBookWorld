@@ -2,6 +2,7 @@ package com.example.mybookworld.Firebase
 
 import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import com.example.mybookworld.activities.MainActivity
 import com.example.mybookworld.activities.MyProfileActivity
 import com.example.mybookworld.activities.SignInActivity
@@ -11,6 +12,8 @@ import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import java.util.*
+import kotlin.collections.HashMap
 
 class FirestoreClass {
 
@@ -38,6 +41,28 @@ class FirestoreClass {
                 }
     }
 
+    fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
+        mFireStore.collection(Constants.USERS) // Collection Name
+                .document(getCurrentUserID()) // Document ID
+                .update(userHashMap) // A hashmap of fields which are to be updated.
+                .addOnSuccessListener {
+                    // Profile data is updated successfully.
+                    Log.e(activity.javaClass.simpleName, "Profile Data updated successfully!")
+
+                    Toast.makeText(activity, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+
+                    // Notify the success result.
+                    activity.profileUpdateSuccess()
+                }
+                .addOnFailureListener { e ->
+                    activity.hideProgressDialog()
+                    Log.e(
+                            activity.javaClass.simpleName,
+                            "Error while creating a board.",
+                            e
+                    )
+                }
+    }
 
     fun loadUserData(activity: Activity) {
 
