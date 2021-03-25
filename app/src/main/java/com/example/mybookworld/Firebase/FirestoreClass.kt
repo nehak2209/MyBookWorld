@@ -1,22 +1,26 @@
 package com.example.mybookworld.Firebase
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.util.Log
 import android.widget.Toast
-import com.example.mybookworld.activities.MainActivity
-import com.example.mybookworld.activities.MyProfileActivity
-import com.example.mybookworld.activities.SignInActivity
-import com.example.mybookworld.activities.SignUpActivity
+import androidx.fragment.app.Fragment
+import com.example.mybookworld.ui.activities.MainActivity
+import com.example.mybookworld.ui.activities.MyProfileActivity
+import com.example.mybookworld.ui.activities.SignInActivity
+import com.example.mybookworld.ui.activities.SignUpActivity
+import com.example.mybookworld.ui.fragments.HomeFragment
+import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
 import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class FirestoreClass {
-
+class
+FirestoreClass {
 
     private val mFireStore = FirebaseFirestore.getInstance()
 
@@ -78,7 +82,6 @@ class FirestoreClass {
 
                     // Here we have received the document snapshot which is converted into the User Data model object.
                     val loggedInUser = document.toObject(User::class.java)!!
-
                     when (activity){
                         is SignInActivity -> {
                             activity.signInSuccess(loggedInUser)
@@ -126,4 +129,34 @@ class FirestoreClass {
 
         return currentUserID
     }
+fun getBooksList(fragment: Fragment){
+    mFireStore.collection(Constants.BOOKS)
+            .get()
+            .addOnSuccessListener {
+                document->
+                Log.e("books list",document.documents.toString())
+                val bookList:ArrayList<Books> = ArrayList()
+                for ( i in document.documents){
+                    val book=i.toObject(Books::class.java)
+                    book!!.book_id=i.id
+                    bookList.add(book)
+
+                }
+
+                when(fragment){
+                    is HomeFragment->{
+
+                        fragment.successProductListFromFireStore(bookList)
+                    }
+                }
+            }
+        .addOnFailureListener { exception ->
+            Log.d(TAG, "Error getting documents: ", exception)
+        }
+
+
+}
+
+
+
 }

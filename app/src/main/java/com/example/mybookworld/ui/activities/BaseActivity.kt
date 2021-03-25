@@ -1,19 +1,16 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.mybookworld.activities
+package com.example.mybookworld.ui.activities
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.Message
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.mybookworld.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuth.getInstance
 import kotlinx.android.synthetic.main.dialog_progress.*
-import kotlinx.coroutines.delay
 
 open class BaseActivity : AppCompatActivity() {
 
