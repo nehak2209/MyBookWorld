@@ -1,4 +1,4 @@
-package com.example.mybookworld.activities
+package com.example.mybookworld.ui.activities
 
 import android.content.Intent
 import android.graphics.Typeface

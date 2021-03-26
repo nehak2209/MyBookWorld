@@ -1,8 +1,10 @@
-package com.example.mybookworld.activities
+package com.example.mybookworld.ui.activities
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -12,22 +14,31 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
-import com.example.mybookworld.fragments.GenreFragment
-import com.example.mybookworld.fragments.HomeFragment
-import com.example.mybookworld.fragments.MyWorksFragment
-import com.example.mybookworld.fragments.WriterSectionFragment
+import com.example.mybookworld.ui.fragments.GenreFragment
+import com.example.mybookworld.ui.fragments.HomeFragment
+import com.example.mybookworld.ui.fragments.MyWorksFragment
+import com.example.mybookworld.ui.fragments.WriterSectionFragment
 import com.example.mybookworld.models.User
+import com.example.mybookworld.utils.GlideLoader
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListener {
+
     companion object{
 const val  MY_PROFILE_REQUEST_CODE:Int=11
 
+    }
+
+    private val mContext: Context? = null
+
+    fun getContext(): Context? {
+        return mContext
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,12 +68,13 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
         }
     }
    fun updateNavigationUserDetails(user: User){
-       Glide
-               .with(this)
-               .load(user.image)
-               .centerCrop()
-               .placeholder(R.drawable.ic_user_place_holder)
-               .into(nav_user_image)
+       GlideLoader(this).loadUserPicture(Uri.parse(user.image),nav_user_image)
+
+//       Glide.with(this@MainActivity)
+//               .load(user.image)
+//               .centerCrop()
+//               .placeholder(R.drawable.ic_user_place_holder)
+//               .into(nav_user_image)
 
        tv_username.text=user.name
    }
@@ -96,7 +108,7 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
                 startActivity(intent)
                 finish()
             }
-            R.id.nav_favourites->{
+            R.id.nav_favourites -> {
                 Toast.makeText(this@MainActivity, "favourites", Toast.LENGTH_SHORT).show()
             }
             R.id.nav_about -> {
@@ -140,7 +152,7 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
 
     private fun makeCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply{
-            replace (R.id.fl_wrapper,fragment)
+            replace(R.id.fl_wrapper, fragment)
             commit()
         }
 }

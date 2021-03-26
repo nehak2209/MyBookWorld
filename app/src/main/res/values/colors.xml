@@ -22,4 +22,5 @@
     <color name="backgroundcolor">#fcfcfc</color>
     <color name="lightgray">#ededed</color>
     <color name="colorAccent1">#ff4081</color>
+    <color name="light_medium_gray">#f3f3f3</color>
 </resources>

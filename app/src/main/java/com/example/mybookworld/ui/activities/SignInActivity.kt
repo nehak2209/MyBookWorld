@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.mybookworld.activities
+package com.example.mybookworld.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
