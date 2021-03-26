@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -144,8 +143,4 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
             replace (R.id.fl_wrapper,fragment)
             commit()
         }
-
-
-
-
 }

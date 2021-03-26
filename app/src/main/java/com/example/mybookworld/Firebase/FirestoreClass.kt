@@ -12,8 +12,6 @@ import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import java.util.*
-import kotlin.collections.HashMap
 
 class FirestoreClass {
 
