@@ -23,4 +23,6 @@
     <color name="lightgray">#ededed</color>
     <color name="colorAccent1">#ff4081</color>
     <color name="light_medium_gray">#f3f3f3</color>
+    
+    <color name="colorBookCoverViewBackground">#E1E1E1</color>
 </resources>

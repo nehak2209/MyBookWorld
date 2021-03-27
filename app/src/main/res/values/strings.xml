@@ -57,5 +57,17 @@
 
     <!--END PROFILE-->
 
+    <!--MY BOOKS-->
 
+    <string name="Happy_Writing">Happy Writing</string>
+    <string name="book_name">Book Title</string>
+    <string name="book_category">Book Category</string>
+    <string name="choose_book">Upload Book</string>
+    <string name="my_book_description_text">Enter Book Details</string>
+    <string name="upload">Upload Book PDF</string>
+    <string name="book_description">Book Description</string>
+    <string name="book_pages">Number Of Pages</string>
+    <string name="upload_cover">Upload Book Cover</string>
+
+    <string name="submit">Submit Book</string>
 </resources>

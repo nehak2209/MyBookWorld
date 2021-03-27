@@ -83,4 +83,7 @@
     <dimen name="rv_item_name_textsize">14sp</dimen>
     <dimen name="rv_item_page_marginTop">2dp</dimen>
     <dimen name="rv_item_page_textsize">12sp</dimen>
+
+    <dimen name="add_book_cover_image">250dp</dimen>
+    <dimen name="add_cook_cover_update_icon_padding">16dp</dimen>
 </resources>

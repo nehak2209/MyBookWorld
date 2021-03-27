@@ -1,19 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.WriterSectionFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.WriterSectionFragment"
+    android:orientation="vertical">
 
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_writer_section_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/writer_section" />
-    </RelativeLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/dark_violet">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/WriterSection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="@string/Happy_Writing"
+            android:textColor="@color/primary_text_color"
+            android:textSize="@dimen/toolbar_title_text_size"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="top|center_vertical">
+
+
+            <FrameLayout
+                android:id="@+id/f1_book_cover"
+                tools:ignore="MissingConstraints"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/add_book_cover_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <ImageView
+                    android:id="@+id/book_cover_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/add_book_cover_image"
+                    android:background="@color/colorBookCoverViewBackground"
+                    android:contentDescription="@string/book_description"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/add_cook_cover_update_icon_padding"
+                    android:src="@drawable/ic_book_cover"
+                    />
+
+                <ImageView
+                    android:id="@+id/book_cover_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBookCoverViewBackground"
+                    android:contentDescription="@string/book_description"
+                    android:padding="@dimen/add_cook_cover_update_icon_padding"
+                    android:src="@drawable/ic_vector_add_book_cover" />
+
+            </FrameLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/authentication_screen_til_marginStartEnd"
+        android:layout_marginTop="@dimen/authentication_screen_til_marginTop"
+        android:layout_marginEnd="@dimen/authentication_screen_til_marginStartEnd">
+
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:hint="@string/name"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_text_size"
+            android:visibility="visible" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/authentication_screen_til_marginStartEnd"
+        android:layout_marginTop="@dimen/authentication_screen_til_marginTop"
+        android:layout_marginEnd="@dimen/authentication_screen_til_marginStartEnd">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/authentication_screen_til_marginStartEnd"
+        android:layout_marginEnd="@dimen/authentication_screen_til_marginStartEnd">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_book_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_name"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/authentication_screen_til_marginStartEnd"
+        android:layout_marginEnd="@dimen/authentication_screen_til_marginStartEnd">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_category"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/authentication_screen_til_marginStartEnd"
+        android:layout_marginEnd="@dimen/authentication_screen_til_marginStartEnd">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_description_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_description"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/authentication_screen_til_marginStartEnd"
+        android:layout_marginEnd="@dimen/authentication_screen_til_marginStartEnd">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_pages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_pages"
+            android:inputType="number"
+            android:textSize="@dimen/et_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_upload_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/btn_marginStartEnd"
+        android:layout_marginTop="@dimen/sign_up_screen_btn_marginTop"
+        android:layout_marginEnd="@dimen/btn_marginStartEnd"
+        android:background="@drawable/shape_button_rounded"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingTop="@dimen/btn_paddingTopBottom"
+        android:paddingBottom="@dimen/btn_paddingTopBottom"
+        android:text="@string/upload"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/btn_text_size" />
+
+        <Button
+            android:id="@+id/btn_submit_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/btn_marginStartEnd"
+            android:layout_marginTop="@dimen/sign_up_screen_btn_marginTop"
+            android:layout_marginEnd="@dimen/btn_marginStartEnd"
+            android:background="@drawable/shape_button_rounded"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:paddingTop="@dimen/btn_paddingTopBottom"
+            android:paddingBottom="@dimen/btn_paddingTopBottom"
+            android:text="@string/submit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/btn_text_size"
+            android:layout_marginBottom="@dimen/sign_up_screen_btn_marginTop"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
