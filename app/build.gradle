@@ -68,6 +68,8 @@ dependencies {
 
      //pdf viewer
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'com.mindorks.android:prdownloader:0.6.0'
+
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.firebase:firebase-auth:20.0.3'
     implementation 'com.google.firebase:firebase-analytics-ktx'
@@ -76,5 +78,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.multidex:multidex:2.0.1'
+    //noinspection GradleDeprecatedConfiguration
+    compile 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    //noinspection GradleDeprecatedConfiguration
+    compile 'org.apache.commons:commons-collections4:4.1'
+    implementation 'es.voghdev.pdfviewpager:library:1.1.2'
 
 }
