@@ -6,15 +6,16 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
-import com.example.mybookworld.ui.activities.PdfViewerActivity
+import com.example.mybookworld.ui.activities.PdfReaderActivity
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
 
 const val EXTRA_MESSAGE = "com.example.MyBookWorld.MESSAGE"
+
+
 
 
 open class MyBookListAdapters(
@@ -45,16 +46,15 @@ open class MyBookListAdapters(
             holder.itemView.review.text="Reviews:"+"${model.review}"
             holder.itemView.score.text=model.rating
             holder.itemView.imageView.setOnClickListener {
-                holder.itemView.pdfView.fromUri(Uri.parse(model.bookUrl))
+
+                val intent = Intent(context, PdfReaderActivity::class.java)
+                        .apply {
+                    putExtra("url", model.bookUrl)
+
+                }
+                context.startActivity(intent)
             }
-//            holder.itemView.imageView.setOnClickListener {
-////                val intent = Intent(this, PdfViewerActivity::class.java).apply {
-////                    putExtra(EXTRA_MESSAGE, model.bookUrl)
-////                }
-//                startActivity(Intent(this@MyBookListAdapters, PdfViewerActivity::class.java).apply{
-//                    putExtra(EXTRA_MESSAGE, model.bookUrl)
-//                })
-//            }
+
         }
     }
 
