@@ -7,11 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
-import com.example.mybookworld.models.myBooks
-import com.example.mybookworld.ui.activities.MainActivity
-import com.example.mybookworld.ui.activities.MyProfileActivity
-import com.example.mybookworld.ui.activities.SignInActivity
-import com.example.mybookworld.ui.activities.SignUpActivity
+import com.example.mybookworld.ui.activities.*
 import com.example.mybookworld.ui.fragments.HomeFragment
 import com.example.mybookworld.ui.fragments.WriterSectionFragment
 import com.example.mybookworld.utils.Constants
@@ -159,15 +155,22 @@ FirestoreClass {
 
     }
 
-    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo:myBooks){
+
+    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: User.UserBooks){
         mFireStore.collection(Constants.USERBOOKS)
                 .document()
                 .set(bookInfo, SetOptions.merge())
                 .addOnSuccessListener {
-                    
-                }
+                    FragmentActivity.userBookUploadSuccess()
+                }.addOnFailureListener{e->
+                BaseActivity().hideProgressDialog()
+                Log.e(
+                    FragmentActivity.javaClass.simpleName, "Error while uploading book to cloud storage.",
+                    e
+                )
+            }
     }
 
-
-
 }
+
+

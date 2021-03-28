@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
-import com.example.mybookworld.models.myBooks
+import com.example.mybookworld.models.User
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import com.example.mybookworld.utils.PermissionConstants
@@ -146,14 +146,16 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     }
 
 //Function to display success of book upload
-    private fun userBookUploadSuccess(){
+  fun userBookUploadSuccess(){
         hideProgressDialog()
         Toast.makeText(
                 getActivity()!!,resources.getString(R.string.user_book_upload_success),
                 Toast.LENGTH_SHORT
         ).show()
-
+       getActivity()!!.finish()
     }
+
+
 
     //function to update book data uploaded by user
     private fun updateUserBookData() {
@@ -162,17 +164,19 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         getString(Constants.LOGGED_IN_USERNAME ," ")!!
 
 
-        val bookDetail = myBooks(     //myBooks is data class
-                FirestoreClass().getCurrentUserID(),
-                userName,
-                et_book_name.text.toString().trim{ it <= ' '},
-                userName,
-                mBookCoverImageURL,
-                mBookURL,
-                et_pages.text.toString().trim{ it <= ' '},
-                et_category.text.toString().trim{ it <= ' '},
-                et_description_book.text.toString().trim{ it <= ' '}
+        val bookDetail = User.UserBooks(     //myBooks is data class
+            FirestoreClass().getCurrentUserID(),
+            userName,
+            et_book_name.text.toString().trim { it <= ' ' },
+            userName,
+            mBookCoverImageURL,
+            mBookURL,
+            et_pages.text.toString().trim { it <= ' ' },
+            et_category.text.toString().trim { it <= ' ' },
+            et_description_book.text.toString().trim { it <= ' ' }
         )
+
+        FirestoreClass().uploadUserBookDetails(this,bookDetail)
     }
 
     //Function to show progress dialog
@@ -316,12 +320,14 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    //function to display success of image uploading to storage
+    //function to display success of book cover image uploading to storage
     fun imageUploadSuccess(imageUrl : String) {
 
         //hideProgressDialog()
         //showErrorSnackBar("Book Cover Image Is Uploaded Succcessfully, image URL: $imageUrl",false)
         mBookCoverImageURL=imageUrl
+
+        updateUserBookData()         //write this function in bookpdfuploadsuccess
     }
 
     //Function to take permission of user to choose image from phone
