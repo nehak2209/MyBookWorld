@@ -70,4 +70,12 @@
     <string name="upload_cover">Upload Book Cover</string>
 
     <string name="submit">Submit Book</string>
+    <string name="err_msg_select_book_cover">Kindly Select an Image For Book Cover</string>
+    <string name="err_msg_enter_book_name">Please Enter Book Name</string>
+    <string name="err_msg_enter_book_pages">Enter Number Of Pages in Book</string>
+    <string name="err_msg_enter_book_desc">Enter short Dscription Of Book</string>
+    <string name="err_msg_enter_book_category">Enter Category Of Book</string>
+    <string name="err_msg_enter_email">Enter email</string>
+    <string name="err_msg_enter_name">Enter Author\'s Name</string>
+    <string name="user_book_upload_success">User Book Is Uploaded Successfully</string>
 </resources>

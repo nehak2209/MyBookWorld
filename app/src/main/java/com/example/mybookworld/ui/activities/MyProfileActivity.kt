@@ -12,9 +12,6 @@ import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
-import com.bumptech.glide.Glide
-
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.User

@@ -5,19 +5,19 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.mybookworld.models.Books
+import com.example.mybookworld.models.User
+import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.ui.activities.MainActivity
 import com.example.mybookworld.ui.activities.MyProfileActivity
 import com.example.mybookworld.ui.activities.SignInActivity
 import com.example.mybookworld.ui.activities.SignUpActivity
 import com.example.mybookworld.ui.fragments.HomeFragment
-import com.example.mybookworld.models.Books
-import com.example.mybookworld.models.User
+import com.example.mybookworld.ui.fragments.WriterSectionFragment
 import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class
 FirestoreClass {
@@ -45,6 +45,8 @@ FirestoreClass {
                 }
     }
 
+
+
     fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
         mFireStore.collection(Constants.USERS) // Collection Name
                 .document(getCurrentUserID()) // Document ID
@@ -69,7 +71,6 @@ FirestoreClass {
     }
 
     fun loadUserData(activity: Activity) {
-
 
         mFireStore.collection(Constants.USERS)
 
@@ -129,8 +130,9 @@ FirestoreClass {
 
         return currentUserID
     }
-fun getBooksList(fragment: Fragment){
-    mFireStore.collection(Constants.BOOKS)
+
+    fun getBooksList(fragment: Fragment){
+      mFireStore.collection(Constants.BOOKS)
             .get()
             .addOnSuccessListener {
                 document->
@@ -155,7 +157,16 @@ fun getBooksList(fragment: Fragment){
         }
 
 
-}
+    }
+
+    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo:myBooks){
+        mFireStore.collection(Constants.USERBOOKS)
+                .document()
+                .set(bookInfo, SetOptions.merge())
+                .addOnSuccessListener {
+                    
+                }
+    }
 
 
 

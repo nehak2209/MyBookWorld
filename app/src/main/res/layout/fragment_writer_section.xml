@@ -51,22 +51,25 @@
                 >
 
                 <ImageView
-                    android:id="@+id/book_cover_image"
+                    android:id="@+id/book_cover"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/add_book_cover_image"
                     android:background="@color/colorBookCoverViewBackground"
                     android:contentDescription="@string/book_description"
-                    android:foreground="?attr/selectableItemBackground"
                     android:padding="@dimen/add_cook_cover_update_icon_padding"
                     android:src="@drawable/ic_book_cover"
+                    android:scaleType="fitXY"
                     />
 
                 <ImageView
-                    android:id="@+id/book_cover_update"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/add_book_cover_photo"
+                    android:layout_width="66dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="top|bottom"
                     android:background="@color/colorBookCoverViewBackground"
                     android:contentDescription="@string/book_description"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:contextClickable="true"
                     android:padding="@dimen/add_cook_cover_update_icon_padding"
                     android:src="@drawable/ic_vector_add_book_cover" />
 

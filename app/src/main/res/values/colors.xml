@@ -25,4 +25,7 @@
     <color name="light_medium_gray">#f3f3f3</color>
     
     <color name="colorBookCoverViewBackground">#E1E1E1</color>
+
+    <color name="colorSnackBarSuccess">#8BC34A</color>
+    <color name="colorSnackBarError">#F72400</color>
 </resources>
