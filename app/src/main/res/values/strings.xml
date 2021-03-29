@@ -78,4 +78,15 @@
     <string name="err_msg_enter_email">Enter email</string>
     <string name="err_msg_enter_name">Enter Author\'s Name</string>
     <string name="user_book_upload_success">User Book Is Uploaded Successfully</string>
+
+    <string name="content_description">image</string>
+
+    <string name="et_hint_book_title">Book Title</string>
+    <string name="et_hint_product_price">Product Price ($)</string>
+    <string name="et_hint_product_description">Book Description</string>
+    <string name="et_hint_product_quantity">Book Pages</string>
+    <string name="btn_lbl_submit">Submit</string>
+    <string name="action_add_product">Add Product</string>
+    <string name="title_add_product">ADD PRODUCT</string>
+    <string name="read_storage_permission_denied">Permission Denied for Storage Access</string>
 </resources>

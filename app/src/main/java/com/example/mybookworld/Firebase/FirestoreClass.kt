@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
+import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.ui.activities.*
 import com.example.mybookworld.ui.fragments.HomeFragment
 import com.example.mybookworld.ui.fragments.WriterSectionFragment
@@ -15,8 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
-class
-FirestoreClass {
+class FirestoreClass {
 
     private val mFireStore = FirebaseFirestore.getInstance()
 
@@ -156,12 +156,12 @@ FirestoreClass {
     }
 
 
-    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: User.UserBooks){
+    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: myBooks){
         mFireStore.collection(Constants.USERBOOKS)
                 .document()
                 .set(bookInfo, SetOptions.merge())
                 .addOnSuccessListener {
-                    FragmentActivity.userBookUploadSuccess()
+                    FragmentActivity.userBookCoverUploadSuccess()
                 }.addOnFailureListener{e->
                 BaseActivity().hideProgressDialog()
                 Log.e(
