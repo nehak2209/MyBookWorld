@@ -3,12 +3,12 @@ package com.example.mybookworld.utils
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
 
 /**
- * This class will be used for Custom font text using the Button which inherits the AppCompatButton class.
+ * This class will be used for Custom bold text using the TextView which inherits the AppCompactTextView class.
  */
-class MSPButton(context: Context, attrs: AttributeSet) : AppCompatButton(context, attrs) {
+class MSPTextViewBold(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
 
     /**
      * The init block runs every time the class is instantiated.
@@ -19,7 +19,7 @@ class MSPButton(context: Context, attrs: AttributeSet) : AppCompatButton(context
     }
 
     /**
-     * Applies a font to a Button.
+     * Applies a font to a TextView.
      */
     private fun applyFont() {
 
@@ -27,6 +27,5 @@ class MSPButton(context: Context, attrs: AttributeSet) : AppCompatButton(context
         val typeface: Typeface =
             Typeface.createFromAsset(context.assets, "Montserrat-Bold.ttf")
         setTypeface(typeface)
-
     }
 }

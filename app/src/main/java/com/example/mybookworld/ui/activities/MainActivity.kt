@@ -36,6 +36,8 @@ class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListe
     companion object{
 const val  MY_PROFILE_REQUEST_CODE:Int=11
 
+        const val MY_FAVOURITE_REQUEST_CODE=22
+
     }
 
     private val mContext: Context? = null
@@ -73,12 +75,6 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
    fun updateNavigationUserDetails(user: User){
        GlideLoader(this).loadUserPicture(Uri.parse(user.image),nav_user_image)
 
-//       Glide.with(this@MainActivity)
-//               .load(user.image)
-//               .centerCrop()
-//               .placeholder(R.drawable.ic_user_place_holder)
-//               .into(nav_user_image)
-
        tv_username.text=user.name
    }
 
@@ -112,7 +108,8 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
                 finish()
             }
             R.id.nav_favourites -> {
-                Toast.makeText(this@MainActivity, "favourites", Toast.LENGTH_SHORT).show()
+               startActivityForResult(Intent(this@MainActivity,MyFavouriteActivity::class.java),
+                   MY_FAVOURITE_REQUEST_CODE)
             }
             R.id.nav_about -> {
 

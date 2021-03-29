@@ -1,6 +1,8 @@
 package com.example.mybookworld.ui.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ public class PdfReaderActivity extends AppCompatActivity implements DownloadFile
     private  ProgressBar progressBar;
 
     private LinearLayout pdfLayout;
+    private  String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +47,28 @@ public class PdfReaderActivity extends AppCompatActivity implements DownloadFile
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             url = getIntent().getStringExtra("url");
+            title = getIntent().getStringExtra("bookName");
         }
+        setupActionBar();
         Log.i("url",url);
 
         //Create a RemotePDFViewPager object
         remotePDFViewPager = new RemotePDFViewPager(this, url, this);
+    }
+    private void setupActionBar() {
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar_my_viewer_activity);
+        setSupportActionBar(myToolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_black_24dp);
+            Log.i("bookName",title);
+            actionBar.setTitle(title);
+        }
+
+
+        myToolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 
     @Override

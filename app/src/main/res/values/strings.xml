@@ -69,6 +69,8 @@
     <string name="book_pages">Number Of Pages</string>
     <string name="upload_cover">Upload Book Cover</string>
 
+
+
     <string name="submit">Submit Book</string>
     <string name="err_msg_select_book_cover">Kindly Select an Image For Book Cover</string>
     <string name="err_msg_enter_book_name">Please Enter Book Name</string>
@@ -79,14 +81,8 @@
     <string name="err_msg_enter_name">Enter Author\'s Name</string>
     <string name="user_book_upload_success">User Book Is Uploaded Successfully</string>
 
-    <string name="content_description">image</string>
 
-    <string name="et_hint_book_title">Book Title</string>
-    <string name="et_hint_product_price">Product Price ($)</string>
-    <string name="et_hint_product_description">Book Description</string>
-    <string name="et_hint_product_quantity">Book Pages</string>
-    <string name="btn_lbl_submit">Submit</string>
-    <string name="action_add_product">Add Product</string>
-    <string name="title_add_product">ADD PRODUCT</string>
-    <string name="read_storage_permission_denied">Permission Denied for Storage Access</string>
+
+    <string name="nav_my_favourite">My Favourite</string>
+
 </resources>
