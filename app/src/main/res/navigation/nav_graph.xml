@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.mybookworld.ui.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/genreFragment"
+        android:name="com.example.mybookworld.ui.fragments.GenreFragment"
+        android:label="fragment_genre"
+        tools:layout="@layout/fragment_genre" >
+        <action
+            android:id="@+id/action_genreFragment_to_categoryWiseBooksFragment"
+            app:destination="@id/categoryWiseBooksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myWorksFragment"
+        android:name="com.example.mybookworld.ui.fragments.MyWorksFragment"
+        android:label="fragment_my_works"
+        tools:layout="@layout/fragment_my_works" />
+    <fragment
+        android:id="@+id/writerSectionFragment"
+        android:name="com.example.mybookworld.ui.fragments.WriterSectionFragment"
+        android:label="fragment_writer_section"
+        tools:layout="@layout/fragment_writer_section" />
+    <fragment
+        android:id="@+id/categoryWiseBooksFragment"
+        android:name="com.example.mybookworld.ui.fragments.CategoryWiseBooksFragment"
+        android:label="fragment_category_wise_books"
+        tools:layout="@layout/fragment_category_wise_books" >
+        <argument
+            android:name="genre"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_categoryWiseBooksFragment_to_genreFragment"
+            app:destination="@id/genreFragment" />
+    </fragment>
+</navigation>
