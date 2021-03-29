@@ -16,13 +16,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.activities.MyFavouriteActivity"></activity>
+        <activity
+            android:name=".ui.activities.PdfViewerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activities.PdfReaderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activities.MyProfileActivity"
             android:screenOrientation="portrait"

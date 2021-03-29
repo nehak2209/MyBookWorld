@@ -6,10 +6,14 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
+import com.example.mybookworld.ui.activities.MyFavouriteActivity
 import com.example.mybookworld.ui.activities.PdfReaderActivity
+import com.example.mybookworld.ui.activities.PdfViewerActivity
+import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
 
@@ -45,13 +49,19 @@ open class MyBookListAdapters(
             holder.itemView.book_pagesrev.text="Pages:" + "${model.pages}"
             holder.itemView.review.text="Reviews:"+"${model.review}"
             holder.itemView.score.text=model.rating
+
+            //horizontal view --->PdfReaderActivity
+            //vertical view--->PdfViewerActivity
             holder.itemView.imageView.setOnClickListener {
-
                 val intent = Intent(context, PdfReaderActivity::class.java)
-                        .apply {
-                    putExtra("url", model.bookUrl)
+                intent.putExtra("url", model.bookUrl)
+                intent.putExtra("bookName", model.title)
+                context.startActivity(intent)
+            }
+            holder.itemView.favourites.setOnClickListener {
 
-                }
+                val intent = Intent(context, MyFavouriteActivity::class.java)
+                intent.putExtra(Constants.EXTRA_BOOK_ID, model.book_id)
                 context.startActivity(intent)
             }
 

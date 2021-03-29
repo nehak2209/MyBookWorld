@@ -91,14 +91,6 @@ class MyProfileActivity : BaseActivity() {
             try {
 
                 GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!,iv_profile_user_image)
-                // Load the user image in the ImageView.
-//                Glide
-//                    .with(this@MyProfileActivity)
-//                    .load(Uri.parse(mSelectedImageFileUri.toString())) // URI of the image
-//                    .centerCrop() // Scale type of the image.
-//                    .placeholder(R.drawable.ic_user_place_holder) // A default place holder
-//                    .into(iv_profile_user_image) // the view in which the image will be loaded.
-
             } catch (e: IOException) {
                 e.printStackTrace()
             }

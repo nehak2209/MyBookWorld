@@ -86,4 +86,15 @@
 
     <dimen name="add_book_cover_image">250dp</dimen>
     <dimen name="add_cook_cover_update_icon_padding">16dp</dimen>
+
+
+    <dimen name="et_textSize">16sp</dimen>
+
+    <dimen name="et_padding">16dp</dimen>
+
+    <!--updating-->
+    <dimen name="button_background_radius">10dp</dimen>
+    <dimen name="btn_textSize">18sp</dimen>
+
+    <dimen name="btn_padding">8dp</dimen>
 </resources>

@@ -10,6 +10,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,12 +27,14 @@ import androidx.fragment.app.FragmentActivity
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.User
+import com.example.mybookworld.ui.activities.MyProfileActivity
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import com.example.mybookworld.utils.PermissionConstants
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.dialog_progress.*
 import kotlinx.android.synthetic.main.fragment_writer_section.*
 import java.io.IOException
@@ -52,10 +55,10 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    //val pdf:Int=0;
-    //lateinit var uri: Uri
-    //lateinit var mStorage: StorageReference
-   private var mSelectedImageFIleUri :Uri? = null
+
+    private lateinit var mRootView: View
+
+    private var mSelectedImageFIleUri :Uri? = null
     private lateinit var mProgressDialog: Dialog
     private var mBookCoverImageURL: String = ""
     private var mBookURL: String = ""
@@ -67,14 +70,10 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        //btn_upload_book.setOnClickListener(){
-          //  uploadBookPdf()
-        //}
-        //val image : ImageView = findViewById(R.id.add_book_cover_photo)
 
-      // var image = requireView().findViewById<ImageView>(R.id.add_book_cover_photo)
-       // image.setOnClickListener { Log.d(TAG, "onViewCreated(): hello world");
-        //    image.setOnClickListener(this)
+
+
+
     }
 
     override fun onCreateView(
@@ -89,32 +88,34 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
             image.setOnClickListener(this)
         }
 
-       val submitBok : Button? = view?.findViewById(R.id.btn_submit_book)
+        val submitBok : Button? = view?.findViewById(R.id.btn_submit)
         if (submitBok != null) {
             submitBok.setOnClickListener(this)
         }
-        //image.setOnClickListener { Log.d("click ok", "onViewCreated(): hello world");
-        //image.setOnClickListener(this)
         return view
     }
 
-//Function to execute onCLic actions
+
+
+    //Function to execute onCLic actions
     override fun onClick(v: View?){
         if(v !=null){
             when(v.id) {
                 R.id.add_book_cover_photo -> { //imageView to add book cover photo in app
-                    if (ContextCompat.checkSelfPermission(getActivity()!!.getApplicationContext(),
-                                    Manifest.permission.READ_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        PermissionConstants.showImageChooser(getActivity()!!)
+                    if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
+                                    Manifest.permission.READ_EXTERNAL_STORAGE
+                            )
+                            == PackageManager.PERMISSION_GRANTED)
+                            {
+                                showImageChooser()
                     } else {
-                        ActivityCompat.requestPermissions(getActivity()!!,
+                        ActivityCompat.requestPermissions(activity!!,
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        PermissionConstants.READ_STORAGE_PERMISSION_CODE)
+                        Constants.READ_STORAGE_PERMISSION_CODE)
                     }
                 }
 
-                R.id.btn_submit_book ->{ //button to submit all data related to book to cloud storage
+                R.id.btn_submit ->{ //button to submit all data related to book to cloud storage
                     if(ValidateBookDetails()){
                         bookCoverUpload()
                     }
@@ -127,39 +128,48 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
 //Function to select and display image  of book cover in app
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK
-                && requestCode == PermissionConstants.PICK_IMAGE_REQUEST_CODE
-                && data!!.data != null
-        ) {
-            add_book_cover_photo.setImageDrawable(ContextCompat.getDrawable(getActivity()!!,R.drawable.ic_vector_edit))
+    if(resultCode==Activity.RESULT_OK){
+        Log.i("data 1",data.toString())
+        if(requestCode==Constants.PICK_IMAGE_REQUEST_CODE){
+            Log.i("data 2",data.toString())
+            if (data!=null){
+                Log.i("data 3",data.toString())
+                add_book_cover_photo.setImageDrawable(ContextCompat.getDrawable(activity!!,R.drawable.ic_vector_edit))
 
-            mSelectedImageFIleUri =data.data!!
+               val  selectedImageFileURI=data.data!!
+                try {
+                   GlideLoader(activity!!).loadUserPicture(selectedImageFileURI,book_cover)
+               }catch (e:IOException){
 
-            try {
-                GlideLoader(getActivity()!!).loadBookPicture(mSelectedImageFIleUri!!,book_cover)
-            }catch(e : IOException){
-                e.printStackTrace()
+                   e.printStackTrace()
+               }
             }
-        }else if(resultCode == Activity.RESULT_CANCELED){
-            Log.e("Request Cancelled","Image Selection Cancelled")
         }
+
     }
+    else if(resultCode == Activity.RESULT_CANCELED){
+        Log.e("Request Cancelled","Image Selection Cancelled")
+        }
+
+    }
+
+
 
 //Function to display success of book upload
   fun userBookUploadSuccess(){
         hideProgressDialog()
         Toast.makeText(
-                getActivity()!!,resources.getString(R.string.user_book_upload_success),
+                activity!!,resources.getString(R.string.user_book_upload_success),
                 Toast.LENGTH_SHORT
         ).show()
-       getActivity()!!.finish()
+       activity!!.finish()
     }
 
 
 
     //function to update book data uploaded by user
     private fun updateUserBookData() {
-        val userName = this.getActivity()?.
+        val userName = this.activity?.
         getSharedPreferences(Constants.NAME , Context.MODE_PRIVATE)?.
         getString(Constants.LOGGED_IN_USERNAME ," ")!!
 
@@ -167,21 +177,21 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         val bookDetail = User.UserBooks(     //myBooks is data class
             FirestoreClass().getCurrentUserID(),
             userName,
-            et_book_name.text.toString().trim { it <= ' ' },
+            et_book_title.text.toString().trim { it <= ' ' },
             userName,
             mBookCoverImageURL,
             mBookURL,
-            et_pages.text.toString().trim { it <= ' ' },
-            et_category.text.toString().trim { it <= ' ' },
-            et_description_book.text.toString().trim { it <= ' ' }
+            et_book_pages.text.toString().trim { it <= ' ' },
+            //et_category.text.toString().trim { it <= ' ' },
+            et_book_description.text.toString().trim { it <= ' ' }
         )
 
         FirestoreClass().uploadUserBookDetails(this,bookDetail)
     }
 
     //Function to show progress dialog
-    fun showProgressDialog(text: String) {
-        mProgressDialog = Dialog(getActivity()!!)
+    private fun showProgressDialog(text: String) {
+        mProgressDialog = Dialog(activity!!)
 
         /*Set the screen content from a layout resource.
         The resource will be inflated, adding all top-level views to the screen.*/
@@ -194,33 +204,33 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     }
 
     //Function to hide progress dialog
-    fun hideProgressDialog(){
+    private fun hideProgressDialog(){
         mProgressDialog.dismiss()
     }
 
     //Function to get fileExtension of file chosen
     private fun getFileExtension(uri: Uri?): String? {
 
-        return MimeTypeMap.getSingleton().getExtensionFromMimeType(getActivity()?.getContentResolver()?.getType(uri!!))//.toString())
+        return MimeTypeMap.getSingleton().getExtensionFromMimeType(activity?.contentResolver?.getType(uri!!))//.toString())
     }
 
     //SnackBar to diaplay messages
-    fun showErrorSnackBar(message: String, errorMessage: Boolean) {
+    private fun showErrorSnackBar(message: String, errorMessage: Boolean) {
         val snackBar : Snackbar =
-                Snackbar.make(getActivity()!!.findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+                Snackbar.make(activity!!.findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
 
         if (errorMessage) {
             snackBarView.setBackgroundColor(
                     ContextCompat.getColor(
-                            getActivity()!!,
+                            activity!!,
                             R.color.colorSnackBarError
                     )
             )
         }else{
             snackBarView.setBackgroundColor(
                     ContextCompat.getColor(
-                            getActivity()!!,
+                            activity!!,
                             R.color.colorSnackBarSuccess
                     )
             )
@@ -235,27 +245,23 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
                  showErrorSnackBar(resources.getString(R.string.err_msg_select_book_cover),true)
                  false
              }
-            TextUtils.isEmpty(et_name.text.toString().trim{
+            TextUtils.isEmpty(et_author_name.text.toString().trim{
                 it <= ' '}) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_name),false)
                 false
-            } TextUtils.isEmpty(et_email.text.toString().trim{
-                it <= ' '}) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_email), false)
-                false
-            } TextUtils.isEmpty(et_book_name.text.toString().trim{
+            } TextUtils.isEmpty(et_book_title.text.toString().trim{
             it <= ' '}) -> {
           showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_name), false)
           false
-          }TextUtils.isEmpty(et_category.text.toString().trim{
-                it <= ' '}) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_category), false)
-                false
-            }TextUtils.isEmpty(et_description_book.text.toString().trim{
+//          }TextUtils.isEmpty(et_category.text.toString().trim{
+//                it <= ' '}) -> {
+//                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_category), false)
+//                false
+            }TextUtils.isEmpty(et_book_description.text.toString().trim{
                 it <= ' '}) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_desc), false)
                 false
-            }TextUtils.isEmpty(et_pages.text.toString().trim{
+            }TextUtils.isEmpty(et_book_pages.text.toString().trim{
                 it <= ' '}) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_pages), false)
                 false
@@ -268,7 +274,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     //function to call uploadBookCoverToCloudStorage function
     private fun bookCoverUpload(){
         showProgressDialog("Please Wait...")
-        mSelectedImageFIleUri?.let { uploadBookCoverToCloudStorage(getActivity()!!, it) }
+        mSelectedImageFIleUri?.let { uploadBookCoverToCloudStorage(activity!!, it) }
 
     }
 
@@ -321,7 +327,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     }
 
     //function to display success of book cover image uploading to storage
-    fun imageUploadSuccess(imageUrl : String) {
+    private fun imageUploadSuccess(imageUrl : String) {
 
         //hideProgressDialog()
         //showErrorSnackBar("Book Cover Image Is Uploaded Succcessfully, image URL: $imageUrl",false)
@@ -337,14 +343,14 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
             grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PermissionConstants.READ_STORAGE_PERMISSION_CODE) {
+        if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE) {
             //If permission is granted
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                PermissionConstants.showImageChooser(getActivity()!!)
+                showImageChooser()
             } else {
                 //Displaying another toast if permission is not granted
                 Toast.makeText(
-                        getActivity(),
+                        activity,
                         "Oops, you just denied the permission for storage. You can also allow it from settings.",
                         Toast.LENGTH_LONG
                 ).show()
@@ -352,7 +358,18 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun showImageChooser() {
+        // An intent for launching the image selection of phone storage.
+        val galleryIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        // Launches the image selection of phone storage using the constant code.
+        startActivityForResult(galleryIntent,PICK_IMAGE_REQUEST_CODE)
+    }
+
     companion object {
+        private const val PICK_IMAGE_REQUEST_CODE = 2
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
