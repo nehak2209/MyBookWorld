@@ -134,30 +134,9 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
     }
     private fun setupBottomBar()
     {
-//        val homeFragment = HomeFragment()
-//        val categoryFragment = GenreFragment()
-//        val myBooksFragment = MyWorksFragment()
-//        val writerSectionFragment = WriterSectionFragment()
-//        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-//
-//        makeCurrentFragment(homeFragment)
-//        bottomNav.setOnNavigationItemSelectedListener{
-//            when (it.itemId) {
-//                R.id.ic_home -> makeCurrentFragment(homeFragment)
-//                R.id.ic_explore -> makeCurrentFragment(categoryFragment)
-//                R.id.ic_list -> makeCurrentFragment(myBooksFragment)
-//                R.id.ic_write -> makeCurrentFragment(writerSectionFragment)
-//            }
-//            true
-//        }
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val navController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
     }
 
-//    private fun makeCurrentFragment(fragment: Fragment) =
-//        supportFragmentManager.beginTransaction().apply{
-//            replace(R.id.fl_wrapper, fragment)
-//            commit()
-//        }
 }
