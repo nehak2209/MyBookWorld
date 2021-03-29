@@ -88,4 +88,5 @@ dependencies {
     compile 'org.apache.commons:commons-collections4:4.1'
     implementation 'es.voghdev.pdfviewpager:library:1.1.2'
 
+
 }

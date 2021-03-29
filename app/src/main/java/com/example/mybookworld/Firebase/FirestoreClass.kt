@@ -5,20 +5,15 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.mybookworld.ui.activities.MainActivity
-import com.example.mybookworld.ui.activities.MyProfileActivity
-import com.example.mybookworld.ui.activities.SignInActivity
-import com.example.mybookworld.ui.activities.SignUpActivity
-import com.example.mybookworld.ui.fragments.HomeFragment
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
-import com.example.mybookworld.ui.fragments.CategoryWiseBooksFragment
+import com.example.mybookworld.ui.activities.*
+import com.example.mybookworld.ui.fragments.HomeFragment
+import com.example.mybookworld.ui.fragments.WriterSectionFragment
 import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class
 FirestoreClass {
@@ -46,6 +41,8 @@ FirestoreClass {
                 }
     }
 
+
+
     fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
         mFireStore.collection(Constants.USERS) // Collection Name
                 .document(getCurrentUserID()) // Document ID
@@ -70,7 +67,6 @@ FirestoreClass {
     }
 
     fun loadUserData(activity: Activity) {
-
 
         mFireStore.collection(Constants.USERS)
 
@@ -130,8 +126,9 @@ FirestoreClass {
 
         return currentUserID
     }
-fun getBooksList(fragment: Fragment){
-    mFireStore.collection(Constants.BOOKS)
+
+    fun getBooksList(fragment: Fragment){
+      mFireStore.collection(Constants.BOOKS)
             .get()
             .addOnSuccessListener {
                 document->
@@ -154,32 +151,26 @@ fun getBooksList(fragment: Fragment){
         .addOnFailureListener { exception ->
             Log.d(TAG, "Error getting documents: ", exception)
         }
-}
 
-    fun getGenreBooksList(fragment: Fragment,genre: String){
-        mFireStore.collection(Constants.BOOKS)
-                .whereEqualTo("category",genre)
-                .get()
+
+    }
+
+
+    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: User.UserBooks){
+        mFireStore.collection(Constants.USERBOOKS)
+                .document()
+                .set(bookInfo, SetOptions.merge())
                 .addOnSuccessListener {
-                    document->
-                    Log.e("books list",document.documents.toString())
-                    val bookList:ArrayList<Books> = ArrayList()
-                    for ( i in document.documents){
-                        val book=i.toObject(Books::class.java)
-                        book!!.book_id=i.id
-                        bookList.add(book)
-
-                    }
-
-                    when(fragment){
-                        is CategoryWiseBooksFragment->{
-                            fragment.successCategoryWiseListFromFireStore(bookList)
-                        }
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "Error getting documents: ", exception)
-                }
+                    FragmentActivity.userBookUploadSuccess()
+                }.addOnFailureListener{e->
+                BaseActivity().hideProgressDialog()
+                Log.e(
+                    FragmentActivity.javaClass.simpleName, "Error while uploading book to cloud storage.",
+                    e
+                )
+            }
     }
 
 }
+
+
