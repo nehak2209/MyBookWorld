@@ -11,6 +11,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
@@ -27,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
+
 
 class MainActivity : BaseActivity(),NavigationView.OnNavigationItemSelectedListener {
 
@@ -131,28 +134,30 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
     }
     private fun setupBottomBar()
     {
-        val homeFragment = HomeFragment()
-        val categoryFragment = GenreFragment()
-        val myBooksFragment = MyWorksFragment()
-        val writerSectionFragment = WriterSectionFragment()
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
-        makeCurrentFragment(homeFragment)
-        bottomNav.setOnNavigationItemSelectedListener{
-            when (it.itemId) {
-                R.id.ic_home -> makeCurrentFragment(homeFragment)
-                R.id.ic_explore -> makeCurrentFragment(categoryFragment)
-                R.id.ic_list -> makeCurrentFragment(myBooksFragment)
-                R.id.ic_write -> makeCurrentFragment(writerSectionFragment)
-            }
-            true
-        }
-
+//        val homeFragment = HomeFragment()
+//        val categoryFragment = GenreFragment()
+//        val myBooksFragment = MyWorksFragment()
+//        val writerSectionFragment = WriterSectionFragment()
+//        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+//
+//        makeCurrentFragment(homeFragment)
+//        bottomNav.setOnNavigationItemSelectedListener{
+//            when (it.itemId) {
+//                R.id.ic_home -> makeCurrentFragment(homeFragment)
+//                R.id.ic_explore -> makeCurrentFragment(categoryFragment)
+//                R.id.ic_list -> makeCurrentFragment(myBooksFragment)
+//                R.id.ic_write -> makeCurrentFragment(writerSectionFragment)
+//            }
+//            true
+//        }
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val navController = findNavController(R.id.fragment)
+        bottomNavigationView.setupWithNavController(navController)
     }
 
-    private fun makeCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply{
-            replace(R.id.fl_wrapper, fragment)
-            commit()
-        }
+//    private fun makeCurrentFragment(fragment: Fragment) =
+//        supportFragmentManager.beginTransaction().apply{
+//            replace(R.id.fl_wrapper, fragment)
+//            commit()
+//        }
 }

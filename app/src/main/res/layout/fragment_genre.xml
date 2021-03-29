@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_genre"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,6 +32,7 @@
                 <!-- horror card -->
                 <!-- romance card -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/horror"
                     android:layout_width="190dp"
                     android:layout_height="170dp"
                     android:layout_marginHorizontal="10dp"
@@ -80,6 +82,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/romance"
                     android:layout_width="190dp"
                     android:layout_height="170dp"
                     android:layout_marginHorizontal="10dp"
@@ -141,6 +144,7 @@
                 android:orientation="horizontal">
                 <!-- fiction card -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/fiction"
                     android:layout_width="190dp"
                     android:layout_height="170dp"
                     android:layout_marginHorizontal="10dp"
@@ -191,6 +195,7 @@
                 </androidx.cardview.widget.CardView>
                 <!-- historical fiction card -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/historical_fiction"
                     android:layout_width="190dp"
                     android:layout_height="170dp"
                     android:layout_marginHorizontal="10dp"
@@ -252,6 +257,7 @@
                 android:orientation="horizontal">
                 <!-- fantasy card -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/fantasy"
                     android:layout_width="190dp"
                     android:layout_height="170dp"
                     android:layout_marginHorizontal="10dp"
@@ -294,7 +300,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="4dp"
-                            android:text="     Get lost in another world."
+                            android:text="Get lost in another world."
                             android:textColor="@android:color/darker_gray" />
 
 
@@ -302,6 +308,7 @@
                 </androidx.cardview.widget.CardView>
                 <!-- action and adventure card -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/action"
                     android:layout_width="190dp"
                     android:layout_height="170dp"
                     android:layout_margin="10dp"

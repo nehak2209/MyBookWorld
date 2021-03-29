@@ -12,6 +12,7 @@ import com.example.mybookworld.ui.activities.SignUpActivity
 import com.example.mybookworld.ui.fragments.HomeFragment
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
+import com.example.mybookworld.ui.fragments.CategoryWiseBooksFragment
 import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -153,10 +154,32 @@ fun getBooksList(fragment: Fragment){
         .addOnFailureListener { exception ->
             Log.d(TAG, "Error getting documents: ", exception)
         }
-
-
 }
 
+    fun getGenreBooksList(fragment: Fragment,genre: String){
+        mFireStore.collection(Constants.BOOKS)
+                .whereEqualTo("category",genre)
+                .get()
+                .addOnSuccessListener {
+                    document->
+                    Log.e("books list",document.documents.toString())
+                    val bookList:ArrayList<Books> = ArrayList()
+                    for ( i in document.documents){
+                        val book=i.toObject(Books::class.java)
+                        book!!.book_id=i.id
+                        bookList.add(book)
 
+                    }
+
+                    when(fragment){
+                        is CategoryWiseBooksFragment->{
+                            fragment.successCategoryWiseListFromFireStore(bookList)
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "Error getting documents: ", exception)
+                }
+    }
 
 }
