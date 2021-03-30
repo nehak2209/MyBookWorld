@@ -249,6 +249,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
                     //)
                 }
     }
+
     //Function to display success of book upload
     fun showUserBookCoverUploadSuccess(){
         hideProgressDialog()
@@ -256,7 +257,8 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
                 requireContext(),resources.getString(R.string.user_book_upload_success),
                 Toast.LENGTH_SHORT
         ).show()
-        //this.requireContext().finish()
+        
+        activity?.finish()
     }
 
     //Function to show progress dialog
@@ -283,31 +285,6 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
 
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(activity?.contentResolver?.getType(uri!!))//.toString())
     }
-
-    //SnackBar to diaplay messages
-    private fun showErrorSnackBar(message: String, errorMessage: Boolean) {
-        val snackBar : Snackbar =
-                Snackbar.make(requireActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
-        val snackBarView = snackBar.view
-
-        if (errorMessage) {
-            snackBarView.setBackgroundColor(
-                    ContextCompat.getColor(
-                            requireContext(),
-                            R.color.colorSnackBarError
-                    )
-            )
-        }else{
-            snackBarView.setBackgroundColor(
-                    ContextCompat.getColor(
-                            requireContext(),
-                            R.color.colorSnackBarSuccess
-                    )
-            )
-        }
-        snackBar.show()
-    }
-
 
 
     //function to call uploadBookCoverToCloudStorage function
@@ -374,8 +351,6 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
 
     }
 
-
-
     private fun showImageChooser() {
         // An intent for launching the image selection of phone storage.
         val galleryIntent = Intent(
@@ -384,6 +359,30 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         )
         // Launches the image selection of phone storage using the constant code.
         startActivityForResult(galleryIntent,PICK_IMAGE_REQUEST_CODE)
+    }
+
+    //SnackBar to diaplay messages
+    private fun showErrorSnackBar(message: String, errorMessage: Boolean) {
+        val snackBar : Snackbar =
+                Snackbar.make(requireActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+        val snackBarView = snackBar.view
+
+        if (errorMessage) {
+            snackBarView.setBackgroundColor(
+                    ContextCompat.getColor(
+                            requireContext(),
+                            R.color.colorSnackBarError
+                    )
+            )
+        }else{
+            snackBarView.setBackgroundColor(
+                    ContextCompat.getColor(
+                            requireContext(),
+                            R.color.colorSnackBarSuccess
+                    )
+            )
+        }
+        snackBar.show()
     }
 
     companion object {
