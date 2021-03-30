@@ -197,6 +197,28 @@ FirestoreClass {
                 }
     }
 
+
+    fun getBookDetails(activity: BookDetailsActivity,bookId:String){
+   mFireStore.collection(Constants.BOOKS)
+           .document(bookId)
+           .get()
+           .addOnSuccessListener {
+           document->
+
+               Log.e(activity.javaClass.simpleName,document.toString())
+               val book=document.toObject(Books::class.java)
+               if (book != null) {
+                   activity.bookDetailSuccess(book)
+               }
+           }
+           .addOnFailureListener {
+               exception ->
+               Log.d(TAG, "Error getting book details: ", exception)
+           }
+
+    }
+
+
 }
 
 

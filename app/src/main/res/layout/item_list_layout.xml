@@ -101,23 +101,11 @@
         android:text="review"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/book_image"
-
         app:layout_constraintTop_toBottomOf="@id/book_pagesrev" />
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <ImageView
-        android:id="@+id/favourites"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
 
-        android:layout_marginRight="16dp"
-       app:layout_constraintEnd_toEndOf="@id/imageView"
-     app:layout_constraintTop_toTopOf="@id/imageView"
-        android:src="@drawable/ic_baseline_star_border_24"
-         />
 </androidx.constraintlayout.widget.ConstraintLayout>
