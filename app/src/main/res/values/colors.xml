@@ -53,4 +53,8 @@
     <color name="colorImageViewBackground">#E1E1E1</color>
 
     <color name="colorOffWhite">#F8F8F8</color>
+
+    <color name="book_details_bg">#F3F3F3</color>
+
+    <color name="book_value_text_color">#545353</color>
 </resources>

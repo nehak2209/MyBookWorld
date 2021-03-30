@@ -24,6 +24,9 @@ open class BaseActivity : AppCompatActivity() {
 
     //dialog to display to user while loading
 
+    /**
+     * This function is used to show the progress dialog with the title and message to user.
+     */
     fun showProgressDialog(text: String) {
         mProgressDialog = Dialog(this)
 
@@ -33,10 +36,12 @@ open class BaseActivity : AppCompatActivity() {
 
         mProgressDialog.tv_progress_text.text = text
 
+        mProgressDialog.setCancelable(false)
+        mProgressDialog.setCanceledOnTouchOutside(false)
+
         //Start the dialog and display it on screen.
         mProgressDialog.show()
     }
-
     fun hideProgressDialog(){
         mProgressDialog.dismiss()
     }

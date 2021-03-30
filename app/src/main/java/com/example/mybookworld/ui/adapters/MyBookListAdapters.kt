@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
+import com.example.mybookworld.ui.activities.BookDetailsActivity
 import com.example.mybookworld.ui.activities.MyFavouriteActivity
 import com.example.mybookworld.ui.activities.PdfReaderActivity
 import com.example.mybookworld.ui.activities.PdfViewerActivity
@@ -50,24 +51,16 @@ open class MyBookListAdapters(
             holder.itemView.review.text="Reviews:"+"${model.review}"
             holder.itemView.score.text=model.rating
 
-            //horizontal view --->PdfReaderActivity
-            //vertical view--->PdfViewerActivity
-            holder.itemView.imageView.setOnClickListener {
-                val intent = Intent(context, PdfReaderActivity::class.java)
-                intent.putExtra("url", model.bookUrl)
-                intent.putExtra("bookName", model.title)
+            holder.itemView.setOnClickListener {
+                val intent = Intent(context, BookDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_BOOK_ID,model.book_id)
                 context.startActivity(intent)
-            }
-            holder.itemView.favourites.setOnClickListener {
 
-                val intent = Intent(context, MyFavouriteActivity::class.java)
-                intent.putExtra(Constants.EXTRA_BOOK_ID, model.book_id)
-                context.startActivity(intent)
             }
+
 
         }
     }
-
 
 
     override fun getItemCount(): Int {
