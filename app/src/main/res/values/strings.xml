@@ -81,8 +81,17 @@
     <string name="err_msg_enter_name">Enter Author\'s Name</string>
     <string name="user_book_upload_success">User Book Is Uploaded Successfully</string>
 
-
-
     <string name="nav_my_favourite">My Favourite</string>
+
+    <!--genre start-->
+    <string name="romance">Romance</string>
+    <string name="fiction">Fiction</string>
+    <string name="historical_fiction">Historical Fiction</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="horror">Horror</string>
+    <string name="action_adventure">Action and Adventure</string>
+    <string name="author">Author</string>
+    <!--genre end-->
+
 
 </resources>

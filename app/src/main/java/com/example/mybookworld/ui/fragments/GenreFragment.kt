@@ -1,14 +1,14 @@
 package com.example.mybookworld.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.cardview.widget.CardView
-import com.example.mybookworld.R
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.mybookworld.R
+
 
 class GenreFragment : Fragment() {
 

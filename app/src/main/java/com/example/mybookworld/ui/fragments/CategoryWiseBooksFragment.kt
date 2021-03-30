@@ -13,6 +13,7 @@ import com.example.mybookworld.models.Books
 import com.example.mybookworld.ui.adapters.MyBookListAdapters
 import kotlinx.android.synthetic.main.fragment_category_wise_books.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlin.reflect.KProperty
 
 class CategoryWiseBooksFragment : Fragment() {
    val args by navArgs<CategoryWiseBooksFragmentArgs>()
@@ -45,3 +46,4 @@ class CategoryWiseBooksFragment : Fragment() {
     }
 
 }
+

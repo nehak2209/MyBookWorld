@@ -23,18 +23,14 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
-import com.example.mybookworld.models.User
-import com.example.mybookworld.ui.activities.MyProfileActivity
+import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
-import com.example.mybookworld.utils.PermissionConstants
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.dialog_progress.*
 import kotlinx.android.synthetic.main.fragment_writer_section.*
 import java.io.IOException
@@ -71,9 +67,6 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
             param2 = it.getString(ARG_PARAM2)
         }
 
-
-
-
     }
 
     override fun onCreateView(
@@ -84,14 +77,14 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         val view : View? = inflater.inflate(R.layout.fragment_writer_section, container, false)
 
         val image : ImageView? = view?.findViewById(R.id.add_book_cover_photo)
-        if (image != null) {
-            image.setOnClickListener(this)
-        }
 
-        val submitBok : Button? = view?.findViewById(R.id.btn_submit)
-        if (submitBok != null) {
-            submitBok.setOnClickListener(this)
-        }
+            image!!.setOnClickListener(this)
+
+
+        val submitBook : Button? = view?.findViewById(R.id.btn_submit)
+
+            submitBook!!.setOnClickListener(this)
+
         return view
     }
 
@@ -102,21 +95,21 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         if(v !=null){
             when(v.id) {
                 R.id.add_book_cover_photo -> { //imageView to add book cover photo in app
-                    if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
+                    if (ContextCompat.checkSelfPermission(requireContext().applicationContext,
                                     Manifest.permission.READ_EXTERNAL_STORAGE
                             )
                             == PackageManager.PERMISSION_GRANTED)
                             {
                                 showImageChooser()
                     } else {
-                        ActivityCompat.requestPermissions(activity!!,
+                        ActivityCompat.requestPermissions(requireContext() as Activity,
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                         Constants.READ_STORAGE_PERMISSION_CODE)
                     }
                 }
 
                 R.id.btn_submit ->{ //button to submit all data related to book to cloud storage
-                    if(ValidateBookDetails()){
+                    if(validateBookDetails()){
                         bookCoverUpload()
                     }
                 }
@@ -134,11 +127,11 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
             Log.i("data 2",data.toString())
             if (data!=null){
                 Log.i("data 3",data.toString())
-                add_book_cover_photo.setImageDrawable(ContextCompat.getDrawable(activity!!,R.drawable.ic_vector_edit))
+                add_book_cover_photo.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_vector_edit))
 
                val  selectedImageFileURI=data.data!!
                 try {
-                   GlideLoader(activity!!).loadUserPicture(selectedImageFileURI,book_cover)
+                   GlideLoader(requireContext()).loadUserPicture(selectedImageFileURI,book_cover)
                }catch (e:IOException){
 
                    e.printStackTrace()
@@ -159,26 +152,26 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
   fun userBookUploadSuccess(){
         hideProgressDialog()
         Toast.makeText(
-                activity!!,resources.getString(R.string.user_book_upload_success),
+                requireContext(),resources.getString(R.string.user_book_upload_success),
                 Toast.LENGTH_SHORT
         ).show()
-       activity!!.finish()
+       this.requireActivity().finish()
     }
 
 
 
     //function to update book data uploaded by user
-    private fun updateUserBookData() {
-        val userName = this.activity?.
+    fun userBookCoverUploadSuccess() {
+        val userName = requireContext().
         getSharedPreferences(Constants.NAME , Context.MODE_PRIVATE)?.
         getString(Constants.LOGGED_IN_USERNAME ," ")!!
 
 
-        val bookDetail = User.UserBooks(     //myBooks is data class
+        val bookDetail = myBooks(     //myBooks is data class
             FirestoreClass().getCurrentUserID(),
             userName,
             et_book_title.text.toString().trim { it <= ' ' },
-            userName,
+            et_author_name.text.toString().trim{it <=' '},
             mBookCoverImageURL,
             mBookURL,
             et_book_pages.text.toString().trim { it <= ' ' },
@@ -191,7 +184,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
 
     //Function to show progress dialog
     private fun showProgressDialog(text: String) {
-        mProgressDialog = Dialog(activity!!)
+        mProgressDialog = Dialog(requireContext())
 
         /*Set the screen content from a layout resource.
         The resource will be inflated, adding all top-level views to the screen.*/
@@ -217,20 +210,20 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     //SnackBar to diaplay messages
     private fun showErrorSnackBar(message: String, errorMessage: Boolean) {
         val snackBar : Snackbar =
-                Snackbar.make(activity!!.findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+                Snackbar.make(requireActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
 
         if (errorMessage) {
             snackBarView.setBackgroundColor(
                     ContextCompat.getColor(
-                            activity!!,
+                            requireContext(),
                             R.color.colorSnackBarError
                     )
             )
         }else{
             snackBarView.setBackgroundColor(
                     ContextCompat.getColor(
-                            activity!!,
+                            requireContext(),
                             R.color.colorSnackBarSuccess
                     )
             )
@@ -239,7 +232,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     }
 
     //Function to validate book details entered by user
-  private fun ValidateBookDetails():Boolean{
+  private fun validateBookDetails():Boolean{
         return when{
              mSelectedImageFIleUri == null ->{
                  showErrorSnackBar(resources.getString(R.string.err_msg_select_book_cover),true)
@@ -274,12 +267,13 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     //function to call uploadBookCoverToCloudStorage function
     private fun bookCoverUpload(){
         showProgressDialog("Please Wait...")
-        mSelectedImageFIleUri?.let { uploadBookCoverToCloudStorage(activity!!, it) }
+        //mSelectedImageFIleUri?.let { uploadBookCoverToCloudStorage(requireActivity(), it) }
+        mSelectedImageFIleUri?.let { uploadBookCoverToCloudStorage() }
 
     }
 
     //Function to uploadbook cover image to cloud storage
-    private fun uploadBookCoverToCloudStorage(activity: FragmentActivity, uploadImageUri: Uri) {
+    /*private fun uploadBookCoverToCloudStorage(activity: FragmentActivity, uploadImageUri: Uri) {
         showProgressDialog(resources.getString(R.string.please_wait))
 
         if (mSelectedImageFIleUri != null) {
@@ -311,7 +305,54 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
                                     imageUploadSuccess(mBookCoverImageURL)
 
                                     // Call a function to update user details in the database.
-                                    updateUserBookData()
+                                    userBookCoverUploadSuccess()
+                                }
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(
+                                getActivity(),
+                                exception.message,
+                                Toast.LENGTH_LONG
+                        ).show()
+
+                        hideProgressDialog()
+                    }
+        }
+    }*/
+
+    private fun uploadBookCoverToCloudStorage() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        if (mSelectedImageFIleUri != null) {
+
+            //getting the storage reference
+            val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
+                    "BOOK_COVER_IMAGE" + System.currentTimeMillis() + "." + getFileExtension(
+                            mSelectedImageFIleUri
+                    )
+            )
+
+            //adding the file to reference
+            sRef.putFile(mSelectedImageFIleUri!!)
+                    .addOnSuccessListener { taskSnapshot ->
+                        // The image upload is success
+                        Log.e(
+                                "Firebase Image URL",
+                                taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
+                        )
+
+                        // Get the downloadable url from the task snapshot
+                        taskSnapshot.metadata!!.reference!!.downloadUrl
+                                .addOnSuccessListener { uri ->
+                                    Log.e("Downloadable Image URL", uri.toString())
+
+                                    // assign the image url to the variable.
+                                    mBookCoverImageURL = uri.toString()
+
+                                    imageUploadSuccess(mBookCoverImageURL)
+
+                                    // Call a function to update user details in the database.
+                                    userBookCoverUploadSuccess()
                                 }
                     }
                     .addOnFailureListener { exception ->
@@ -333,7 +374,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         //showErrorSnackBar("Book Cover Image Is Uploaded Succcessfully, image URL: $imageUrl",false)
         mBookCoverImageURL=imageUrl
 
-        updateUserBookData()         //write this function in bookpdfuploadsuccess
+        userBookCoverUploadSuccess()         //write this function in bookpdfuploadsuccess
     }
 
     //Function to take permission of user to choose image from phone
