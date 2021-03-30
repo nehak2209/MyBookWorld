@@ -29,6 +29,8 @@ import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.dialog_progress.*
@@ -58,6 +60,9 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
     private lateinit var mProgressDialog: Dialog
     private var mBookCoverImageURL: String = ""
     private var mBookURL: String = ""
+
+    private lateinit var bookDetail:myBooks
+    private val userBookFireStore = FirebaseFirestore.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -117,6 +122,27 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    //Function to take permission of user to choose image from phone
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE) {
+            //If permission is granted
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showImageChooser()
+            } else {
+                //Displaying another toast if permission is not granted
+                Toast.makeText(
+                        activity,
+                        "Oops, you just denied the permission for storage. You can also allow it from settings.",
+                        Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
 
 //Function to select and display image  of book cover in app
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -129,9 +155,10 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
                 Log.i("data 3",data.toString())
                 add_book_cover_photo.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_vector_edit))
 
-               val  selectedImageFileURI=data.data!!
+                mSelectedImageFIleUri =data.data!!
+
                 try {
-                   GlideLoader(requireContext()).loadUserPicture(selectedImageFileURI,book_cover)
+                   GlideLoader(requireContext()).loadUserPicture(mSelectedImageFIleUri!!,book_cover)
                }catch (e:IOException){
 
                    e.printStackTrace()
@@ -146,30 +173,49 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
 
     }
 
-
-
-//Function to display success of book upload
-  fun userBookUploadSuccess(){
-        hideProgressDialog()
-        Toast.makeText(
-                requireContext(),resources.getString(R.string.user_book_upload_success),
-                Toast.LENGTH_SHORT
-        ).show()
-       this.requireActivity().finish()
+    //Function to validate book details entered by user
+    private fun validateBookDetails():Boolean{
+        return when{
+            mSelectedImageFIleUri == null ->{
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_book_cover),true)
+                false
+            }
+            TextUtils.isEmpty(et_author_name.text.toString().trim{
+                it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_name),false)
+                false
+            } TextUtils.isEmpty(et_book_title.text.toString().trim{
+                it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_name), false)
+                false
+//          }TextUtils.isEmpty(et_category.text.toString().trim{
+//                it <= ' '}) -> {
+//                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_category), false)
+//                false
+            }TextUtils.isEmpty(et_book_description.text.toString().trim{
+                it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_desc), false)
+                false
+            }TextUtils.isEmpty(et_book_pages.text.toString().trim{
+                it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_pages), false)
+                false
+            }else ->{
+                true
+            }
+        }
     }
-
-
 
 
 
     //function to update book data uploaded by user
     fun userBookCoverUploadSuccess() {
-        val userName = requireContext().
+        val userName = this.requireContext().
         getSharedPreferences(Constants.NAME , Context.MODE_PRIVATE)?.
         getString(Constants.LOGGED_IN_USERNAME ," ")!!
 
 
-        val bookDetail = myBooks(     //myBooks is data class
+        bookDetail = myBooks(     //myBooks is data class
             FirestoreClass().getCurrentUserID(),
             userName,
             et_book_title.text.toString().trim { it <= ' ' },
@@ -181,7 +227,36 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
             et_book_description.text.toString().trim { it <= ' ' }
         )
 
-        FirestoreClass().uploadUserBookDetails(this,bookDetail)
+       // FirestoreClass().uploadUserBookDetails(this,bookDetail)
+        uploadUserBookDetails()
+    }
+
+    private fun uploadUserBookDetails(){
+
+        userBookFireStore.collection(Constants.USERBOOKS)
+                .document()
+                .set(bookDetail, SetOptions.merge())
+                .addOnSuccessListener {
+
+                    showUserBookCoverUploadSuccess()
+
+
+                }.addOnFailureListener{e->
+                    hideProgressDialog()
+                   // Log.e(
+                        //    FragmentActivity.javaClass.simpleName, "Error while uploading book to cloud storage.",
+                        //    e
+                    //)
+                }
+    }
+    //Function to display success of book upload
+    fun showUserBookCoverUploadSuccess(){
+        hideProgressDialog()
+        Toast.makeText(
+                requireContext(),resources.getString(R.string.user_book_upload_success),
+                Toast.LENGTH_SHORT
+        ).show()
+        //this.requireContext().finish()
     }
 
     //Function to show progress dialog
@@ -233,49 +308,108 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
         snackBar.show()
     }
 
-    //Function to validate book details entered by user
-  private fun validateBookDetails():Boolean{
-        return when{
-             mSelectedImageFIleUri == null ->{
-                 showErrorSnackBar(resources.getString(R.string.err_msg_select_book_cover),true)
-                 false
-             }
-            TextUtils.isEmpty(et_author_name.text.toString().trim{
-                it <= ' '}) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_name),false)
-                false
-            } TextUtils.isEmpty(et_book_title.text.toString().trim{
-            it <= ' '}) -> {
-          showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_name), false)
-          false
-//          }TextUtils.isEmpty(et_category.text.toString().trim{
-//                it <= ' '}) -> {
-//                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_category), false)
-//                false
-            }TextUtils.isEmpty(et_book_description.text.toString().trim{
-                it <= ' '}) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_desc), false)
-                false
-            }TextUtils.isEmpty(et_book_pages.text.toString().trim{
-                it <= ' '}) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_book_pages), false)
-                false
-            }else ->{
-                true
-            }
-        }
-    }
+
 
     //function to call uploadBookCoverToCloudStorage function
     private fun bookCoverUpload(){
-        showProgressDialog("Please Wait...")
-        //mSelectedImageFIleUri?.let { uploadBookCoverToCloudStorage(requireActivity(), it) }
-        mSelectedImageFIleUri?.let { uploadBookCoverToCloudStorage() }
+        showProgressDialog(resources.getString(R.string.please_wait))
 
+        uploadBookCoverToCloudStorage()
     }
 
     //Function to uploadbook cover image to cloud storage
-    /*private fun uploadBookCoverToCloudStorage(activity: FragmentActivity, uploadImageUri: Uri) {
+    private fun uploadBookCoverToCloudStorage() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        if (mSelectedImageFIleUri != null) {
+
+            //getting the storage reference
+            val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
+                    "BOOK_COVER_IMAGE" + System.currentTimeMillis() + "." + getFileExtension(
+                            mSelectedImageFIleUri
+                    )
+            )
+
+            //adding the file to reference
+            sRef.putFile(mSelectedImageFIleUri!!)
+                    .addOnSuccessListener { taskSnapshot ->
+                        // The image upload is success
+                        Log.e(
+                                "Firebase Image URL",
+                                taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
+                        )
+
+                        // Get the downloadable url from the task snapshot
+                        taskSnapshot.metadata!!.reference!!.downloadUrl
+                                .addOnSuccessListener { uri ->
+                                    Log.e("Downloadable Image URL", uri.toString())
+
+                                    // assign the image url to the variable.
+                                    mBookCoverImageURL = uri.toString()
+
+                                    imageUploadSuccess(mBookCoverImageURL)
+
+                                    // Call a function to update user details in the database.
+                                    userBookCoverUploadSuccess()
+                                }
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(
+                                requireContext(),
+                                exception.message,
+                                Toast.LENGTH_LONG
+                        ).show()
+
+                        hideProgressDialog()
+                    }
+        }
+    }
+
+    //function to display success of book cover image uploading to storage
+    private fun imageUploadSuccess(imageUrl : String) {
+
+        mBookCoverImageURL=imageUrl
+
+        showUserBookCoverUploadSuccess()
+
+    }
+
+
+
+    private fun showImageChooser() {
+        // An intent for launching the image selection of phone storage.
+        val galleryIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        // Launches the image selection of phone storage using the constant code.
+        startActivityForResult(galleryIntent,PICK_IMAGE_REQUEST_CODE)
+    }
+
+    companion object {
+        private const val PICK_IMAGE_REQUEST_CODE = 2
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment WriterSectionFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            WriterSectionFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+}
+
+
+/*private fun uploadBookCoverToCloudStorage(activity: FragmentActivity, uploadImageUri: Uri) {
         showProgressDialog(resources.getString(R.string.please_wait))
 
         if (mSelectedImageFIleUri != null) {
@@ -321,116 +455,3 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
                     }
         }
     }*/
-
-    private fun uploadBookCoverToCloudStorage() {
-        showProgressDialog(resources.getString(R.string.please_wait))
-
-        if (mSelectedImageFIleUri != null) {
-
-            //getting the storage reference
-            val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-                    "BOOK_COVER_IMAGE" + System.currentTimeMillis() + "." + getFileExtension(
-                            mSelectedImageFIleUri
-                    )
-            )
-
-            //adding the file to reference
-            sRef.putFile(mSelectedImageFIleUri!!)
-                    .addOnSuccessListener { taskSnapshot ->
-                        // The image upload is success
-                        Log.e(
-                                "Firebase Image URL",
-                                taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
-                        )
-
-                        // Get the downloadable url from the task snapshot
-                        taskSnapshot.metadata!!.reference!!.downloadUrl
-                                .addOnSuccessListener { uri ->
-                                    Log.e("Downloadable Image URL", uri.toString())
-
-                                    // assign the image url to the variable.
-                                    mBookCoverImageURL = uri.toString()
-
-                                    imageUploadSuccess(mBookCoverImageURL)
-
-                                    // Call a function to update user details in the database.
-                                    userBookCoverUploadSuccess()
-                                }
-                    }
-                    .addOnFailureListener { exception ->
-                        Toast.makeText(
-                                getActivity(),
-                                exception.message,
-                                Toast.LENGTH_LONG
-                        ).show()
-
-                        hideProgressDialog()
-                    }
-        }
-    }
-
-    //function to display success of book cover image uploading to storage
-    private fun imageUploadSuccess(imageUrl : String) {
-
-        //hideProgressDialog()
-        //showErrorSnackBar("Book Cover Image Is Uploaded Succcessfully, image URL: $imageUrl",false)
-        mBookCoverImageURL=imageUrl
-
-        userBookCoverUploadSuccess()         //write this function in bookpdfuploadsuccess
-    }
-
-    //Function to take permission of user to choose image from phone
-    override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE) {
-            //If permission is granted
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showImageChooser()
-            } else {
-                //Displaying another toast if permission is not granted
-                Toast.makeText(
-                        activity,
-                        "Oops, you just denied the permission for storage. You can also allow it from settings.",
-                        Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-    }
-
-    private fun showImageChooser() {
-        // An intent for launching the image selection of phone storage.
-        val galleryIntent = Intent(
-            Intent.ACTION_PICK,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        )
-        // Launches the image selection of phone storage using the constant code.
-        startActivityForResult(galleryIntent,PICK_IMAGE_REQUEST_CODE)
-    }
-
-    companion object {
-        private const val PICK_IMAGE_REQUEST_CODE = 2
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WriterSectionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WriterSectionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-}
-
-
