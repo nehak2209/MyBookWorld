@@ -171,6 +171,7 @@ class FirestoreClass {
                 )
             }
     }
+
     fun getGenreBooksList(fragment: Fragment,genre: String){
         mFireStore.collection(Constants.BOOKS)
                 .whereEqualTo("category",genre)

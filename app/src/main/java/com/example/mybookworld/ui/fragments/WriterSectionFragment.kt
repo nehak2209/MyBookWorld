@@ -160,6 +160,8 @@ class WriterSectionFragment : Fragment(), View.OnClickListener {
 
 
 
+
+
     //function to update book data uploaded by user
     fun userBookCoverUploadSuccess() {
         val userName = requireContext().
