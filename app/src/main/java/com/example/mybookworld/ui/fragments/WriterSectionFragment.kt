@@ -248,6 +248,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                 Log.i("data 3", data.toString())
                 mBookUri = data.data!!
             }
+
             //bookUri = data!!.data!!
             uriTxt = mBookUri
             uploadPdfToCLoudStorage()
@@ -352,6 +353,9 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
 
                         hideProgressDialog()
                     }
+        }else{
+            showErrorSnackBar(resources.getString(R.string.err_msg_select_book), true)
+            false
         }
     }
 
@@ -448,7 +452,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                 requireContext(), resources.getString(R.string.user_book_upload_success),
                 Toast.LENGTH_SHORT
         ).show()
-       activity?.finish()
+       //activity?.finish()
         activity?.startActivity(activity?.intent)
     }
 
@@ -463,7 +467,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
         mProgressDialog.tv_progress_text.text = text
 
         //Start the dialog and display it on screen.
-//        mProgressDialog.show()
+         mProgressDialog.show()
     }
 
     //Function to hide progress dialog
@@ -498,6 +502,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
 
     //function to display success of book cover image uploading to storage
     private fun bookUploadSuccess(bookUrl: String) {
+        hideProgressDialog()
 
         mBookURL=bookUrl
 
@@ -551,57 +556,4 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                 }
             }
     }
-
-
-
 }
-
-
-
-
-/*private fun uploadBookCoverToCloudStorage(activity: FragmentActivity, uploadImageUri: Uri) {
-        showProgressDialog(resources.getString(R.string.please_wait))
-
-        if (mSelectedImageFIleUri != null) {
-
-            //getting the storage reference
-            val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-                    "BOOK_COVER_IMAGE" + System.currentTimeMillis() + "." + getFileExtension(
-                            mSelectedImageFIleUri
-                    )
-            )
-
-            //adding the file to reference
-            sRef.putFile(mSelectedImageFIleUri!!)
-                    .addOnSuccessListener { taskSnapshot ->
-                        // The image upload is success
-                        Log.e(
-                                "Firebase Image URL",
-                                taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
-                        )
-
-                        // Get the downloadable url from the task snapshot
-                        taskSnapshot.metadata!!.reference!!.downloadUrl
-                                .addOnSuccessListener { uri ->
-                                    Log.e("Downloadable Image URL", uri.toString())
-
-                                    // assign the image url to the variable.
-                                    mBookCoverImageURL = uri.toString()
-
-                                    imageUploadSuccess(mBookCoverImageURL)
-
-                                    // Call a function to update user details in the database.
-                                    userBookCoverUploadSuccess()
-                                }
-                    }
-                    .addOnFailureListener { exception ->
-                        Toast.makeText(
-                                getActivity(),
-                                exception.message,
-                                Toast.LENGTH_LONG
-                        ).show()
-
-                        hideProgressDialog()
-                    }
-        }
-    }*/
