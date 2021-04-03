@@ -89,5 +89,7 @@
     <string name="fantasy">Fantasy</string>
     <string name="historical_fiction">Historical Fiction</string>
     <string name="action_adventure">Action and Adventure</string>
+    <string name="err_msg_select_book">Please select a book pdf</string>
+    <string name="err_msg_select_category">Please select a category for your book</string>
 
 </resources>

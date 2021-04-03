@@ -10,16 +10,10 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.bumptech.glide.Glide
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
-import com.example.mybookworld.ui.fragments.GenreFragment
-import com.example.mybookworld.ui.fragments.HomeFragment
-import com.example.mybookworld.ui.fragments.MyWorksFragment
-import com.example.mybookworld.ui.fragments.WriterSectionFragment
 import com.example.mybookworld.models.User
 import com.example.mybookworld.utils.GlideLoader
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -72,6 +66,7 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
             drawer_layout.openDrawer(GravityCompat.START)
         }
     }
+
    fun updateNavigationUserDetails(user: User){
        GlideLoader(this).loadUserPicture(Uri.parse(user.image),nav_user_image)
 
@@ -131,6 +126,7 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
 
         return true
     }
+
     private fun setupBottomBar()
     {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
