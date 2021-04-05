@@ -57,4 +57,11 @@
     <color name="book_details_bg">#F3F3F3</color>
 
     <color name="book_value_text_color">#545353</color>
+    <!-- colors from pinterest pallete i found -->
+    <color name="navyblue_p">#323b58</color>
+    <color name="lightpink_p">#f4c1c0</color>
+    <color name="blushpink_p">#c08189</color>
+    <color name="purple_p">#6f3857</color>
+    <color name="darkteal_p">#323b58</color>
+    <color name="lightteal_p">#323b58</color>
 </resources>
