@@ -1,21 +1,27 @@
 package com.example.mybookworld.ui.activities
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.content.LocusId
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
+import com.example.mybookworld.models.favouritesItem
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_book_details.*
-import kotlinx.android.synthetic.main.activity_my_profile.*
+import android.widget.Toast.makeText as toastMakeText
 
-class BookDetailsActivity : BaseActivity() {
+class BookDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private  var mBookId:String=""
+    private lateinit var mBookDetails: Books
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_details)
@@ -26,7 +32,11 @@ class BookDetailsActivity : BaseActivity() {
             mBookId=intent.getStringExtra(Constants.EXTRA_BOOK_ID)!!
             Log.i("book id",mBookId)
         }
+        favourites.setOnClickListener(this)
+        favouritesRed.setOnClickListener(this)
         getBookDetails()
+
+
 
 
 
@@ -38,9 +48,16 @@ class BookDetailsActivity : BaseActivity() {
         FirestoreClass().getBookDetails(this,mBookId)
     }
 
+    fun bookExistsInFavourites(){
+        hideProgressDialog()
+        favourites.visibility=View.GONE
+        favouritesRed.visibility=View.VISIBLE
+    }
+
 
 
     fun bookDetailSuccess(book:Books){
+        mBookDetails = book
 
 
         hideProgressDialog()
@@ -55,6 +72,8 @@ class BookDetailsActivity : BaseActivity() {
         category_detail.text=book.category
         book_detail_description.text=book.description
 
+
+        FirestoreClass().checkIfItemExistInFavourites(this,mBookId)
         //horizontal view --->PdfReaderActivity
         //vertical view--->PdfViewerActivity
 
@@ -82,4 +101,89 @@ class BookDetailsActivity : BaseActivity() {
 
         toolbar_book_detail_activity.setNavigationOnClickListener { onBackPressed() }
     }
+
+    private fun addToFavourites(){
+        val addtoFavourites= favouritesItem(
+            FirestoreClass().getCurrentUserID(),
+            mBookId,
+            mBookDetails.title,
+            mBookDetails.author,
+            mBookDetails.category,
+            mBookDetails.pages,
+            mBookDetails.rating,
+            mBookDetails.review,
+            mBookDetails.description,
+            mBookDetails.bookUrl,
+            mBookDetails.imageUrl
+
+            )
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().addFavouriteItem(this,addtoFavourites)
+    }
+
+    fun addToFavouriteSuccess(){
+        hideProgressDialog()
+        Toast.makeText(
+            this@BookDetailsActivity,
+            resources.getString(R.string.success_message_item_added_to_favourites),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        favourites.visibility=View.GONE
+        favouritesRed.visibility=View.VISIBLE
+    }
+
+    override fun onClick(v: View?) {
+        if(v!=null){
+            when(v.id){
+                R.id.favourites ->{
+                    addToFavourites()
+                }
+                R.id.favouritesRed->{
+                    Log.i("calling alert dialog",mBookId)
+                    showAlertDialog(mBookId)
+                }
+            }
+        }
+    }
+
+    private fun showAlertDialog(bookId: String) {
+        val alertDialog=AlertDialog.Builder(this)
+        alertDialog.setTitle("Alert")
+        alertDialog.setMessage("Do you want to remove the book from Favourites?")
+
+        alertDialog.setPositiveButton(
+            "Delete",
+        ) { dialogInterface, _ ->
+            showProgressDialog(resources.getString((R.string.please_wait)))
+            Log.i("inside ALERT POSITIVE",mBookId)
+            FirestoreClass().deleteFavouriteItem(this,bookId)
+            Log.i("DELETE ITEM CALLED",mBookId)
+            dialogInterface.dismiss()
+        }
+        alertDialog.setNegativeButton(
+            "Cancel",
+
+        ) { dialogInterface, _ ->
+            dialogInterface.dismiss()
+        }
+
+        val alert: AlertDialog = alertDialog.create()
+        alert.setCanceledOnTouchOutside(false)
+        alert.show()
+    }
+
+    fun removalFomFavouritesSuccess(){
+        hideProgressDialog()
+        Toast.makeText(
+            this,
+            resources.getString(R.string.remove_from_book_success),
+            Toast.LENGTH_SHORT
+        ).show()
+
+//        favourites.visibility=View.VISIBLE
+//        favouritesRed.visibility=View.GONE
+    }
 }
+
+

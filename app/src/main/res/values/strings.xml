@@ -89,7 +89,9 @@
     <string name="fantasy">Fantasy</string>
     <string name="historical_fiction">Historical Fiction</string>
     <string name="action_adventure">Action and Adventure</string>
-    <string name="err_msg_select_book">Please select a book pdf</string>
-    <string name="err_msg_select_category">Please select a category for your book</string>
+    <string name="success_message_item_added_to_favourites">added To favourittes</string>
+    <string name="err_msg_select_book">book selected</string>
+    <string name="err_msg_select_category">category not selected</string>
+    <string name="remove_from_book_success">removed from favourites</string>
 
 </resources>

@@ -17,6 +17,10 @@ object Constants {
     const val BOOK_COVER_IMAGE:String="book cover image"
     const val USERBOOKS : String="user uploaded books"
     const val EXTRA_BOOK_ID:String="extra_book_id"
+    const val FAVOURITES_ITEM:String="favourites"
+    const val FAVOURITES_ITEM_ADDED:String="favouritesRed"
+    const val BOOK_ID:String="bookId"
+
 
      const val PICK_IMAGE_REQUEST_CODE = 2
     const val READ_STORAGE_PERMISSION_CODE = 2
