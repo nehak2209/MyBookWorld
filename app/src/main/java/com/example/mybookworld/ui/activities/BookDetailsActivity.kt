@@ -2,7 +2,6 @@ package com.example.mybookworld.ui.activities
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.LocusId
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +14,6 @@ import com.example.mybookworld.models.favouritesItem
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_book_details.*
-import android.widget.Toast.makeText as toastMakeText
 
 class BookDetailsActivity : BaseActivity(), View.OnClickListener {
 
@@ -120,7 +118,6 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().addFavouriteItem(this,addtoFavourites)
     }
-
 
 
     fun addToFavouriteSuccess(){

@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.myBooks
-import com.example.mybookworld.ui.adapters.MyBookListAdapters
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.example.mybookworld.ui.adapters.UserBookListAdapters
+import kotlinx.android.synthetic.main.fragment_my_works.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,25 +43,25 @@ class MyWorksFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_my_works, container, false)
     }
 
-    private  fun getProductListFromFireStore(){
+    private  fun getUserBooksListFromFireStore(){
 
-        FirestoreClass().getBooksList(this)
+        FirestoreClass().getUserBooksList(this)
     }
 
-    fun successUserBookListFromFireStore(bookList: ArrayList<myBooks>){
-        if(bookList.size>0){
-            iv_all_books.visibility=View.VISIBLE
-            iv_all_books.layoutManager= LinearLayoutManager(activity)
-            iv_all_books.setHasFixedSize(true)
-            val adapterBooks= MyBookListAdapters( requireActivity(),bookList)
-            iv_all_books.adapter=adapterBooks
+    fun successUserBookListFromFireStore(userBookList: ArrayList<myBooks>){
+        if(userBookList.size>0){
+            iv_all_user_books.visibility=View.VISIBLE
+            iv_all_user_books.layoutManager= LinearLayoutManager(activity)
+            iv_all_user_books.setHasFixedSize(true)
+            val adapterBooks= UserBookListAdapters( requireActivity(),userBookList)
+            iv_all_user_books.adapter=adapterBooks
         }
 
     }
 
     override fun onResume() {
         super.onResume()
-        getProductListFromFireStore()
+        getUserBooksListFromFireStore()
     }
 
     companion object {

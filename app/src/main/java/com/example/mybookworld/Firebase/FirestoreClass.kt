@@ -176,7 +176,6 @@ class FirestoreClass {
                     }
                     when(fragment){
                         is MyWorksFragment->{
-
                             fragment.successUserBookListFromFireStore(userBookList)
                         }
                     }
@@ -184,7 +183,6 @@ class FirestoreClass {
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
                 }
-
 
     }
 

@@ -17,5 +17,12 @@ data class myBooks (
        // val bookPdf: String="",
         val description: String  ="",
         val category: String="",
-        var book_id:String=""
-):Parcelable
+        var book_id:String="",
+       // val review: String="",
+        //val rating: String=""
+
+):Parcelable {
+
+
+
+}

@@ -65,6 +65,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
     private var mBookCoverImageURL: String = ""
     private var mBookURL: String = ""
     private var bookCategory:String=""
+    private var book_id:String=""
 
     private lateinit var bookDetail:myBooks
     private val userBookFireStore = FirebaseFirestore.getInstance()
@@ -417,7 +418,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                 et_book_pages.text.toString().trim { it <= ' ' },
                 et_book_description.text.toString().trim { it <= ' ' },
                 bookCategory,
-                Constants.BOOK_ID
+                book_id
         )
 
        // FirestoreClass().uploadUserBookDetails(this,bookDetail)
