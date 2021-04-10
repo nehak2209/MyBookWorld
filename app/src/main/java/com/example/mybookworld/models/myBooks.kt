@@ -9,7 +9,6 @@ data class myBooks (
 
         var user_id : String="",
         var user_name : String ="",
-        //var book_id: String = "",
         val title: String ="",
         val author: String ="",
         val imageUrl: String ="",
@@ -17,5 +16,6 @@ data class myBooks (
         val pages: String ="",
        // val bookPdf: String="",
         val description: String  ="",
-        val category: String=""
+        val category: String="",
+        var book_id:String=""
 ):Parcelable

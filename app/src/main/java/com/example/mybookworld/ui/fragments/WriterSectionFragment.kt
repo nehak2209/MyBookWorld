@@ -104,7 +104,6 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
 
         uploadPdfButton!!.setOnClickListener(this)
 
-       // val radioButton: Button?= view?.findViewById(R.id.til_book_category)
         val radioGroup :RadioGroup = view?.findViewById(R.id.til_book_category)
 
         radioGroup.setOnCheckedChangeListener(this)
@@ -123,18 +122,18 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
 
                   bookCategory="Fiction"
 
-              }R.id.til_fantasy -> {
+                 }R.id.til_fantasy -> {
 
                   bookCategory="Fantasy"
 
-              }R.id.til_historical_fiction -> {
+                 }R.id.til_historical_fiction -> {
 
                   bookCategory="Historical Fiction"
 
-              }R.id.til_action_adventure -> {
+                 }R.id.til_action_adventure -> {
 
                   bookCategory="Action And Adventure"
-               }
+                 }
               }
     }
 
@@ -272,7 +271,6 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                             mSelectedImageFIleUri
                     )
             )
-
             //adding the file to reference
             sRef.putFile(mSelectedImageFIleUri!!)
                     .addOnSuccessListener { taskSnapshot ->
@@ -418,8 +416,8 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                 mBookURL,
                 et_book_pages.text.toString().trim { it <= ' ' },
                 et_book_description.text.toString().trim { it <= ' ' },
-                bookCategory
-
+                bookCategory,
+                Constants.BOOK_ID
         )
 
        // FirestoreClass().uploadUserBookDetails(this,bookDetail)
@@ -452,7 +450,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                 requireContext(), resources.getString(R.string.user_book_upload_success),
                 Toast.LENGTH_SHORT
         ).show()
-       //activity?.finish()
+        activity?.finish()
         activity?.startActivity(activity?.intent)
     }
 

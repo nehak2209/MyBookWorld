@@ -1,11 +1,16 @@
 package com.example.mybookworld.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
+import com.example.mybookworld.models.myBooks
+import com.example.mybookworld.ui.adapters.MyBookListAdapters
+import kotlinx.android.synthetic.main.fragment_home.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +41,27 @@ class MyWorksFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_works, container, false)
+    }
+
+    private  fun getProductListFromFireStore(){
+
+        FirestoreClass().getBooksList(this)
+    }
+
+    fun successUserBookListFromFireStore(bookList: ArrayList<myBooks>){
+        if(bookList.size>0){
+            iv_all_books.visibility=View.VISIBLE
+            iv_all_books.layoutManager= LinearLayoutManager(activity)
+            iv_all_books.setHasFixedSize(true)
+            val adapterBooks= MyBookListAdapters( requireActivity(),bookList)
+            iv_all_books.adapter=adapterBooks
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getProductListFromFireStore()
     }
 
     companion object {

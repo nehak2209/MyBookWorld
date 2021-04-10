@@ -121,6 +121,8 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
         FirestoreClass().addFavouriteItem(this,addtoFavourites)
     }
 
+
+
     fun addToFavouriteSuccess(){
         hideProgressDialog()
         Toast.makeText(

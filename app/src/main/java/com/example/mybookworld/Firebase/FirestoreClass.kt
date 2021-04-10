@@ -3,7 +3,6 @@ package com.example.mybookworld.Firebase
 
 import android.app.Activity
 import android.content.ContentValues.TAG
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,7 +13,7 @@ import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.ui.activities.*
 import com.example.mybookworld.ui.fragments.CategoryWiseBooksFragment
 import com.example.mybookworld.ui.fragments.HomeFragment
-import com.example.mybookworld.ui.fragments.WriterSectionFragment
+import com.example.mybookworld.ui.fragments.MyWorksFragment
 import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -161,8 +160,36 @@ class FirestoreClass {
 
     }
 
+    fun getUserBooksList(fragment: Fragment){
+        mFireStore.collection(Constants.USERBOOKS)
+                .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+                .get()
+                .addOnSuccessListener {
+                    document->
+                    Log.e("user books list",document.documents.toString())
+                    val userBookList:ArrayList<myBooks> = ArrayList()
+                    for ( i in document.documents){
+                        val book=i.toObject(myBooks::class.java)
+                        book!!.book_id=i.id
+                        userBookList.add(book)
 
-    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: myBooks){
+                    }
+                    when(fragment){
+                        is MyWorksFragment->{
+
+                            fragment.successUserBookListFromFireStore(userBookList)
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "Error getting documents: ", exception)
+                }
+
+
+    }
+
+
+   /* fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: myBooks){
         mFireStore.collection(Constants.USERBOOKS)
                 .document()
                 .set(bookInfo, SetOptions.merge())
@@ -175,7 +202,7 @@ class FirestoreClass {
                     e
                 )
             }
-    }
+    }*/
 
     fun getGenreBooksList(fragment: Fragment,genre: String){
         mFireStore.collection(Constants.BOOKS)

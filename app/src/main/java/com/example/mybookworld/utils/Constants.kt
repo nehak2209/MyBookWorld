@@ -1,13 +1,10 @@
 package com.example.mybookworld.utils
 
-import android.app.Activity
-import android.content.Intent
-import android.provider.MediaStore
-
 
 object Constants {
 
 
+    const val USER_ID:String="user_id"
     const val USERS:String="users"
     const val IMAGE:String="image"
     const val NAME:String="name"

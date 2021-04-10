@@ -6,14 +6,10 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookworld.R
-import com.example.mybookworld.models.Books
+import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.ui.activities.BookDetailsActivity
-import com.example.mybookworld.ui.activities.MyFavouriteActivity
-import com.example.mybookworld.ui.activities.PdfReaderActivity
-import com.example.mybookworld.ui.activities.PdfViewerActivity
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
@@ -25,7 +21,7 @@ const val EXTRA_MESSAGE = "com.example.MyBookWorld.MESSAGE"
 
 open class MyBookListAdapters(
     private val context: Context,
-    private var list: ArrayList<Books>
+    private var list: ArrayList<myBooks>
 ):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
      return MyViewHolder(
