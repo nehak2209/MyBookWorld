@@ -62,6 +62,9 @@
     <color name="violet_gradient">#8312A5</color>
     <color name="blue_gradient">#0037A5</color>
 
+    <!-- BOYSENBERRY FOR THE BUTTONS -->
+    <color name="boysenberry">#6F2A4E</color>
+
     <!-- colors from pinterest pallete i found -->
     <color name="navyblue_p">#323b58</color>
     <color name="lightpink_p">#f4c1c0</color>
