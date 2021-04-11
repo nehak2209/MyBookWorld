@@ -57,6 +57,11 @@
     <color name="book_details_bg">#F3F3F3</color>
 
     <color name="book_value_text_color">#545353</color>
+
+    <!-- colors for blue purple gradient buttons -->
+    <color name="violet_gradient">#8312A5</color>
+    <color name="blue_gradient">#0037A5</color>
+
     <!-- colors from pinterest pallete i found -->
     <color name="navyblue_p">#323b58</color>
     <color name="lightpink_p">#f4c1c0</color>
