@@ -171,7 +171,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_book_description"
-                    tools:ignore="MissingConstraints"></com.example.mybookworld.utils.MSPRadioButton>
+                    tools:ignore="MissingConstraints">
+
+                </com.example.mybookworld.utils.MSPRadioButton>
 
                 <com.example.mybookworld.utils.MSPRadioButton
                     android:id="@+id/til_horror"
@@ -187,7 +189,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_romance"
-                    tools:ignore="MissingConstraints"></com.example.mybookworld.utils.MSPRadioButton>
+                    tools:ignore="MissingConstraints">
+
+                </com.example.mybookworld.utils.MSPRadioButton>
 
             <com.example.mybookworld.utils.MSPRadioButton
                 android:id="@+id/til_fiction"
