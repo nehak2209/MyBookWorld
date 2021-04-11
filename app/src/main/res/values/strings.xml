@@ -5,20 +5,20 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_sign_in">SignIn</string>
     <!--Intro Screen-->
-    <string name="let_s_get_started_text">Lets Get Started</string>
+    <string name="let_s_get_started_text">Let\'s Get Started</string>
     <string name="intro_text_description">New to the Book World?</string>
     <string name="sign_up_description_text">Enter your name, email id and password, to sign up.</string>
     <!--Sign Up-->
     <string name="sign_up">Sign Up</string>
     <string name="confirm_password">Confirm Password</string>
     <!--START Sign IN-->
-    <string name="sign_in_description_text">Enter your name, email id and password, to log into your account.</string>
+    <string name="sign_in_description_text">Enter your name, email id and password, to login.</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
@@ -35,17 +35,17 @@
     <!--End-->
 
     <!--Dialog box-->
-    <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
+    <string name="please_click_back_again_to_exit">Please click back again to Exit.</string>
     <string name="please_wait">Please Wait…</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello Blank Fragment</string>
     <string name="writeIcon">Write</string>
     <string name="exploreIcon">Explore</string>
     <string name="homeIcon">Home</string>
     <string name="genre">Genre</string>
     <string name="writer_section">Writer\'s Section</string>
 
-    <string name="favourites">favourite</string>
+    <string name="favourites">Favourite</string>
     <string name="Firebase">fire</string>
     <!--dialog box-->
 
@@ -59,7 +59,7 @@
 
     <!--MY BOOKS-->
 
-    <string name="Happy_Writing">Happy Writing</string>
+    <string name="Happy_Writing">Happy Writing!</string>
     <string name="book_name">Book Title</string>
     <string name="book_category">Book Category</string>
     <string name="choose_book">Upload Book</string>
@@ -74,11 +74,11 @@
     <string name="err_msg_select_book_cover">Kindly Select an Image For Book Cover</string>
     <string name="err_msg_enter_book_name">Please Enter Book Name</string>
     <string name="err_msg_enter_book_pages">Enter Number Of Pages in Book</string>
-    <string name="err_msg_enter_book_desc">Enter short Dscription Of Book</string>
+    <string name="err_msg_enter_book_desc">Enter Short Description Of Book</string>
     <string name="err_msg_enter_book_category">Enter Category Of Book</string>
-    <string name="err_msg_enter_email">Enter email</string>
+    <string name="err_msg_enter_email">Enter Email</string>
     <string name="err_msg_enter_name">Enter Author\'s Name</string>
-    <string name="user_book_upload_success">User Book Is Uploaded Successfully</string>
+    <string name="user_book_upload_success">User\'s Book Is Uploaded Successfully</string>
 
 
     <string name="nav_my_favourite">My Favourite</string>
@@ -89,9 +89,9 @@
     <string name="fantasy">Fantasy</string>
     <string name="historical_fiction">Historical Fiction</string>
     <string name="action_adventure">Action and Adventure</string>
-    <string name="success_message_item_added_to_favourites">added To favourittes</string>
-    <string name="err_msg_select_book">book selected</string>
-    <string name="err_msg_select_category">category not selected</string>
-    <string name="remove_from_book_success">removed from favourites</string>
+    <string name="success_message_item_added_to_favourites">Added To Favorites</string>
+    <string name="err_msg_select_book">Book Selected</string>
+    <string name="err_msg_select_category">Category not selected</string>
+    <string name="remove_from_book_success">Removed from Favourites</string>
 
 </resources>
