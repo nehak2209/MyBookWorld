@@ -97,5 +97,6 @@
     <string name="err_msg_select_book">book selected</string>
     <string name="err_msg_select_category">category not selected</string>
     <string name="remove_from_book_success">removed from favourites</string>
+    <string name="no_favourite_item_found">Favourites List Is Empty</string>
 
 </resources>

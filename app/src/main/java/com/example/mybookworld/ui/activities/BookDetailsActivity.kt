@@ -89,47 +89,30 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_black_24dp)
             actionBar.title = resources.getString(R.string.app_name)
         }
+
         toolbar_book_detail_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
-    /*private fun addToFavourites(){
-        val addtoFavourites= favouritesItem(
-            FirestoreClass().getCurrentUserID(),
+    private fun addToFavourites(){
+        val addtoFavourites= Books(
             mBookId,
             mBookDetails.title,
             mBookDetails.author,
-            mBookDetails.category,
+            mBookDetails.imageUrl,
+            mBookDetails.bookUrl,
             mBookDetails.pages,
             mBookDetails.rating,
             mBookDetails.review,
             mBookDetails.description,
-            mBookDetails.bookUrl,
-            mBookDetails.imageUrl
+            mBookDetails.category,
+            FirestoreClass().getCurrentUserID(),
+
+
 
             )
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().addFavouriteItem(this,addtoFavourites)
-    }*/
-
-    private fun addToFavourites(){
-        val addtoFavourites= Books(
-            FirestoreClass().getCurrentUserID(),
-            mBookId,
-            mBookDetails.title,
-            mBookDetails.author,
-            mBookDetails.category,
-            mBookDetails.pages,
-            mBookDetails.rating,
-            mBookDetails.review,
-            mBookDetails.description,
-            mBookDetails.bookUrl,
-            mBookDetails.imageUrl
-
-        )
-        showProgressDialog(resources.getString(R.string.please_wait))
-        FirestoreClass().addFavouriteItem(this,addtoFavourites)
     }
-
 
     fun addToFavouriteSuccess(){
         hideProgressDialog()
@@ -167,7 +150,7 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
         ) { dialogInterface, _ ->
             showProgressDialog(resources.getString((R.string.please_wait)))
             Log.i("inside ALERT POSITIVE",mBookId)
-            FirestoreClass().deleteFavouriteItem(this,bookId)
+            FirestoreClass().deleteItem(this,bookId)
             Log.i("DELETE ITEM CALLED",mBookId)
             dialogInterface.dismiss()
         }
@@ -191,8 +174,8 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
             Toast.LENGTH_SHORT
         ).show()
 
-//        favourites.visibility=View.VISIBLE
-//        favouritesRed.visibility=View.GONE
+        favourites.visibility=View.VISIBLE
+        favouritesRed.visibility=View.GONE
     }
 }
 

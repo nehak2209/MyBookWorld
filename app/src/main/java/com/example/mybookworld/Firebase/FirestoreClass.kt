@@ -8,10 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
+import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.ui.activities.*
 import com.example.mybookworld.ui.fragments.CategoryWiseBooksFragment
 import com.example.mybookworld.ui.fragments.HomeFragment
-import com.example.mybookworld.ui.fragments.MyWorksFragment
+import com.example.mybookworld.ui.fragments.WriterSectionFragment
 import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -143,8 +144,10 @@ class FirestoreClass {
                     bookList.add(book)
 
                 }
+
                 when(fragment){
                     is HomeFragment->{
+
                         fragment.successProductListFromFireStore(bookList)
                     }
                 }
@@ -152,75 +155,25 @@ class FirestoreClass {
         .addOnFailureListener { exception ->
             Log.d(TAG, "Error getting documents: ", exception)
         }
+
+
     }
 
-    /*fun getUserBooksList(fragment: Fragment){
+
+    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: myBooks){
         mFireStore.collection(Constants.USERBOOKS)
-                .whereEqualTo(Constants.USER_ID, getCurrentUserID())
-                .get()
+                .document()
+                .set(bookInfo, SetOptions.merge())
                 .addOnSuccessListener {
-                    document->
-                    Log.e("user books list",document.documents.toString())
-                    val userBookList:ArrayList<myBooks> = ArrayList()
-                    for ( i in document.documents){
-                        val book=i.toObject(myBooks::class.java)
-                        book!!.book_id=i.id
-                        userBookList.add(book)
-
-                    }
-                    when(fragment){
-                        is MyWorksFragment->{
-                            fragment.successUserBookListFromFireStore(userBookList)
-                        }
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "Error getting documents: ", exception)
-                }
-
-    }*/
-    fun getUserBooksList(fragment: Fragment){
-        mFireStore.collection(Constants.USERBOOKS)
-            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
-            .get()
-            .addOnSuccessListener {
-                    document->
-                Log.e("user books list",document.documents.toString())
-                val userBookList:ArrayList<Books> = ArrayList()
-                for ( i in document.documents){
-                    val book=i.toObject(Books::class.java)
-                    book!!.book_id=i.id
-                    userBookList.add(book)
-
-                }
-                when(fragment){
-                    is MyWorksFragment ->{
-                        fragment.successUserBookListFromFireStore(userBookList)
-                    }
-                }
+                    FragmentActivity.userBookCoverUploadSuccess()
+                }.addOnFailureListener{e->
+                BaseActivity().hideProgressDialog()
+                Log.e(
+                    FragmentActivity.javaClass.simpleName, "Error while uploading book to cloud storage.",
+                    e
+                )
             }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
-            }
-
     }
-
-
-
-    /* fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: myBooks){
-         mFireStore.collection(Constants.USERBOOKS)
-                 .document()
-                 .set(bookInfo, SetOptions.merge())
-                 .addOnSuccessListener {
-                     FragmentActivity.userBookCoverUploadSuccess()
-                 }.addOnFailureListener{e->
-                 BaseActivity().hideProgressDialog()
-                 Log.e(
-                     FragmentActivity.javaClass.simpleName, "Error while uploading book to cloud storage.",
-                     e
-                 )
-             }
-     }*/
 
     fun getGenreBooksList(fragment: Fragment,genre: String){
         mFireStore.collection(Constants.BOOKS)
@@ -287,17 +240,21 @@ class FirestoreClass {
             }
     }
 
-    fun deleteFavouriteItem(activity: BookDetailsActivity, Book_id:String){
-        mFireStore.collection(Constants.FAVOURITES_ITEM).whereEqualTo("user_id",getCurrentUserID())
+    fun deleteItem(activity: BookDetailsActivity, Book_id:String){
+        mFireStore.collection(Constants.FAVOURITES_ITEM)
+            .whereEqualTo("user_id",getCurrentUserID())
             .whereEqualTo("book_id",Book_id)
             .get()
+            .addOnSuccessListener {
+                    document->
+                Log.e("books list",document.documents.toString())
+                for ( i in document.documents){
+                    i.reference.delete()
 
-            .addOnSuccessListener{
+                }
                 activity.removalFomFavouritesSuccess()
-                Log.i("IN FIRESTORE CLASS",Book_id)
-
             }.addOnFailureListener {
-                e ->
+                    e ->
                 activity.hideProgressDialog()
 
                 Log.e(
@@ -305,7 +262,9 @@ class FirestoreClass {
                     "Error while removing from favourites",
                 )
             }
+
     }
+
     fun checkIfItemExistInFavourites(activity: BookDetailsActivity, favouritesRed:String){
         mFireStore.collection(Constants.FAVOURITES_ITEM).whereEqualTo("user_id",getCurrentUserID())
             .whereEqualTo("book_id",favouritesRed)
@@ -333,7 +292,29 @@ class FirestoreClass {
             }
     }
 
+    fun getFavouritesList(activity: MyFavouriteActivity){
+        mFireStore.collection((Constants.FAVOURITES_ITEM))
+            .whereEqualTo("user_id",getCurrentUserID())
+            .get()
+            .addOnSuccessListener {
+                document ->
+                Log.e("Favourites List",document.documents.toString())
+                val favouritesItemList: ArrayList<Books> = ArrayList()
 
+                for(i in document.documents){
+                    val book = i.toObject(Books::class.java)
+                    //book!!.book_id=i.id
+
+                    favouritesItemList.add(book!!)
+                    print(book.book_id)
+                }
+                when(activity){
+                    is MyFavouriteActivity->{
+                        activity.successFavouritesListAFromFirestore(favouritesItemList)
+                    }
+                }
+            }
+    }
 }
 
 

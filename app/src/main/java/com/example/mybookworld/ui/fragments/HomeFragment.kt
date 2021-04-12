@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
         super.onResume()
         getProductListFromFireStore()
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -71,6 +72,7 @@ class HomeFragment : Fragment() {
 
         fun newInstance(param1: String, param2: String) =
                 HomeFragment().apply {
+
 
                 }
     }

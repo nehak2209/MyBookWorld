@@ -30,7 +30,7 @@
     <dimen name="authentication_screen_content_marginTop">40dp</dimen>
     <dimen name="authentication_description_text_size">16sp</dimen>
     <dimen name="authentication_screen_marginStartEnd">25dp</dimen>
-    <dimen name="authentication_screen_card_view_marginTop">60dp</dimen>
+    <dimen name="authentication_screen_card_view_marginTop">80dp</dimen>
     <dimen name="card_view_elevation">10dp</dimen>
     <dimen name="card_view_corner_radius">10dp</dimen>
     <dimen name="card_view_layout_content_padding">16dp</dimen>
@@ -63,7 +63,7 @@
 
     <!--START PROFILE DIMENS-->
     <dimen name="my_profile_screen_content_marginStartEnd">16dp</dimen>
-    <dimen name="my_profile_screen_content_marginTopBottom">10dp</dimen>
+    <dimen name="my_profile_screen_content_marginTopBottom">40dp</dimen>
     <dimen name="my_profile_screen_content_padding">16dp</dimen>
     <dimen name="my_profile_user_image_size">100dp</dimen>
     <dimen name="my_profile_name_til_marginTop">25dp</dimen>

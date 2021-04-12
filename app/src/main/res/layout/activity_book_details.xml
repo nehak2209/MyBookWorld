@@ -75,7 +75,7 @@
                 android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 android:textStyle="bold"
-                android:text="Power your subconscious mind   "
+                android:text="Power of Your subconscious mind   "
                 android:textColor="@color/book_value_text_color"
                 android:textSize="@dimen/book_details_label_textSize"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -216,7 +216,7 @@
                     android:layout_marginEnd="60dp"
                     android:layout_marginStart="60dp"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_baseline_favorite_24"
+                    android:src="@drawable/ic_baseline_favorite_border_24"
                     android:visibility="gone"
 
                     />
