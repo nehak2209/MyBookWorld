@@ -27,7 +27,7 @@ import androidx.fragment.app.Fragment
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
-import com.example.mybookworld.models.myBooks
+
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import com.google.android.material.snackbar.Snackbar
@@ -70,7 +70,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
     private var rating:String=""
     private var review:String=""
 
-    private lateinit var bookDetail:myBooks
+
     private lateinit var userBook:Books
     private val userBookFireStore = FirebaseFirestore.getInstance()
 
@@ -427,7 +427,6 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                 book_id
         )*/
          userBook = Books(
-             FirestoreClass().getCurrentUserID(),
              book_id,
              et_book_title.text.toString().trim { it <= ' ' },
              et_author_name.text.toString().trim { it <= ' ' },
@@ -438,6 +437,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
              review,
              et_book_description.text.toString().trim { it <= ' ' },
              bookCategory,
+             FirestoreClass().getCurrentUserID(),
          )
 
        // FirestoreClass().uploadUserBookDetails(this,bookDetail)
@@ -464,7 +464,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
     }*/
    private fun uploadUserBookDetails(){
 
-       userBookFireStore.collection(Constants.USERBOOKS)
+       userBookFireStore.collection(Constants.BOOKS)
            .document()
            .set(userBook, SetOptions.merge())
            .addOnSuccessListener {

@@ -36,13 +36,6 @@ class MyWorksFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_works, container, false)
-    }
 
     private  fun getUserBooksListFromFireStore(){
         showProgressDialog(resources.getString(R.string.please_wait))
@@ -55,6 +48,7 @@ class MyWorksFragment : BaseFragment() {
 
         for(i in userBookList){
             Log.i("User Book",i.title)
+            Log.i("Book URL",i.bookUrl)
         }
         if(userBookList.size>0){
             iv_all_user_books.visibility=View.VISIBLE
@@ -68,6 +62,17 @@ class MyWorksFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         getUserBooksListFromFireStore()
+    }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        val root =inflater.inflate(R.layout.fragment_my_works, container, false)
+        //pdfView.
+        return root
     }
 
     companion object {
