@@ -5,10 +5,10 @@
 
     <gradient
         android:angle="360"
-        android:endColor="@color/colorThemeOrange"
-        android:startColor="@color/colorThemePink"
+        android:endColor="@color/blue_gradient"
+        android:startColor="@color/violet_gradient"
         android:type="linear" />
 
     <corners android:radius="@dimen/button_background_radius" />
 </shape>
-<!--END-->
+    <!--END-->
