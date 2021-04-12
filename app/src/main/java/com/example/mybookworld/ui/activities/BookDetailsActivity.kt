@@ -2,20 +2,23 @@ package com.example.mybookworld.ui.activities
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
+import com.example.mybookworld.models.favouritesItem
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_book_details.*
-import kotlinx.android.synthetic.main.activity_my_profile.*
 
-class BookDetailsActivity : BaseActivity() {
+class BookDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private  var mBookId:String=""
+    private lateinit var mBookDetails: Books
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_details)
@@ -26,6 +29,10 @@ class BookDetailsActivity : BaseActivity() {
             mBookId=intent.getStringExtra(Constants.EXTRA_BOOK_ID)!!
             Log.i("book id",mBookId)
         }
+
+
+        favourites.setOnClickListener(this)
+        favouritesRed.setOnClickListener(this)
         getBookDetails()
 
 
@@ -38,31 +45,41 @@ class BookDetailsActivity : BaseActivity() {
         FirestoreClass().getBookDetails(this,mBookId)
     }
 
+    fun bookExistsInFavourites(){
+        hideProgressDialog()
+        favourites.visibility=View.GONE
+        favouritesRed.visibility=View.VISIBLE
+    }
+
 
 
     fun bookDetailSuccess(book:Books){
-
-
-        hideProgressDialog()
+        mBookDetails = book
+       // hideProgressDialog()
         GlideLoader(this).loadBookPicture(Uri.parse(book.imageUrl),book_detail_image)
         GlideLoader(this).loadBookPicture(Uri.parse(book.imageUrl),image_back_detail)
 
         tvb_book_Detail_title_label1.text=book.title
-         tv_author_detail_title1.text=book.author
+        tv_author_detail_title1.text=book.author
         book_score_detail.text=book.rating
         review_book_detail.text="Reviews:"+"${book.review}"
         book_detail_pages.text="Pages:" + "${book.pages}"
         category_detail.text=book.category
         book_detail_description.text=book.description
 
+        Log.i("id is found before",mBookId)
+        FirestoreClass().checkIfItemExistInFavourites(this,mBookId)
+        Log.i("id is found after",mBookId)
+
+
         //horizontal view --->PdfReaderActivity
         //vertical view--->PdfViewerActivity
 
         read_now.setOnClickListener {
             val intent = Intent(this, PdfReaderActivity::class.java)
-                intent.putExtra("url", book.bookUrl)
-                intent.putExtra("bookName", book.title)
-                startActivity(intent)
+            intent.putExtra("url", book.bookUrl)
+            intent.putExtra("bookName", book.title)
+            startActivity(intent)
 
         }
 
@@ -81,5 +98,46 @@ class BookDetailsActivity : BaseActivity() {
         }
 
         toolbar_book_detail_activity.setNavigationOnClickListener { onBackPressed() }
+    }
+
+    private fun addToFavourites(){
+        val addtoFavourites= favouritesItem(
+                FirestoreClass().getCurrentUserID(),
+                mBookId,
+                mBookDetails.title,
+                mBookDetails.author,
+                mBookDetails.category,
+                mBookDetails.pages,
+                mBookDetails.rating,
+                mBookDetails.review,
+                mBookDetails.description,
+                mBookDetails.bookUrl,
+                mBookDetails.imageUrl
+
+        )
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().addFavouriteItem(this,addtoFavourites)
+    }
+
+    fun addToFavouriteSuccess(){
+        hideProgressDialog()
+        Toast.makeText(
+                this@BookDetailsActivity,
+                resources.getString(R.string.success_message_item_added_to_favourites),
+                Toast.LENGTH_SHORT
+        ).show()
+
+        favourites.visibility=View.INVISIBLE
+        favouritesRed.visibility=View.VISIBLE
+    }
+
+    override fun onClick(v: View?) {
+        if(v!=null){
+            when(v.id){
+                R.id.favourites ->{
+                    addToFavourites()
+                }
+            }
+        }
     }
 }

@@ -91,5 +91,6 @@
     <string name="action_adventure">Action and Adventure</string>
     <string name="err_msg_select_book">Please select a book pdf</string>
     <string name="err_msg_select_category">Please select a category for your book</string>
+    <string name="success_message_item_added_to_favourites">successfully added</string>
 
 </resources>

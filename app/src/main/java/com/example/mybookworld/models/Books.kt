@@ -15,7 +15,9 @@ data class Books(
         val rating: String  ="",
         val review: String  ="",
         val description: String  ="",
-        val category: String=""
+        val category: String="",
+        var user_id:String="",
+
 ):Parcelable {
         constructor(parcel: Parcel) : this(
                 parcel.readString()!!,
@@ -27,6 +29,8 @@ data class Books(
                 parcel.readString()!!,
                 parcel.readString()!!,
                 parcel.readString()!!
+
+
         ) {
         }
 
