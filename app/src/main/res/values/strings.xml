@@ -11,7 +11,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_sign_in">SignIn</string>
     <!--Intro Screen-->
-    <string name="let_s_get_started_text">Let\'s Get Started</string>
+    <string name="let_s_get_started_text">Let Us Get Started</string>
     <string name="intro_text_description">New to the Book World?</string>
     <string name="sign_up_description_text">Enter your name, email id and password, to sign up.</string>
     <!--Sign Up-->
