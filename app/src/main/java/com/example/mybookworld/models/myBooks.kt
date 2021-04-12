@@ -6,7 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class myBooks (
-
         var user_id : String="",
         var user_name : String ="",
         val title: String ="",

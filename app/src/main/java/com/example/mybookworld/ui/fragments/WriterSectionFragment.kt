@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
+import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
@@ -66,9 +67,14 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
     private var mBookURL: String = ""
     private var bookCategory:String=""
     private var book_id:String=""
+    private var rating:String=""
+    private var review:String=""
 
     private lateinit var bookDetail:myBooks
+    private lateinit var userBook:Books
     private val userBookFireStore = FirebaseFirestore.getInstance()
+
+
 
 
 
@@ -362,15 +368,15 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
     private fun validateBookDetails():Boolean{
         return when{
             mSelectedImageFIleUri == null ->{
-                showErrorSnackBar(resources.getString(R.string.err_msg_select_book_cover), true)
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_book_cover), false)
                 false
             }
             mBookUri == null ->{
-                showErrorSnackBar(resources.getString(R.string.err_msg_select_book), true)
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_book), false)
                 false
             }
             bookCategory == null ->{
-                showErrorSnackBar(resources.getString(R.string.err_msg_select_category), true)
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_category), false)
                 false
             }
             TextUtils.isEmpty(et_author_name.text.toString().trim {
@@ -408,7 +414,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
         getString(Constants.LOGGED_IN_USERNAME, "")!!
 
 
-        bookDetail = myBooks(     //myBooks is data class
+       /* bookDetail = myBooks(     //myBooks is data class
                 FirestoreClass().getCurrentUserID(),
                 userName,
                 et_book_title.text.toString().trim { it <= ' ' },
@@ -419,13 +425,26 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                 et_book_description.text.toString().trim { it <= ' ' },
                 bookCategory,
                 book_id
-        )
+        )*/
+         userBook = Books(
+             FirestoreClass().getCurrentUserID(),
+             book_id,
+             et_book_title.text.toString().trim { it <= ' ' },
+             et_author_name.text.toString().trim { it <= ' ' },
+             mBookCoverImageURL,
+             mBookURL,
+             et_book_pages.text.toString().trim { it <= ' ' },
+             rating,
+             review,
+             et_book_description.text.toString().trim { it <= ' ' },
+             bookCategory,
+         )
 
        // FirestoreClass().uploadUserBookDetails(this,bookDetail)
         uploadUserBookDetails()
     }
 
-    private fun uploadUserBookDetails(){
+   /* private fun uploadUserBookDetails(){
 
         userBookFireStore.collection(Constants.USERBOOKS)
                 .document()
@@ -442,7 +461,25 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                         //    e
                     //)
                 }
-    }
+    }*/
+   private fun uploadUserBookDetails(){
+
+       userBookFireStore.collection(Constants.USERBOOKS)
+           .document()
+           .set(userBook, SetOptions.merge())
+           .addOnSuccessListener {
+
+               showUserBookUploadSuccess()
+
+
+           }.addOnFailureListener{ e->
+               hideProgressDialog()
+               // Log.e(
+               //    FragmentActivity.javaClass.simpleName, "Error while uploading book to cloud storage.",
+               //    e
+               //)
+           }
+   }
 
     //Function to display success of book upload
     fun showUserBookUploadSuccess(){

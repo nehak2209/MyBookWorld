@@ -10,7 +10,6 @@ import android.widget.Toast
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
-import com.example.mybookworld.models.favouritesItem
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_book_details.*
@@ -33,10 +32,6 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
         favourites.setOnClickListener(this)
         favouritesRed.setOnClickListener(this)
         getBookDetails()
-
-
-
-
 
     }
 
@@ -82,8 +77,6 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
                 startActivity(intent)
 
         }
-
-
     }
 
     private fun setupActionBar() {
@@ -96,11 +89,10 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_black_24dp)
             actionBar.title = resources.getString(R.string.app_name)
         }
-
         toolbar_book_detail_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
-    private fun addToFavourites(){
+    /*private fun addToFavourites(){
         val addtoFavourites= favouritesItem(
             FirestoreClass().getCurrentUserID(),
             mBookId,
@@ -115,6 +107,25 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
             mBookDetails.imageUrl
 
             )
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().addFavouriteItem(this,addtoFavourites)
+    }*/
+
+    private fun addToFavourites(){
+        val addtoFavourites= Books(
+            FirestoreClass().getCurrentUserID(),
+            mBookId,
+            mBookDetails.title,
+            mBookDetails.author,
+            mBookDetails.category,
+            mBookDetails.pages,
+            mBookDetails.rating,
+            mBookDetails.review,
+            mBookDetails.description,
+            mBookDetails.bookUrl,
+            mBookDetails.imageUrl
+
+        )
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().addFavouriteItem(this,addtoFavourites)
     }

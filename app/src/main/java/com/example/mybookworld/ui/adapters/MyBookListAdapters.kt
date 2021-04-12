@@ -23,6 +23,7 @@ open class MyBookListAdapters(
     private val context: Context,
     private var list: ArrayList<Books>
 ):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
      return MyViewHolder(
          LayoutInflater.from(context).inflate(
@@ -51,17 +52,15 @@ open class MyBookListAdapters(
                 val intent = Intent(context, BookDetailsActivity::class.java)
                 intent.putExtra(Constants.EXTRA_BOOK_ID,model.book_id)
                 context.startActivity(intent)
-
             }
-
-
         }
     }
 
 
     override fun getItemCount(): Int {
-    return list.size
+        return list.size
     }
+
   class MyViewHolder(view: View):RecyclerView.ViewHolder(view)
 
 }

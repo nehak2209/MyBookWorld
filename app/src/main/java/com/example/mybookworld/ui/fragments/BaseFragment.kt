@@ -1,17 +1,13 @@
 package com.example.mybookworld.ui.fragments
 
+import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
-import com.example.mybookworld.models.Books
-import com.example.mybookworld.ui.adapters.MyBookListAdapters
-import kotlinx.android.synthetic.main.fragment_my_works.*
+import kotlinx.android.synthetic.main.dialog_progress.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,14 +16,16 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [MyWorksFragment.newInstance] factory method to
+ * Use the [BaseFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MyWorksFragment : BaseFragment() {
+open class BaseFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
+
+    private lateinit var mProgressDialog:Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,38 +39,39 @@ class MyWorksFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_works, container, false)
+        return inflater.inflate(R.layout.fragment_base, container, false)
     }
 
-    private  fun getUserBooksListFromFireStore(){
-        showProgressDialog(resources.getString(R.string.please_wait))
+    fun showProgressDialog(text:String){
+        mProgressDialog=Dialog(requireActivity())
 
-        FirestoreClass().getUserBooksList(this)
+        mProgressDialog.setContentView(R.layout.dialog_progress)
+
+        mProgressDialog.tv_progress_text.text=text
+
+        mProgressDialog.setCancelable(false)
+        mProgressDialog.setCanceledOnTouchOutside(false)
+
+        mProgressDialog.show()
     }
 
-    fun successUserBookListFromFireStore(userBookList: ArrayList<Books>){
-        hideProgressDialog()
-
-        for(i in userBookList){
-            Log.i("User Book",i.title)
-        }
-        if(userBookList.size>0){
-            iv_all_user_books.visibility=View.VISIBLE
-            iv_all_user_books.layoutManager= LinearLayoutManager(activity)
-            iv_all_user_books.setHasFixedSize(true)
-            val adapterBooks = MyBookListAdapters(requireActivity(),userBookList)
-            iv_all_user_books.adapter = adapterBooks
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getUserBooksListFromFireStore()
+    fun hideProgressDialog(){
+        mProgressDialog.dismiss()
     }
 
     companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment BaseFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            MyWorksFragment().apply {
+            BaseFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
