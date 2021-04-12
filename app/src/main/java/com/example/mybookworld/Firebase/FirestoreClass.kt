@@ -3,13 +3,11 @@ package com.example.mybookworld.Firebase
 
 import android.app.Activity
 import android.content.ContentValues.TAG
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
-import com.example.mybookworld.models.favouritesItem
 import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.ui.activities.*
 import com.example.mybookworld.ui.fragments.CategoryWiseBooksFragment
@@ -224,7 +222,7 @@ class FirestoreClass {
 
     }
 
-    fun addFavouriteItem(activity: BookDetailsActivity, addTofavouritesItem: favouritesItem){
+    fun addFavouriteItem(activity: BookDetailsActivity, addTofavouritesItem: Books){
             mFireStore.collection(Constants.FAVOURITES_ITEM)
             .document()
             .set(addTofavouritesItem, SetOptions.merge())
@@ -242,17 +240,21 @@ class FirestoreClass {
             }
     }
 
-    fun deleteFavouriteItem(activity: BookDetailsActivity, Book_id:String){
-        mFireStore.collection(Constants.FAVOURITES_ITEM).whereEqualTo("user_id",getCurrentUserID())
+    fun deleteItem(activity: BookDetailsActivity, Book_id:String){
+        mFireStore.collection(Constants.FAVOURITES_ITEM)
+            .whereEqualTo("user_id",getCurrentUserID())
             .whereEqualTo("book_id",Book_id)
             .get()
+            .addOnSuccessListener {
+                    document->
+                Log.e("books list",document.documents.toString())
+                for ( i in document.documents){
+                    i.reference.delete()
 
-            .addOnSuccessListener{
+                }
                 activity.removalFomFavouritesSuccess()
-                Log.i("IN FIRESTORE CLASS",Book_id)
-
             }.addOnFailureListener {
-                e ->
+                    e ->
                 activity.hideProgressDialog()
 
                 Log.e(
@@ -260,7 +262,9 @@ class FirestoreClass {
                     "Error while removing from favourites",
                 )
             }
+
     }
+
     fun checkIfItemExistInFavourites(activity: BookDetailsActivity, favouritesRed:String){
         mFireStore.collection(Constants.FAVOURITES_ITEM).whereEqualTo("user_id",getCurrentUserID())
             .whereEqualTo("book_id",favouritesRed)
@@ -288,7 +292,29 @@ class FirestoreClass {
             }
     }
 
+    fun getFavouritesList(activity: MyFavouriteActivity){
+        mFireStore.collection((Constants.FAVOURITES_ITEM))
+            .whereEqualTo("user_id",getCurrentUserID())
+            .get()
+            .addOnSuccessListener {
+                document ->
+                Log.e("Favourites List",document.documents.toString())
+                val favouritesItemList: ArrayList<Books> = ArrayList()
 
+                for(i in document.documents){
+                    val book = i.toObject(Books::class.java)
+                    //book!!.book_id=i.id
+
+                    favouritesItemList.add(book!!)
+                    print(book.book_id)
+                }
+                when(activity){
+                    is MyFavouriteActivity->{
+                        activity.successFavouritesListAFromFirestore(favouritesItemList)
+                    }
+                }
+            }
+    }
 }
 
 

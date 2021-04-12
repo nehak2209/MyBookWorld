@@ -2,7 +2,6 @@ package com.example.mybookworld.ui.activities
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.LocusId
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +10,9 @@ import android.widget.Toast
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
-import com.example.mybookworld.models.favouritesItem
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_book_details.*
-import android.widget.Toast.makeText as toastMakeText
 
 class BookDetailsActivity : BaseActivity(), View.OnClickListener {
 
@@ -35,10 +32,6 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
         favourites.setOnClickListener(this)
         favouritesRed.setOnClickListener(this)
         getBookDetails()
-
-
-
-
 
     }
 
@@ -84,8 +77,6 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
                 startActivity(intent)
 
         }
-
-
     }
 
     private fun setupActionBar() {
@@ -103,18 +94,20 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun addToFavourites(){
-        val addtoFavourites= favouritesItem(
-            FirestoreClass().getCurrentUserID(),
+        val addtoFavourites= Books(
             mBookId,
             mBookDetails.title,
             mBookDetails.author,
-            mBookDetails.category,
+            mBookDetails.imageUrl,
+            mBookDetails.bookUrl,
             mBookDetails.pages,
             mBookDetails.rating,
             mBookDetails.review,
             mBookDetails.description,
-            mBookDetails.bookUrl,
-            mBookDetails.imageUrl
+            mBookDetails.category,
+            FirestoreClass().getCurrentUserID(),
+
+
 
             )
         showProgressDialog(resources.getString(R.string.please_wait))
@@ -157,7 +150,7 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
         ) { dialogInterface, _ ->
             showProgressDialog(resources.getString((R.string.please_wait)))
             Log.i("inside ALERT POSITIVE",mBookId)
-            FirestoreClass().deleteFavouriteItem(this,bookId)
+            FirestoreClass().deleteItem(this,bookId)
             Log.i("DELETE ITEM CALLED",mBookId)
             dialogInterface.dismiss()
         }
@@ -181,8 +174,8 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
             Toast.LENGTH_SHORT
         ).show()
 
-//        favourites.visibility=View.VISIBLE
-//        favouritesRed.visibility=View.GONE
+        favourites.visibility=View.VISIBLE
+        favouritesRed.visibility=View.GONE
     }
 }
 
