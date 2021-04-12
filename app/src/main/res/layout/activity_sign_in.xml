@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
+    android:background="@drawable/bg_triangle"
     android:orientation="vertical"
     tools:context=".ui.activities.SignInActivity">
 
@@ -20,6 +20,7 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/lora"
             android:gravity="center_vertical"
             android:text="@string/sign_in"
             android:textColor="@color/primary_text_color"
@@ -38,16 +39,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:text="@string/sign_in_description_text"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/authentication_description_text_size" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/authentication_screen_marginStartEnd"
-            android:layout_marginTop="@dimen/authentication_screen_marginTop"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="@dimen/authentication_screen_marginStartEnd"
             android:elevation="@dimen/card_view_elevation"
             app:cardCornerRadius="@dimen/card_view_corner_radius">

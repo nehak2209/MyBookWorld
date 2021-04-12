@@ -1,3 +1,4 @@
+
 package com.example.mybookworld.Firebase
 
 import android.app.Activity
@@ -41,6 +42,8 @@ class FirestoreClass {
                     )
                 }
     }
+
+
 
 
 
@@ -219,7 +222,99 @@ class FirestoreClass {
 
     }
 
+    fun addFavouriteItem(activity: BookDetailsActivity, addTofavouritesItem: Books){
+            mFireStore.collection(Constants.FAVOURITES_ITEM)
+            .document()
+            .set(addTofavouritesItem, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.addToFavouriteSuccess()
+            }
+            .addOnFailureListener {
+                e ->
+                activity.hideProgressDialog()
 
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error While Creating The Document for Favourites Item",
+                )
+            }
+    }
+
+    fun deleteItem(activity: BookDetailsActivity, Book_id:String){
+        mFireStore.collection(Constants.FAVOURITES_ITEM)
+            .whereEqualTo("user_id",getCurrentUserID())
+            .whereEqualTo("book_id",Book_id)
+            .get()
+            .addOnSuccessListener {
+                    document->
+                Log.e("books list",document.documents.toString())
+                for ( i in document.documents){
+                    i.reference.delete()
+
+                }
+                activity.removalFomFavouritesSuccess()
+            }.addOnFailureListener {
+                    e ->
+                activity.hideProgressDialog()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while removing from favourites",
+                )
+            }
+
+    }
+
+    fun checkIfItemExistInFavourites(activity: BookDetailsActivity, favouritesRed:String){
+        mFireStore.collection(Constants.FAVOURITES_ITEM).whereEqualTo("user_id",getCurrentUserID())
+            .whereEqualTo("book_id",favouritesRed)
+            .get()
+            .addOnSuccessListener {
+                    document ->
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+                if(document.documents.size > 0){
+                    activity.bookExistsInFavourites()
+                    Log.i("id",favouritesRed)
+                }else{
+                    activity.hideProgressDialog()
+                }
+            }
+
+            .addOnFailureListener {
+                    e ->
+                activity.hideProgressDialog()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the existing favourites list",
+                    e
+                )
+            }
+    }
+
+    fun getFavouritesList(activity: MyFavouriteActivity){
+        mFireStore.collection((Constants.FAVOURITES_ITEM))
+            .whereEqualTo("user_id",getCurrentUserID())
+            .get()
+            .addOnSuccessListener {
+                document ->
+                Log.e("Favourites List",document.documents.toString())
+                val favouritesItemList: ArrayList<Books> = ArrayList()
+
+                for(i in document.documents){
+                    val book = i.toObject(Books::class.java)
+                    //book!!.book_id=i.id
+
+                    favouritesItemList.add(book!!)
+                    print(book.book_id)
+                }
+                when(activity){
+                    is MyFavouriteActivity->{
+                        activity.successFavouritesListAFromFirestore(favouritesItemList)
+                    }
+                }
+            }
+    }
 }
 
 

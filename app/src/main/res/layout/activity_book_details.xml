@@ -75,7 +75,7 @@
                 android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 android:textStyle="bold"
-                android:text="Power your subconscious mind   "
+                android:text="Power of Your subconscious mind   "
                 android:textColor="@color/book_value_text_color"
                 android:textSize="@dimen/book_details_label_textSize"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +176,6 @@
         android:layout_marginStart="@dimen/book_details_label_margin"
         android:layout_marginEnd="@dimen/book_details_label_margin"
         android:layout_marginTop="8dp"
-        android:textColor="@color/secondary_text_color"
         android:textSize="@dimen/book_details_description_textSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -193,42 +192,44 @@
                 app:layout_constraintTop_toBottomOf="@id/book_detail_description"
                 android:orientation="horizontal"
                 >
-
                 <RelativeLayout
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="0dp"
-                    android:paddingLeft="10dip">
-                    <ImageView
-                        android:id="@+id/favouritesRed"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="60dp"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/ic_baseline_favorite_24"
-                        android:visibility="gone"
-                        android:layout_marginLeft="60dp" />
+                    android:paddingLeft='10dip'>
 
                 <ImageView
-                    android:layout_height="40dp"
-                    android:layout_width="40dp"
                     android:id="@+id/favourites"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="60dp"
                     android:layout_marginStart="60dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="60dp"
-                    android:src="@drawable/ic_baseline_favorite_border_24"/>
+                    android:src="@drawable/ic_baseline_favorite_border_24"
 
+                    />
+
+                <ImageView
+                    android:id="@+id/favouritesRed"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_baseline_favorite_border_24"
+                    android:visibility="gone"
+
+                    />
 
                 <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
                     android:id="@+id/read_now"
-                    android:layout_marginLeft="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="200dp"
                     android:text="Read Now"
+                    android:layout_marginLeft="60dp"
                     android:gravity="right"/>
-
-            </RelativeLayout>
+                </RelativeLayout>
 
 
             </LinearLayout>
