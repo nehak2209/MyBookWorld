@@ -13,8 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/intro_screen_title_text_marginTop"
+        android:fontFamily="@font/roboto_thin"
         android:text="@string/app_name"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/darkteal_p"
         android:textSize="@dimen/intro_screen_title_text_size"
         android:textStyle="bold" />
 
@@ -23,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/intro_screen_image_marginTop"
         android:contentDescription="@string/image_contentDescription"
-        android:src="@drawable/book" />
+        android:src="@drawable/my_book_world" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,6 +77,6 @@
         android:paddingTop="@dimen/btn_paddingTopBottom"
         android:paddingBottom="@dimen/btn_paddingTopBottom"
         android:text="@string/sign_up"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/lightpink_p"
         android:textSize="@dimen/btn_text_size" />
 </LinearLayout>

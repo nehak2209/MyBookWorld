@@ -16,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:paddingTop="?attr/actionBarSize"
+        android:paddingBottom="@dimen/recycler_view_bottom_padding"
         />
 
 </FrameLayout>

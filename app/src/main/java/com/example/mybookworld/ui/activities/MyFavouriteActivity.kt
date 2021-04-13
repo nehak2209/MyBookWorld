@@ -1,8 +1,6 @@
 package com.example.mybookworld.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mybookworld.Firebase.FirestoreClass
@@ -11,8 +9,6 @@ import com.example.mybookworld.models.Books
 import com.example.mybookworld.ui.adapters.MyBookListAdapters
 import com.example.mybookworld.utils.Constants
 import kotlinx.android.synthetic.main.activity_my_favourite.*
-import kotlinx.android.synthetic.main.activity_my_profile.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class MyFavouriteActivity : BaseActivity() {
 

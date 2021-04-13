@@ -1,3 +1,4 @@
+
 package com.example.mybookworld.Firebase
 
 import android.app.Activity
@@ -7,11 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
-import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.ui.activities.*
 import com.example.mybookworld.ui.fragments.CategoryWiseBooksFragment
 import com.example.mybookworld.ui.fragments.HomeFragment
-import com.example.mybookworld.ui.fragments.WriterSectionFragment
+import com.example.mybookworld.ui.fragments.MyWorksFragment
 import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,7 +29,6 @@ class FirestoreClass {
                 // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
                 .set(userInfo, SetOptions.merge())
                 .addOnSuccessListener {
-
 
                     // Here call a function of base activity for transferring the result to it.
                     activity.userRegisteredSuccess()
@@ -160,7 +159,7 @@ class FirestoreClass {
     }
 
 
-    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: myBooks){
+   /* fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: myBooks){
         mFireStore.collection(Constants.USERBOOKS)
                 .document()
                 .set(bookInfo, SetOptions.merge())
@@ -173,7 +172,7 @@ class FirestoreClass {
                     e
                 )
             }
-    }
+    }*/
 
     fun getGenreBooksList(fragment: Fragment,genre: String){
         mFireStore.collection(Constants.BOOKS)
@@ -240,12 +239,6 @@ class FirestoreClass {
             }
     }
 
-
-    fun deleteFavourite(activity: BookDetailsActivity, BookId:String){
-        mFireStore.collection(Constants.FAVOURITES_ITEM)
-
-    }
-
     fun deleteItem(activity: BookDetailsActivity, Book_id:String){
         mFireStore.collection(Constants.FAVOURITES_ITEM)
             .whereEqualTo("user_id",getCurrentUserID())
@@ -256,7 +249,6 @@ class FirestoreClass {
                 Log.e("books list",document.documents.toString())
                 for ( i in document.documents){
                     i.reference.delete()
-                    Log.i("DELETED ",i.reference.id)
 
                 }
                 activity.removalFomFavouritesSuccess()
@@ -273,8 +265,7 @@ class FirestoreClass {
     }
 
     fun checkIfItemExistInFavourites(activity: BookDetailsActivity, favouritesRed:String){
-        mFireStore.collection(Constants.FAVOURITES_ITEM)
-            .whereEqualTo("user_id",getCurrentUserID())
+        mFireStore.collection(Constants.FAVOURITES_ITEM).whereEqualTo("user_id",getCurrentUserID())
             .whereEqualTo("book_id",favouritesRed)
             .get()
             .addOnSuccessListener {
@@ -311,10 +302,10 @@ class FirestoreClass {
 
                 for(i in document.documents){
                     val book = i.toObject(Books::class.java)
-                    book!!.id=i.id
+                    book!!.book_id=i.id
 
-                    favouritesItemList.add(book!!)
-
+                    favouritesItemList.add(book)
+                    print(book.book_id)
                 }
                 when(activity){
                     is MyFavouriteActivity->{
@@ -322,6 +313,32 @@ class FirestoreClass {
                     }
                 }
             }
+    }
+
+    fun getUserBooksList(fragment: Fragment) {
+        mFireStore.collection(Constants.BOOKS)
+            .whereEqualTo("user_id",getCurrentUserID())
+            .get()
+            .addOnSuccessListener {
+                    document->
+                Log.e("books list",document.documents.toString())
+                val bookList:ArrayList<Books> = ArrayList()
+                for ( i in document.documents){
+                    val book=i.toObject(Books::class.java)
+                  book!!.book_id=i.id
+                    bookList.add(book)
+                }
+                when(fragment){
+                    is MyWorksFragment->{
+
+                        fragment.successUserBookListFromFireStore(bookList)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+
     }
 }
 

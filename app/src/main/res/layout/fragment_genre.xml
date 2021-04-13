@@ -60,7 +60,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:gravity="center"
-                            android:text="Horror"
+                            android:text="@string/horror"
                             android:textStyle="bold" />
 
                         <View
@@ -110,7 +110,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:gravity="center"
-                            android:text="Romance"
+                            android:text="@string/romance"
                             android:textStyle="bold" />
 
                         <View
@@ -173,7 +173,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:gravity="center"
-                            android:text="Fiction"
+                            android:text="@string/fiction"
                             android:textStyle="bold" />
 
                         <View
@@ -223,7 +223,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:gravity="center"
-                            android:text="Historical Fiction"
+                            android:text="@string/historical_fiction"
                             android:textStyle="bold" />
 
                         <View
@@ -286,7 +286,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:gravity="center"
-                            android:text="Fantasy"
+                            android:text="@string/fantasy"
                             android:textStyle="bold" />
 
                         <View
@@ -336,7 +336,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:gravity="center"
-                            android:text="Action + Adventure"
+                            android:text="@string/action_adventure"
                             android:textStyle="bold" />
 
                         <View

@@ -6,14 +6,10 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.ui.activities.BookDetailsActivity
-import com.example.mybookworld.ui.activities.MyFavouriteActivity
-import com.example.mybookworld.ui.activities.PdfReaderActivity
-import com.example.mybookworld.ui.activities.PdfViewerActivity
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
@@ -27,6 +23,7 @@ open class MyBookListAdapters(
     private val context: Context,
     private var list: ArrayList<Books>
 ):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
      return MyViewHolder(
          LayoutInflater.from(context).inflate(
@@ -55,17 +52,15 @@ open class MyBookListAdapters(
                 val intent = Intent(context, BookDetailsActivity::class.java)
                 intent.putExtra(Constants.EXTRA_BOOK_ID,model.book_id)
                 context.startActivity(intent)
-
             }
-
-
         }
     }
 
 
     override fun getItemCount(): Int {
-    return list.size
+        return list.size
     }
+
   class MyViewHolder(view: View):RecyclerView.ViewHolder(view)
 
 }
