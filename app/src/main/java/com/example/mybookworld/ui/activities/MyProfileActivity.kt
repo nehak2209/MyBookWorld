@@ -20,6 +20,7 @@ import com.example.mybookworld.utils.GlideLoader
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_my_profile.*
+import kotlinx.android.synthetic.main.fragment_writer_section.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 import java.io.IOException
 
@@ -85,8 +86,11 @@ class MyProfileActivity : BaseActivity() {
             && requestCode == PICK_IMAGE_REQUEST_CODE
             && data!!.data != null
         ) {
+            //iv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_vector_edit))
             // The uri of selection image from phone storage.
+
             mSelectedImageFileUri = data.data!!
+            Log.e("Selected image file URL", mSelectedImageFileUri.toString())
 
             try {
 
@@ -144,14 +148,6 @@ class MyProfileActivity : BaseActivity() {
         mUserDetails = user
         // END
         GlideLoader(this).loadUserPicture(Uri.parse(user.image),iv_profile_user_image)
-
-//
-//            Glide.with(this@MyProfileActivity)
-//            .load(user.image)
-//            .centerCrop()
-//            .placeholder(R.drawable.ic_user_place_holder)
-//            .into(iv_profile_user_image)
-
         et_name.setText(user.name)
         et_email.setText(user.email)
         if (user.mobile != 0L) {
