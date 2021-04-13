@@ -12,9 +12,7 @@
         android:id="@+id/toolbar_writer_section_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
         android:background="@color/lightpink_p"
-
         tools:ignore="MissingConstraints">
 
         <TextView

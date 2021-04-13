@@ -8,11 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.models.User
-import com.example.mybookworld.models.myBooks
 import com.example.mybookworld.ui.activities.*
 import com.example.mybookworld.ui.fragments.CategoryWiseBooksFragment
 import com.example.mybookworld.ui.fragments.HomeFragment
-import com.example.mybookworld.ui.fragments.WriterSectionFragment
+import com.example.mybookworld.ui.fragments.MyWorksFragment
 import com.example.mybookworld.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,9 +35,9 @@ class FirestoreClass {
                 }
                 .addOnFailureListener { e ->
                     Log.e(
-                            activity.javaClass.simpleName,
-                            "Error in writing document",
-                            e
+                        activity.javaClass.simpleName,
+                        "Error in writing document",
+                        e
                     )
                 }
     }
@@ -63,9 +62,9 @@ class FirestoreClass {
                 .addOnFailureListener { e ->
                     activity.hideProgressDialog()
                     Log.e(
-                            activity.javaClass.simpleName,
-                            "Error while creating a board.",
-                            e
+                        activity.javaClass.simpleName,
+                        "Error while creating a board.",
+                        e
                     )
                 }
     }
@@ -78,7 +77,7 @@ class FirestoreClass {
                 .get()
                 .addOnSuccessListener { document ->
                     Log.e(
-                            activity.javaClass.simpleName, document.toString()
+                        activity.javaClass.simpleName, document.toString()
                     )
 
                     // Here we have received the document snapshot which is converted into the User Data model object.
@@ -87,10 +86,10 @@ class FirestoreClass {
                         is SignInActivity -> {
                             activity.signInSuccess(loggedInUser)
                         }
-                        is MainActivity ->{
+                        is MainActivity -> {
                             activity.updateNavigationUserDetails(loggedInUser)
                         }
-                        is MyProfileActivity->{
+                        is MyProfileActivity -> {
                             activity.setUserDataInUI(loggedInUser)
                         }
 
@@ -105,14 +104,14 @@ class FirestoreClass {
                         is SignInActivity -> {
                             activity.hideProgressDialog()
                         }
-                        is MainActivity ->{
+                        is MainActivity -> {
                             activity.hideProgressDialog()
                         }
                     }
                     Log.e(
-                            activity.javaClass.simpleName,
-                            "Error while getting loggedIn user details",
-                            e
+                        activity.javaClass.simpleName,
+                        "Error while getting loggedIn user details",
+                        e
                     )
                 }
     }
@@ -134,9 +133,8 @@ class FirestoreClass {
     fun getBooksList(fragment: Fragment){
       mFireStore.collection(Constants.BOOKS)
             .get()
-            .addOnSuccessListener {
-                document->
-                Log.e("books list",document.documents.toString())
+            .addOnSuccessListener { document->
+                Log.e("books list", document.documents.toString())
                 val bookList:ArrayList<Books> = ArrayList()
                 for ( i in document.documents){
                     val book=i.toObject(Books::class.java)
@@ -146,7 +144,7 @@ class FirestoreClass {
                 }
 
                 when(fragment){
-                    is HomeFragment->{
+                    is HomeFragment -> {
 
                         fragment.successProductListFromFireStore(bookList)
                     }
@@ -160,28 +158,13 @@ class FirestoreClass {
     }
 
 
-    fun uploadUserBookDetails(FragmentActivity:WriterSectionFragment,bookInfo: myBooks){
-        mFireStore.collection(Constants.USERBOOKS)
-                .document()
-                .set(bookInfo, SetOptions.merge())
-                .addOnSuccessListener {
-                    FragmentActivity.userBookCoverUploadSuccess()
-                }.addOnFailureListener{e->
-                BaseActivity().hideProgressDialog()
-                Log.e(
-                    FragmentActivity.javaClass.simpleName, "Error while uploading book to cloud storage.",
-                    e
-                )
-            }
-    }
 
-    fun getGenreBooksList(fragment: Fragment,genre: String){
+    fun getGenreBooksList(fragment: Fragment, genre: String){
         mFireStore.collection(Constants.BOOKS)
-                .whereEqualTo("category",genre)
+                .whereEqualTo("category", genre)
                 .get()
-                .addOnSuccessListener {
-                    document->
-                    Log.e("books list",document.documents.toString())
+                .addOnSuccessListener { document->
+                    Log.e("books list", document.documents.toString())
                     val bookList:ArrayList<Books> = ArrayList()
                     for ( i in document.documents){
                         val book=i.toObject(Books::class.java)
@@ -191,7 +174,7 @@ class FirestoreClass {
                     }
 
                     when(fragment){
-                        is CategoryWiseBooksFragment ->{
+                        is CategoryWiseBooksFragment -> {
                             fragment.successCategoryWiseListFromFireStore(bookList)
                         }
                     }
@@ -202,21 +185,19 @@ class FirestoreClass {
     }
 
 
-    fun getBookDetails(activity: BookDetailsActivity,bookId:String){
+    fun getBookDetails(activity: BookDetailsActivity, bookId: String){
    mFireStore.collection(Constants.BOOKS)
            .document(bookId)
            .get()
-           .addOnSuccessListener {
-           document->
+           .addOnSuccessListener { document->
 
-               Log.e(activity.javaClass.simpleName,document.toString())
+               Log.e(activity.javaClass.simpleName, document.toString())
                val book=document.toObject(Books::class.java)
                if (book != null) {
                    activity.bookDetailSuccess(book)
                }
            }
-           .addOnFailureListener {
-               exception ->
+           .addOnFailureListener { exception ->
                Log.d(TAG, "Error getting book details: ", exception)
            }
 
@@ -229,8 +210,7 @@ class FirestoreClass {
             .addOnSuccessListener {
                 activity.addToFavouriteSuccess()
             }
-            .addOnFailureListener {
-                e ->
+            .addOnFailureListener { e ->
                 activity.hideProgressDialog()
 
                 Log.e(
@@ -240,21 +220,24 @@ class FirestoreClass {
             }
     }
 
-    fun deleteItem(activity: BookDetailsActivity, Book_id:String){
+    fun deleteItem(activity: BookDetailsActivity, Book_id: String){
+
         mFireStore.collection(Constants.FAVOURITES_ITEM)
-            .whereEqualTo("user_id",getCurrentUserID())
-            .whereEqualTo("book_id",Book_id)
+            .whereEqualTo("user_id", getCurrentUserID())
+            .whereEqualTo("book_id", Book_id)
             .get()
-            .addOnSuccessListener {
-                    document->
-                Log.e("books list",document.documents.toString())
-                for ( i in document.documents){
-                    i.reference.delete()
+            .addOnSuccessListener { documents->
+                for ( documented in documents){
+                    documented.reference.delete()
+                    mFireStore.collection(Constants.FAVOURITES_ITEM)
+                        .document(documented.id)
+                        .delete()
+                        .addOnSuccessListener { Log.d(TAG, "book successfully deleted from favourite!") }
+                        .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
 
                 }
                 activity.removalFomFavouritesSuccess()
-            }.addOnFailureListener {
-                    e ->
+            }.addOnFailureListener { e ->
                 activity.hideProgressDialog()
 
                 Log.e(
@@ -265,23 +248,22 @@ class FirestoreClass {
 
     }
 
-    fun checkIfItemExistInFavourites(activity: BookDetailsActivity, favouritesRed:String){
-        mFireStore.collection(Constants.FAVOURITES_ITEM).whereEqualTo("user_id",getCurrentUserID())
-            .whereEqualTo("book_id",favouritesRed)
+    fun checkIfItemExistInFavourites(activity: BookDetailsActivity, favouritesRed: String){
+        mFireStore.collection(Constants.FAVOURITES_ITEM).
+        whereEqualTo("user_id", getCurrentUserID())
+            .whereEqualTo("book_id", favouritesRed)
             .get()
-            .addOnSuccessListener {
-                    document ->
+            .addOnSuccessListener { document ->
                 Log.e(activity.javaClass.simpleName, document.documents.toString())
                 if(document.documents.size > 0){
                     activity.bookExistsInFavourites()
-                    Log.i("id",favouritesRed)
+                    Log.i("id", favouritesRed)
                 }else{
                     activity.hideProgressDialog()
                 }
             }
 
-            .addOnFailureListener {
-                    e ->
+            .addOnFailureListener { e ->
                 activity.hideProgressDialog()
 
                 Log.e(
@@ -294,26 +276,50 @@ class FirestoreClass {
 
     fun getFavouritesList(activity: MyFavouriteActivity){
         mFireStore.collection((Constants.FAVOURITES_ITEM))
-            .whereEqualTo("user_id",getCurrentUserID())
+            .whereEqualTo("user_id", getCurrentUserID())
             .get()
-            .addOnSuccessListener {
-                document ->
-                Log.e("Favourites List",document.documents.toString())
+            .addOnSuccessListener { document ->
+                Log.e("Favourites List", document.documents.toString())
                 val favouritesItemList: ArrayList<Books> = ArrayList()
 
                 for(i in document.documents){
                     val book = i.toObject(Books::class.java)
-                    //book!!.book_id=i.id
+                    book!!.book_id=i.id
 
-                    favouritesItemList.add(book!!)
+                    favouritesItemList.add(book)
                     print(book.book_id)
                 }
                 when(activity){
-                    is MyFavouriteActivity->{
+                    is MyFavouriteActivity -> {
                         activity.successFavouritesListAFromFirestore(favouritesItemList)
                     }
                 }
             }
+    }
+
+    fun getUserBooksList(fragment: Fragment) {
+        mFireStore.collection(Constants.BOOKS)
+            .whereEqualTo("user_id", getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document->
+                Log.e("books list", document.documents.toString())
+                val bookList:ArrayList<Books> = ArrayList()
+                for ( i in document.documents){
+                    val book=i.toObject(Books::class.java)
+                  book!!.book_id=i.id
+                    bookList.add(book)
+                }
+                when(fragment){
+                    is MyWorksFragment -> {
+
+                        fragment.successUserBookListFromFireStore(bookList)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+
     }
 }
 

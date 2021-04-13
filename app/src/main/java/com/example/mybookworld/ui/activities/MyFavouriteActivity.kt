@@ -1,8 +1,6 @@
 package com.example.mybookworld.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mybookworld.Firebase.FirestoreClass
@@ -11,12 +9,11 @@ import com.example.mybookworld.models.Books
 import com.example.mybookworld.ui.adapters.MyBookListAdapters
 import com.example.mybookworld.utils.Constants
 import kotlinx.android.synthetic.main.activity_my_favourite.*
-import kotlinx.android.synthetic.main.activity_my_profile.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class MyFavouriteActivity : BaseActivity() {
 
     private var mBookId: String = ""
+    private  var mId:String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_favourite)
@@ -53,7 +50,7 @@ class MyFavouriteActivity : BaseActivity() {
             rv_favourite_book_list.adapter = adapterFavouriteBooks
 
         } else {
-            iv_all_books.visibility = View.GONE
+            rv_favourite_book_list.visibility = View.GONE
             favourites_not_found.visibility = View.VISIBLE
         }
     }

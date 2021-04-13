@@ -2,11 +2,10 @@
 package com.example.mybookworld.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
@@ -71,7 +70,7 @@ class HomeFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
                 HomeFragment().apply {
 
 
