@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_book_details.*
 class BookDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private  var mBookId:String=""
+
+
     private lateinit var mBookDetails: Books
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
             mBookId=intent.getStringExtra(Constants.EXTRA_BOOK_ID)!!
             Log.i("book id",mBookId)
         }
+
         favourites.setOnClickListener(this)
         favouritesRed.setOnClickListener(this)
         getBookDetails()
@@ -48,17 +51,14 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-
     fun bookDetailSuccess(book:Books){
         mBookDetails = book
-
-
-        hideProgressDialog()
+       // hideProgressDialog()
         GlideLoader(this).loadBookPicture(Uri.parse(book.imageUrl),book_detail_image)
         GlideLoader(this).loadBookPicture(Uri.parse(book.imageUrl),image_back_detail)
 
         tvb_book_Detail_title_label1.text=book.title
-         tv_author_detail_title1.text=book.author
+        tv_author_detail_title1.text=book.author
         book_score_detail.text=book.rating
         review_book_detail.text="Reviews:"+"${book.review}"
         book_detail_pages.text="Pages:" + "${book.pages}"
@@ -66,20 +66,25 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
         book_detail_description.text=book.description
 
 
+
+        Log.i("id is found before",mBookId)
         FirestoreClass().checkIfItemExistInFavourites(this,mBookId)
+        Log.i("id is found after",mBookId)
+        
+
         //horizontal view --->PdfReaderActivity
         //vertical view--->PdfViewerActivity
 
         read_now.setOnClickListener {
             val intent = Intent(this, PdfReaderActivity::class.java)
-                intent.putExtra("url", book.bookUrl)
-                intent.putExtra("bookName", book.title)
-                startActivity(intent)
+            intent.putExtra("url", book.bookUrl)
+            intent.putExtra("bookName", book.title)
+            startActivity(intent)
 
         }
     }
 
-    private fun setupActionBar() {
+    fun setupActionBar() {
 
         setSupportActionBar(toolbar_book_detail_activity)
 
@@ -106,10 +111,9 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
             mBookDetails.description,
             mBookDetails.category,
             FirestoreClass().getCurrentUserID(),
-
-
-
+            mBookDetails.id
             )
+
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().addFavouriteItem(this,addtoFavourites)
     }
@@ -117,28 +121,17 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
     fun addToFavouriteSuccess(){
         hideProgressDialog()
         Toast.makeText(
-            this@BookDetailsActivity,
-            resources.getString(R.string.success_message_item_added_to_favourites),
-            Toast.LENGTH_SHORT
+                this@BookDetailsActivity,
+                resources.getString(R.string.success_message_item_added_to_favourites),
+                Toast.LENGTH_SHORT
         ).show()
 
+        Log.i("after adding to favous",mBookId)
         favourites.visibility=View.GONE
+
         favouritesRed.visibility=View.VISIBLE
     }
 
-    override fun onClick(v: View?) {
-        if(v!=null){
-            when(v.id){
-                R.id.favourites ->{
-                    addToFavourites()
-                }
-                R.id.favouritesRed->{
-                    Log.i("calling alert dialog",mBookId)
-                    showAlertDialog(mBookId)
-                }
-            }
-        }
-    }
 
     private fun showAlertDialog(bookId: String) {
         val alertDialog=AlertDialog.Builder(this)
@@ -176,6 +169,20 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
 
         favourites.visibility=View.VISIBLE
         favouritesRed.visibility=View.GONE
+    }
+
+    override fun onClick(v: View?) {
+        if(v!=null){
+            when(v.id){
+                R.id.favourites ->{
+                    addToFavourites()
+                }
+                R.id.favouritesRed->{
+                    Log.i("calling alert dialog",mBookId)
+                    showAlertDialog(mBookId)
+                }
+            }
+        }
     }
 }
 

@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class MyFavouriteActivity : BaseActivity() {
 
     private var mBookId: String = ""
+    private  var mId:String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_favourite)
@@ -53,7 +54,7 @@ class MyFavouriteActivity : BaseActivity() {
             rv_favourite_book_list.adapter = adapterFavouriteBooks
 
         } else {
-            iv_all_books.visibility = View.GONE
+            rv_favourite_book_list.visibility = View.GONE
             favourites_not_found.visibility = View.VISIBLE
         }
     }

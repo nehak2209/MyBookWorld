@@ -1,4 +1,3 @@
-
 package com.example.mybookworld.Firebase
 
 import android.app.Activity
@@ -30,6 +29,7 @@ class FirestoreClass {
                 // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
                 .set(userInfo, SetOptions.merge())
                 .addOnSuccessListener {
+
 
                     // Here call a function of base activity for transferring the result to it.
                     activity.userRegisteredSuccess()
@@ -240,6 +240,12 @@ class FirestoreClass {
             }
     }
 
+
+    fun deleteFavourite(activity: BookDetailsActivity, BookId:String){
+        mFireStore.collection(Constants.FAVOURITES_ITEM)
+
+    }
+
     fun deleteItem(activity: BookDetailsActivity, Book_id:String){
         mFireStore.collection(Constants.FAVOURITES_ITEM)
             .whereEqualTo("user_id",getCurrentUserID())
@@ -250,6 +256,7 @@ class FirestoreClass {
                 Log.e("books list",document.documents.toString())
                 for ( i in document.documents){
                     i.reference.delete()
+                    Log.i("DELETED ",i.reference.id)
 
                 }
                 activity.removalFomFavouritesSuccess()
@@ -266,7 +273,8 @@ class FirestoreClass {
     }
 
     fun checkIfItemExistInFavourites(activity: BookDetailsActivity, favouritesRed:String){
-        mFireStore.collection(Constants.FAVOURITES_ITEM).whereEqualTo("user_id",getCurrentUserID())
+        mFireStore.collection(Constants.FAVOURITES_ITEM)
+            .whereEqualTo("user_id",getCurrentUserID())
             .whereEqualTo("book_id",favouritesRed)
             .get()
             .addOnSuccessListener {
@@ -303,10 +311,10 @@ class FirestoreClass {
 
                 for(i in document.documents){
                     val book = i.toObject(Books::class.java)
-                    //book!!.book_id=i.id
+                    book!!.id=i.id
 
                     favouritesItemList.add(book!!)
-                    print(book.book_id)
+
                 }
                 when(activity){
                     is MyFavouriteActivity->{
