@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
                 HomeFragment().apply {
 
 

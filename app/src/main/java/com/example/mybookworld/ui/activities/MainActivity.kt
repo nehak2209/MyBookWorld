@@ -104,9 +104,9 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
             }
             R.id.nav_favourites -> {
 
-                Toast.makeText(this@MainActivity, "favourite", Toast.LENGTH_SHORT).show()
-//               startActivityForResult(Intent(this@MainActivity,MyFavouriteActivity::class.java),
-//                   MY_FAVOURITE_REQUEST_CODE)
+             //   Toast.makeText(this@MainActivity, "favourite", Toast.LENGTH_SHORT).show()
+             startActivityForResult(Intent(this@MainActivity,MyFavouriteActivity::class.java),
+                   MY_FAVOURITE_REQUEST_CODE)
             }
             R.id.nav_about -> {
 
@@ -116,10 +116,7 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
 
                 Toast.makeText(this@MainActivity, "help", Toast.LENGTH_SHORT).show()
             }
-            R.id.nav_my_works -> {
 
-                Toast.makeText(this@MainActivity, "setting", Toast.LENGTH_SHORT).show()
-            }
 
         }
         drawer_layout.closeDrawer(GravityCompat.START)

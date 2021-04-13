@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.ui.adapters.MyBookListAdapters
+import kotlinx.android.synthetic.main.activity_my_favourite.*
 import kotlinx.android.synthetic.main.fragment_my_works.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -52,10 +54,14 @@ class MyWorksFragment : BaseFragment() {
         }
         if(userBookList.size>0){
             iv_all_user_books.visibility=View.VISIBLE
+            work_not_found.visibility = View.GONE
             iv_all_user_books.layoutManager= LinearLayoutManager(activity)
             iv_all_user_books.setHasFixedSize(true)
             val adapterBooks = MyBookListAdapters(requireActivity(),userBookList)
             iv_all_user_books.adapter = adapterBooks
+        }else {
+            iv_all_user_books.visibility = View.GONE
+            work_not_found.visibility = View.VISIBLE
         }
     }
 

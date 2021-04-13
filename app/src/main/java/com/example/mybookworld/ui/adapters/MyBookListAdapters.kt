@@ -6,10 +6,15 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.ui.activities.BookDetailsActivity
+import com.example.mybookworld.ui.activities.MyFavouriteActivity
+import com.example.mybookworld.ui.activities.PdfReaderActivity
+import com.example.mybookworld.ui.fragments.HomeFragment
 import com.example.mybookworld.utils.Constants
 import com.example.mybookworld.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
@@ -48,11 +53,26 @@ open class MyBookListAdapters(
             holder.itemView.review.text="Reviews:"+"${model.review}"
             holder.itemView.score.text=model.rating
 
-            holder.itemView.setOnClickListener {
-                val intent = Intent(context, BookDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_BOOK_ID,model.book_id)
-                context.startActivity(intent)
+            when(context){
+                is MyFavouriteActivity -> {
+                    holder.itemView.setOnClickListener {
+                        val intent = Intent(context, PdfReaderActivity::class.java)
+                        intent.putExtra("url", model.bookUrl)
+                        intent.putExtra("bookName", model.title)
+                        context.startActivity(intent)
+                    }
+                }
+                 else ->{
+                     holder.itemView.setOnClickListener {
+                         val intent = Intent(context, BookDetailsActivity::class.java)
+                         intent.putExtra(Constants.EXTRA_BOOK_ID, model.book_id)
+                         context.startActivity(intent)
+                     }
+                 }
+
             }
+
+
         }
     }
 
