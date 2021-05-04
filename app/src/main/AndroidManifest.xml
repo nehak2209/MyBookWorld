@@ -16,10 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.BookDetailsActivity"
+        <activity android:name=".ui.activities.AboutActivity"></activity>
+        <activity android:name=".ui.activities.Help" />
+        <activity
+            android:name=".ui.activities.BookDetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activities.MyFavouriteActivity"
             android:screenOrientation="portrait"
@@ -64,6 +66,7 @@
             android:name=".ui.activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

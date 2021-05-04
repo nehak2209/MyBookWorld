@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +13,7 @@ import com.example.mybookworld.Firebase.FirestoreClass
 import com.example.mybookworld.R
 import com.example.mybookworld.models.Books
 import com.example.mybookworld.ui.adapters.MyBookListAdapters
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_category_wise_books.*
 
 class CategoryWiseBooksFragment : Fragment() {
@@ -40,7 +43,17 @@ class CategoryWiseBooksFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val genreName = args.genre
+        setupActionBar(genreName)
         getCategoryWiseListFromFireStore(genreName)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.app_name)
+    }
+
+    private fun setupActionBar(genreName: String) {
+        (activity as AppCompatActivity).supportActionBar?.title = genreName.capitalize()
     }
 
 }
