@@ -27,12 +27,12 @@ class GenreFragment : Fragment() {
         val histFict = view.findViewById<CardView>(R.id.historical_fiction)
         val fantasy = view.findViewById<CardView>(R.id.fantasy)
         val actionAdv = view.findViewById<CardView>(R.id.action)
-        horror.setOnClickListener{ changeFragment(view,"horror")}
-        romance.setOnClickListener{ changeFragment(view,"romance")}
-        fiction.setOnClickListener{ changeFragment(view,"fiction")}
-        histFict.setOnClickListener{ changeFragment(view,"historical fiction")}
-        fantasy.setOnClickListener{ changeFragment(view,"fantasy")}
-        actionAdv.setOnClickListener{ changeFragment(view,"action")}
+        horror.setOnClickListener{ changeFragment(view,"Horror")}
+        romance.setOnClickListener{ changeFragment(view,"Romance")}
+        fiction.setOnClickListener{ changeFragment(view,"Fiction")}
+        histFict.setOnClickListener{ changeFragment(view,"Historical Fiction")}
+        fantasy.setOnClickListener{ changeFragment(view,"Fantasy")}
+        actionAdv.setOnClickListener{ changeFragment(view,"Action and Adventure")}
     }
     private fun changeFragment(view:View,genre: String) {
         val categoryWise = CategoryWiseBooksFragment()

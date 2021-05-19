@@ -94,5 +94,8 @@
     <string name="err_msg_select_category">Category Not Selected</string>
     <string name="remove_from_book_success">Removed From Favourites</string>
     <string name="no_favourite_item_found">No Favourite Book Found</string>
+    <string name="help_text">In case of any suggestions, feedback, queries, feel free to reach out to us! Email us at developers.mbw@gmail.com</string>
+    <string name="about_app">This app is a place that has been created for readers and writers to share their writings with others. One can simply upload their writings in pdf format and can also read books by other authors, in the different genre categories.<br/>
 
+        <br/>Keep reading, writing and publishing content!</string>
 </resources>
