@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_genre"
     xmlns:tools="http://schemas.android.com/tools"
@@ -353,19 +354,12 @@
                             android:text="Fun for everyone!"
                             android:textColor="@android:color/darker_gray" />
 
-
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
-
             </LinearLayout>
-
-
         </LinearLayout>
 
     </RelativeLayout>
-
-
-
 </FrameLayout>
+
 
