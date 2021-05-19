@@ -51,7 +51,7 @@
 
     <!--START PROFILE-->
     <string name="mobile">Mobile</string>
-    <string name="update">UPDATE</string>
+    <string name="update">UPDATE PROFILE</string>
     <string name="my_profile_title">My Profile</string>
     <string name="nav_my_works">My Works</string>
 
@@ -85,8 +85,10 @@
     <string name="author">Author</string>
     <string name="romance">Romance</string>
     <string name="horror">Horror</string>
+    <string name="health">Health and Fitness</string>
     <string name="fiction">Fiction</string>
     <string name="fantasy">Fantasy</string>
+    <string name="biography">Biography</string>
     <string name="historical_fiction">Historical Fiction</string>
     <string name="action_adventure">Action and Adventure</string>
     <string name="success_message_item_added_to_favourites">Added To Favourites</string>
@@ -94,5 +96,7 @@
     <string name="err_msg_select_category">Category Not Selected</string>
     <string name="remove_from_book_success">Removed From Favourites</string>
     <string name="no_favourite_item_found">No Favourite Book Found</string>
+    <string name="Go_to_My_Works">My Work</string>
+    <string name="Go_To_writer_section">Write Now</string>
 
 </resources>

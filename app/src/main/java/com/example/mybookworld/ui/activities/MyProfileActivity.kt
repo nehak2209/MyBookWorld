@@ -76,6 +76,15 @@ class MyProfileActivity : BaseActivity() {
                 updateUserProfileData()
             }
         }
+
+
+       /* btn_write.setOnClickListener(){
+            WriterSectionFragment()
+        }*/
+        /*btn_my_works.setOnClickListener(){
+            MyWorksFragment()
+        }*/
+
         // END
     }
 
