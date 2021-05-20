@@ -101,5 +101,10 @@
     <string name="help_text">In case of any suggestions, feedback, queries, feel free to reach out to us! Email us at developers.mbw@gmail.com</string>
     <string name="about_app">This app is a place that has been created for readers and writers to share their writings with others. One can simply upload their writings in pdf format and can also read books by other authors, in the different genre categories. <br/>
         <br/> Keep reading, writing and publishing content!</string>
+    <string name="autobiography">Autobiography</string>
+    <string name="health_and_fitness">Health and Fitness</string>
+    <string name="health_fitness_tagline">Eat healthy. Stay fit.</string>
+    <string name="self_improvement">Self-Improvement</string>
+    <string name="Self_improv_tagline">Change begins from you</string>
 
 </resources>
