@@ -204,8 +204,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "select pdf"), pdf)
     }
-
-
+    
     //Function to take permission of user to choose image from phone
     override fun onRequestPermissionsResult(
             requestCode: Int,
