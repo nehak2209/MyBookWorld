@@ -244,7 +244,7 @@ Some of the main applications or features of this app.
 
 <img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/categories.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/fantasy_genre_books,jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/fantasy_genre_books.jpeg" height=450/>
 
 <img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/book_desc.jpeg" height=450/>
 
