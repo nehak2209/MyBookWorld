@@ -437,7 +437,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
              mBookCoverImageURL,
              mBookURL,
              et_book_pages.text.toString().trim { it <= ' ' },
-             rating,
+             "2",
              review,
              et_book_description.text.toString().trim { it <= ' ' },
              bookCategory,
