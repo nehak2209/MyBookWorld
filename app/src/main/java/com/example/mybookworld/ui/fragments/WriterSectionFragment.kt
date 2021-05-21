@@ -70,13 +70,8 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
     private var rating:String=""
     private var review:String=""
 
-
     private lateinit var userBook:Books
     private val userBookFireStore = FirebaseFirestore.getInstance()
-
-
-
-
 
     var pdf:Int=0;
     var uriTxt : Uri?= null
@@ -125,22 +120,32 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
                   }
                   R.id.til_horror -> {
                       bookCategory="Horror"
-                  }R.id.til_fiction -> {
+                  }
+                  R.id.til_fiction -> {
 
                   bookCategory="Fiction"
 
-                 }R.id.til_fantasy -> {
+                 }
+                  R.id.til_fantasy -> {
 
                   bookCategory="Fantasy"
 
-                 }R.id.til_historical_fiction -> {
+                 }
+                  R.id.til_historical_fiction -> {
 
                   bookCategory="Historical Fiction"
 
-                 }R.id.til_action_adventure -> {
+                 }
+                  R.id.til_action_adventure -> {
 
                   bookCategory="Action And Adventure"
                  }
+                  R.id.til_biography -> {
+                      bookCategory="Romance"
+                  }
+                  R.id.til_health -> {
+                      bookCategory="Health and Fitness"
+                  }
               }
     }
 
