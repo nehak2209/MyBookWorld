@@ -234,28 +234,28 @@ Some of the main applications or features of this app.
 * Drive link: ![Drive link here] (https://drive.google.com/file/d/1G6_kM6G92sUs4UPhozEpbKNYWcm1dFXQ/view?usp=sharing)
 * Demo video: ![Drive link here] (https://drive.google.com/file/d/1GAwWDkzzA2KMJeEMtsRtmcMgrg71QY3w/view?usp=sharing)
 -->
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/startpage.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/startpage.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/sign_in.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/sign_in.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/books.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/books.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/Options_Drawer.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/Options_Drawer.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/categories.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/categories.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/fantasy_genre_books,jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/fantasy_genre_books,jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/book_desc.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/book_desc.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/favorites.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/favorites.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/upload_work.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/upload_work.jpeg" height=450/>
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/update_profile.jpeg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/update_profile.jpeg" height=450/>
 
 
-<img src="https://github.com/nehak2209/MyBookWorld/tree/master/screenshots/help_contact.jpg" height=450/>
+<img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/help_contact.jpg" height=450/>
 
 
 
