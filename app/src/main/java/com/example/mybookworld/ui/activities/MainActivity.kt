@@ -109,12 +109,12 @@ const val  MY_PROFILE_REQUEST_CODE:Int=11
                    MY_FAVOURITE_REQUEST_CODE)
             }
             R.id.nav_about -> {
-
-                Toast.makeText(this@MainActivity, "about", Toast.LENGTH_SHORT).show()
+                val aboutIntent = Intent(this@MainActivity,AboutActivity::class.java)
+                startActivity(aboutIntent)
             }
             R.id.nav_help -> {
-
-                Toast.makeText(this@MainActivity, "help", Toast.LENGTH_SHORT).show()
+                val helpIntent = Intent(this@MainActivity,Help::class.java)
+                startActivity(helpIntent)
             }
 
 
