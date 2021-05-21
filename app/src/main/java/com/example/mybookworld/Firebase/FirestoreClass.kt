@@ -245,7 +245,6 @@ class FirestoreClass {
                     "Error while removing from favourites",
                 )
             }
-
     }
 
     fun checkIfItemExistInFavourites(activity: BookDetailsActivity, favouritesRed: String){
