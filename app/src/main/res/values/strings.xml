@@ -106,5 +106,6 @@
     <string name="health_fitness_tagline">Eat healthy. Stay fit.</string>
     <string name="self_improvement">Self-Improvement</string>
     <string name="Self_improv_tagline">Change begins from you</string>
+    <string name="update_profile_picture">Update Profile Picture</string>
 
 </resources>

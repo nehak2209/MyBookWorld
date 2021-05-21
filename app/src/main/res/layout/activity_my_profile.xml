@@ -36,6 +36,10 @@
                 android:orientation="vertical"
                 android:padding="@dimen/my_profile_screen_content_padding">
 
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_profile_user_image"
                     android:layout_width="@dimen/my_profile_user_image_size"
@@ -43,6 +47,18 @@
                     android:contentDescription="@string/image_contentDescription"
                     android:src="@drawable/ic_profile_image"
                     android:layout_marginTop="50dp"/>
+                <ImageView
+                    android:id="@+id/add_profile_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginLeft="65dp"
+                    android:contentDescription="@string/update_profile_picture"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/add_cook_cover_update_icon_padding"
+                    android:src="@drawable/ic_baseline_photo_camera_24" />
+
+                </FrameLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -53,9 +69,9 @@
                         android:id="@+id/et_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorLightGrey"
                         android:hint="@string/name"
-                        android:textSize="@dimen/et_text_size"
-                        android:background="@color/colorLightGrey"/>
+                        android:textSize="@dimen/et_text_size" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
