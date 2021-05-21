@@ -106,6 +106,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:progressTint="#ffff8800"
+                android:progressBackgroundTint="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/book_detail_image"
                 app:layout_constraintTop_toBottomOf="@id/tv_author_detail_title1" />
 

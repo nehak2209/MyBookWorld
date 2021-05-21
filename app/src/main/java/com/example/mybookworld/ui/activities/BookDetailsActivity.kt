@@ -64,7 +64,7 @@ class BookDetailsActivity : BaseActivity(), View.OnClickListener {
         book_detail_pages.text="Pages:" + "${book.pages}"
         category_detail.text=book.category
         book_detail_description.text=book.description
-
+        ratingBar_book_detail.rating=book.rating.toFloat()
 
 
         Log.i("id is found before",mBookId)
