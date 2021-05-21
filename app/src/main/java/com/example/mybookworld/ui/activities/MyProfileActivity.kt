@@ -46,7 +46,7 @@ class MyProfileActivity : BaseActivity() {
 
         FirestoreClass().loadUserData(this@MyProfileActivity)
 
-        iv_profile_user_image.setOnClickListener {
+        add_profile_pic.setOnClickListener {
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED

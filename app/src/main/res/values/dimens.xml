@@ -127,5 +127,7 @@
     <dimen name="book_details_description_textSize">14sp</dimen>
 
     <dimen name="recycler_view_bottom_padding">70dp</dimen>
+    
+    <dimen name="camera_left_margin">65dp</dimen>
 
 </resources>
