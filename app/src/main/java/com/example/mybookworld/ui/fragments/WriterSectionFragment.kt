@@ -67,7 +67,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
     private var mBookURL: String = ""
     private var bookCategory:String=""
     private var book_id:String=""
-    private var rating:String=""
+    private var rating:String="0"
     private var review:String=""
 
     private lateinit var userBook:Books
@@ -437,7 +437,7 @@ class WriterSectionFragment : Fragment(), View.OnClickListener, RadioGroup.OnChe
              mBookCoverImageURL,
              mBookURL,
              et_book_pages.text.toString().trim { it <= ' ' },
-             "2",
+             rating,
              review,
              et_book_description.text.toString().trim { it <= ' ' },
              bookCategory,
