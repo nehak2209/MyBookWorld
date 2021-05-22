@@ -225,7 +225,8 @@ Some of the main applications or features of this app.
 * Notifying users about newly uploaded books.
 * Feature of rating the writer’s work by a reader
 
-##Demo video: ![Drive link here] (https://drive.google.com/file/d/1qR0LP-h-iVgQfeIwYiCvAYOBQy1-SE6H/view?usp=drivesdk)
+###Demo video: ![Drive link here] (https://drive.google.com/file/d/1qR0LP-h-iVgQfeIwYiCvAYOBQy1-SE6H/view?usp=drivesdk)
+
 ## Screenshots 
 <!--
 !<img src="https://github.com/preranashelke/get_maid/blob/master/180c13e8-d97c-4278-82e7-6b6ad2cac497.jpg" height = 450/> 
@@ -253,7 +254,6 @@ Some of the main applications or features of this app.
 <img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/upload_work.jpeg" height=450/>
 
 <img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/update_profile.jpeg" height=450/>
-
 
 <img src="https://github.com/nehak2209/MyBookWorld/blob/master/screenshots/help_contact.jpg" height=450/>
 
